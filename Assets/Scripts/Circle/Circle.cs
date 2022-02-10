@@ -14,7 +14,7 @@ public class Circle : MonoBehaviour
 
     private void Start()
     {
-        circleSize = Random.Range(minSizeRange, maxSizeRange );
+        circleSize = Random.Range(minSizeRange, maxSizeRange);
         view.text = circleSize.ToString();
     }
 

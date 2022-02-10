@@ -3,14 +3,14 @@ using UnityEngine.Events;
 
 public class SnakeHead : MonoBehaviour
 {
-    public event UnityAction blockCollided;
-    public event UnityAction<int> circleCollect;
+    public event UnityAction BlockCollided;
+    public event UnityAction<int> CircleCollect;
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.TryGetComponent(out Block block))
         {
-            blockCollided?.Invoke();
+            BlockCollided?.Invoke();
             block.Fill();
         }
     }
@@ -18,8 +18,6 @@ public class SnakeHead : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent(out Circle circle))
-        {
-            circleCollect?.Invoke(circle.Collect());
-        }
+            CircleCollect?.Invoke(circle.Collect());
     }
 }

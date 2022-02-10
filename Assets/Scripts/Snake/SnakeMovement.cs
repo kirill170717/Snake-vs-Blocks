@@ -32,14 +32,14 @@ public class SnakeMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        head.blockCollided += OnBlockCollided;
-        head.circleCollect += OnCircleCollected;
+        head.BlockCollided += OnBlockCollided;
+        head.CircleCollect += OnCircleCollected;
     }
 
     private void OnDisable()
     {
-        head.blockCollided -= OnBlockCollided;
-        head.circleCollect -= OnCircleCollected;
+        head.BlockCollided -= OnBlockCollided;
+        head.CircleCollect -= OnCircleCollected;
     }
 
     private void Update()
