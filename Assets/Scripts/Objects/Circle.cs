@@ -3,12 +3,9 @@ using UnityEngine;
 
 public class Circle : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text view;
-    [SerializeField]
-    private int minSizeRange;
-    [SerializeField]
-    private int maxSizeRange;
+    public TMP_Text view;
+    public int minSizeRange;
+    public int maxSizeRange;
 
     private int circleSize;
 

@@ -4,8 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Block))]
 public class BlockView : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text view;
+    public TMP_Text view;
 
     private Block block;
 

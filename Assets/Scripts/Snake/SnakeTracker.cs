@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class SnakeTracker : MonoBehaviour
 {
-    [SerializeField]
-    private float setY;
+    public float offsetY;
 
     public Transform Target;
+    private Vector3 transformPosition;
+
+    private void Start()
+    {
+        transformPosition = transform.position;
+    }
 
     private void Update()
     {
-        Vector3 transformPosition = transform.position;
-        transformPosition.y = Target.position.y + setY;
+        transformPosition.y = Target.position.y + offsetY;
         transform.position = transformPosition;
     }
 }

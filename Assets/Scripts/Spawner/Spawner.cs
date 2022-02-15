@@ -2,40 +2,52 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField]
-    private Transform container;
-    [SerializeField]
-    private int repeatCount;
-    [SerializeField]
-    private int distanceBetweenFullLine;
-    [SerializeField]
-    private int distanceBetweenRandomLine;
-    [SerializeField]
-    private Block block;
-    [SerializeField]
-    private int blockSpawnChance;
+    [Header("General")]
+    public Transform container;
+    public int repeatCount;
+    public int distanceBetweenFullLine;
+    public int distanceBetweenRandomLine;
 
-    private SpawnPoint[] blockSpawnPoints;
+    [Header("Block")]
+    public Block block;
+    public int blockSpawnChance;
+
+    [Header("Wall")]
+    public Wall wall;
+    public int wallSpawnChance;
+
+    [Header("Circle")]
+    public Circle circle;
+    public int circleSpawnChance;
+
+    private BlockSpawnPoint[] blockSpawnPoints;
+    private WallSpawnPoint[] wallSpawnPoints;
+    private CircleSpawnPoint[] circleSpawnPoints;
+    private GameObject element;
 
     private void Start()
     {
-        blockSpawnPoints = GetComponentsInChildren<SpawnPoint>();
+        blockSpawnPoints = GetComponentsInChildren<BlockSpawnPoint>();
+        wallSpawnPoints = GetComponentsInChildren<WallSpawnPoint>();
+        circleSpawnPoints = GetComponentsInChildren<CircleSpawnPoint>();
 
         for(int i = 0; i < repeatCount; i++)
         {
             MoveSpawner(distanceBetweenFullLine);
+            GenerateRandomElements(wallSpawnPoints, wall.gameObject, wallSpawnChance);
+            GenerateRandomElements(circleSpawnPoints, circle.gameObject, circleSpawnChance);
             GenerateFullLine(blockSpawnPoints, block.gameObject);
             MoveSpawner(distanceBetweenRandomLine);
+            GenerateRandomElements(wallSpawnPoints, wall.gameObject, wallSpawnChance);
             GenerateRandomElements(blockSpawnPoints, block.gameObject, blockSpawnChance);
+            GenerateRandomElements(circleSpawnPoints, circle.gameObject, circleSpawnChance);
         }
     }
 
     private void GenerateFullLine(SpawnPoint[] spawnPoints, GameObject generatedElement)
     {
         for(int i = 0; i < spawnPoints.Length; i++)
-        {
             GenerateElement(spawnPoints[i].transform.position, generatedElement);
-        }
     }
 
     private void GenerateRandomElements(SpawnPoint[] spawnPoints, GameObject generatedElement, int spawnChance)
@@ -44,8 +56,8 @@ public class Spawner : MonoBehaviour
         {
             if(Random.Range(0, 100) < spawnChance)
             {
-                GameObject element = GenerateElement(spawnPoints[i].transform.position, generatedElement);
-            }
+                element = GenerateElement(spawnPoints[i].transform.position, generatedElement);
+            } 
         }
     }
 

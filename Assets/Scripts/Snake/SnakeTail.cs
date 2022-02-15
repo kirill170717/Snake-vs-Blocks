@@ -9,19 +9,22 @@ public class SnakeTail : MonoBehaviour
     private List<Transform> Tail = new List<Transform>();
     private List<Vector2> Positions = new List<Vector2>();
 
+    private Vector2 direction;
+    private Transform tail;
+
     private void Awake()
     {
         Positions.Add(snakeTail.position);
     }
-     
+
     private void Update()
     {
-        float distance = ((Vector2) snakeTail.position - Positions[0]).magnitude;
+        float distance = ((Vector2)snakeTail.position - Positions[0]).magnitude;
 
         if (distance > tailDiameter)
         {
             // Направление от старого положения головы, к новому
-            Vector2 direction = ((Vector2) snakeTail.position - Positions[0]).normalized;
+            direction = ((Vector2)snakeTail.position - Positions[0]).normalized;
 
             Positions.Insert(0, Positions[0] + direction * tailDiameter);
             Positions.RemoveAt(Positions.Count - 1);
@@ -35,7 +38,7 @@ public class SnakeTail : MonoBehaviour
 
     public void AddTail()
     {
-        Transform tail = Instantiate(snakeTail, Positions[Positions.Count - 1], Quaternion.identity, transform);
+        tail = Instantiate(snakeTail, Positions[Positions.Count - 1], Quaternion.identity, transform);
         Tail.Add(tail);
         Positions.Add(tail.position);
     }

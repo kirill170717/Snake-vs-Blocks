@@ -1,11 +1,12 @@
-﻿using TMPro;
+﻿using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
 {
-    public float forwardSpeed = 5;
+    public float forwardSpeed = 4;
     public float sensitivity = 50;
-    public int length = 0;
+    public int length = 5;
 
     public TMP_Text pointsText;
 
@@ -13,8 +14,11 @@ public class SnakeMovement : MonoBehaviour
     private Rigidbody2D componentRigidbody;
     private SnakeHead head;
     private SnakeTail componentSnakeTail;
+    private GameOverMenu gameOver;
 
     private Vector2 touchLastPos;
+    private Vector2 delta;
+
     private float sidewaysSpeed;
 
     private void Awake()
@@ -23,6 +27,7 @@ public class SnakeMovement : MonoBehaviour
         componentRigidbody = GetComponent<Rigidbody2D>();
         componentSnakeTail = GetComponent<SnakeTail>();
         head = GetComponent<SnakeHead>();
+        gameOver = GetComponent<GameOverMenu>();
 
         for (int i = 0; i < length; i++)
             componentSnakeTail.AddTail();
@@ -50,7 +55,7 @@ public class SnakeMovement : MonoBehaviour
             sidewaysSpeed = 0;
         else if (Input.GetMouseButton(0))
         {
-            Vector2 delta = (Vector2) mainCamera.ScreenToViewportPoint(Input.mousePosition) - touchLastPos;
+            delta = (Vector2)mainCamera.ScreenToViewportPoint(Input.mousePosition) - touchLastPos;
             sidewaysSpeed += delta.x * sensitivity;
             touchLastPos = mainCamera.ScreenToViewportPoint(Input.mousePosition);
         }
@@ -67,17 +72,19 @@ public class SnakeMovement : MonoBehaviour
 
     private void OnBlockCollided()
     {
-        if(length > 0)
+        if (length > 0)
         {
             length--;
             componentSnakeTail.RemoveTail();
             pointsText.SetText(length.ToString());
         }
+        else
+            gameOver.GameOver();
     }
 
     private void OnCircleCollected(int circleSize)
     {
-        for(int i = 0; i < circleSize; i++)
+        for (int i = 0; i < circleSize; i++)
         {
             length++;
             componentSnakeTail.AddTail();
