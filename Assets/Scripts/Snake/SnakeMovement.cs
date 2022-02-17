@@ -1,13 +1,11 @@
-﻿using System.Threading;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
 {
     public float forwardSpeed = 4;
-    public float sensitivity = 50;
+    public float sensitivity = 90;
     public int length = 5;
-
     public TMP_Text pointsText;
 
     private Camera mainCamera;

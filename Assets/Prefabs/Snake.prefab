@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 2
-  sensitivity: 50
+  sensitivity: 90
   length: 5
   pointsText: {fileID: 3007074107407797159}
 --- !u!114 &7100775700576326398

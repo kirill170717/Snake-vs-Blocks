@@ -23,7 +23,6 @@ public class SnakeTail : MonoBehaviour
 
         if (distance > tailDiameter)
         {
-            // Направление от старого положения головы, к новому
             direction = ((Vector2)snakeTail.position - Positions[0]).normalized;
 
             Positions.Insert(0, Positions[0] + direction * tailDiameter);

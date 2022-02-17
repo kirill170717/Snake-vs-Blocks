@@ -23,7 +23,6 @@ public class Spawner : MonoBehaviour
     private BlockSpawnPoint[] blockSpawnPoints;
     private WallSpawnPoint[] wallSpawnPoints;
     private CircleSpawnPoint[] circleSpawnPoints;
-    private GameObject element;
 
     private void Start()
     {
@@ -56,7 +55,7 @@ public class Spawner : MonoBehaviour
         {
             if(Random.Range(0, 100) < spawnChance)
             {
-                element = GenerateElement(spawnPoints[i].transform.position, generatedElement);
+                GenerateElement(spawnPoints[i].transform.position, generatedElement);
             } 
         }
     }
