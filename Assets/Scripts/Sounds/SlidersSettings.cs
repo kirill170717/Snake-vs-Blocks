@@ -6,7 +6,7 @@ public class SlidersSettings : MonoBehaviour
     public Slider music;
     public Slider effects;
 
-    private void Start()
+    private void Awake()
     {
         music.value = PlayerPrefs.GetFloat("Music");
         effects.value = PlayerPrefs.GetFloat("Effects");

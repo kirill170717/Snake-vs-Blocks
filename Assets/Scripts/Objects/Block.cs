@@ -8,7 +8,6 @@ public class Block : MonoBehaviour
     public int maxPriceRange;
     public Color[] colors;
 
-    private BlockDestroyEffect destroyEffect;
     private SpriteRenderer spriteRenderer;
     private int destroyPrice;
     private int filling;
@@ -19,7 +18,6 @@ public class Block : MonoBehaviour
     
     private void Start()
     {
-        destroyEffect = GetComponent<BlockDestroyEffect>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetColor(colors[Random.Range(0, colors.Length)]);
 
@@ -31,7 +29,6 @@ public class Block : MonoBehaviour
     {
         filling++;
         FillingUpdated?.Invoke(LeftToFill);
-        destroyEffect.DestroySound();
 
         if (filling == destroyPrice)
         {

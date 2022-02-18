@@ -7,12 +7,12 @@ public class SnakeMovement : MonoBehaviour
     public float sensitivity = 90;
     public int length = 5;
     public TMP_Text pointsText;
+    //private UiManager manager;
 
     private Camera mainCamera;
     private Rigidbody2D componentRigidbody;
     private SnakeHead head;
     private SnakeTail componentSnakeTail;
-    private GameOverMenu gameOver;
 
     private Vector2 touchLastPos;
     private Vector2 delta;
@@ -22,10 +22,10 @@ public class SnakeMovement : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
+        //manager = GetComponent<UiManager>();
         componentRigidbody = GetComponent<Rigidbody2D>();
         componentSnakeTail = GetComponent<SnakeTail>();
         head = GetComponent<SnakeHead>();
-        gameOver = GetComponent<GameOverMenu>();
 
         for (int i = 0; i < length; i++)
             componentSnakeTail.AddTail();
@@ -76,8 +76,8 @@ public class SnakeMovement : MonoBehaviour
             componentSnakeTail.RemoveTail();
             pointsText.SetText(length.ToString());
         }
-        else
-            gameOver.GameOver();
+        //else
+           //manager.GameOver();
     }
 
     private void OnCircleCollected(int circleSize)
