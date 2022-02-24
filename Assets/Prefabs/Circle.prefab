@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 3423993637212265047}
   minSizeRange: 1
-  maxSizeRange: 10
+  maxSizeRange: 6
 --- !u!1 &3423993637212265033
 GameObject:
   m_ObjectHideFlags: 0

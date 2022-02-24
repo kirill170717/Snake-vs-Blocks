@@ -129,12 +129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPriceRange: 1
   maxPriceRange: 20
-  colors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.3909036, b: 0, a: 1}
-  - {r: 1, g: 0.95389974, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.010499954, a: 1}
-  - {r: 0, g: 0.6872308, b: 1, a: 1}
+  low: {r: 0, g: 0.6509434, b: 0.0025526802, a: 1}
+  medium: {r: 1, g: 0.39090377, b: 0, a: 1}
+  high: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &3691113955539595060
 MonoBehaviour:
   m_ObjectHideFlags: 0

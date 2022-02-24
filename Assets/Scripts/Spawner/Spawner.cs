@@ -19,28 +19,35 @@ public class Spawner : MonoBehaviour
     [Header("Circle")]
     public Circle circle;
     public int circleSpawnChance;
+    
+    [Header("Finish")]
+    public Finish finish;
 
     private BlockSpawnPoint[] blockSpawnPoints;
     private WallSpawnPoint[] wallSpawnPoints;
     private CircleSpawnPoint[] circleSpawnPoints;
+    private FinishSpawnPoint finishSpawnPoint;
 
     private void Start()
     {
         blockSpawnPoints = GetComponentsInChildren<BlockSpawnPoint>();
         wallSpawnPoints = GetComponentsInChildren<WallSpawnPoint>();
         circleSpawnPoints = GetComponentsInChildren<CircleSpawnPoint>();
+        finishSpawnPoint = GetComponentInChildren<FinishSpawnPoint>();
 
         for(int i = 0; i < repeatCount; i++)
         {
-            MoveSpawner(distanceBetweenFullLine);
-            GenerateRandomElements(wallSpawnPoints, wall.gameObject, wallSpawnChance);
-            GenerateRandomElements(circleSpawnPoints, circle.gameObject, circleSpawnChance);
-            GenerateFullLine(blockSpawnPoints, block.gameObject);
             MoveSpawner(distanceBetweenRandomLine);
             GenerateRandomElements(wallSpawnPoints, wall.gameObject, wallSpawnChance);
             GenerateRandomElements(blockSpawnPoints, block.gameObject, blockSpawnChance);
             GenerateRandomElements(circleSpawnPoints, circle.gameObject, circleSpawnChance);
+            MoveSpawner(distanceBetweenFullLine);
+            GenerateRandomElements(wallSpawnPoints, wall.gameObject, wallSpawnChance);
+            GenerateRandomElements(circleSpawnPoints, circle.gameObject, circleSpawnChance);
+            GenerateFullLine(blockSpawnPoints, block.gameObject);
         }
+
+        GenerateElement(finishSpawnPoint.transform.position, finish.gameObject);
     }
 
     private void GenerateFullLine(SpawnPoint[] spawnPoints, GameObject generatedElement)

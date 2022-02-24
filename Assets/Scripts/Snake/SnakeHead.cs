@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +9,7 @@ public class SnakeHead : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.TryGetComponent(out Block block))
+        if (collision.gameObject.TryGetComponent(out Block block))
         {
             BlockCollided?.Invoke();
             block.Fill();
@@ -17,7 +18,9 @@ public class SnakeHead : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out Circle circle))
+        if (collision.TryGetComponent(out Circle circle))
             CircleCollect?.Invoke(circle.Collect());
+        else if (collision.TryGetComponent(out Finish finish))
+            finish.FinishLevel();
     }
 }

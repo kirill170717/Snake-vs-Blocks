@@ -6,7 +6,7 @@ public class Block : MonoBehaviour
 {
     public int minPriceRange;
     public int maxPriceRange;
-    public Color[] colors;
+    public Color low, medium, high;
 
     private SpriteRenderer spriteRenderer;
     private int destroyPrice;
@@ -15,11 +15,11 @@ public class Block : MonoBehaviour
     public int LeftToFill => destroyPrice - filling;
 
     public event UnityAction<int> FillingUpdated;
-    
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        SetColor(colors[Random.Range(0, colors.Length)]);
+        //SetColor(snake.length);
 
         destroyPrice = Random.Range(minPriceRange, maxPriceRange);
         FillingUpdated?.Invoke(LeftToFill);
@@ -29,15 +29,22 @@ public class Block : MonoBehaviour
     {
         filling++;
         FillingUpdated?.Invoke(LeftToFill);
+        Score.Instance.DestructionPoints();
 
         if (filling == destroyPrice)
         {
+            SoundsManager.Instance.DestroySound();
             Destroy(gameObject);
         }
     }
 
-    private void SetColor(Color color)
-    {
-        spriteRenderer.color = color;
-    }
+    //private void SetColor(int length)
+    //{
+    //    if (destroyPrice > length)
+    //        spriteRenderer.color = high;
+    //    else if (destroyPrice > length / 2)
+    //        spriteRenderer.color = medium;
+    //    else
+    //        spriteRenderer.color = low;
+    //}
 }
