@@ -12,7 +12,6 @@ public class DictionaryEditor : ScriptableObject
         public SystemLanguage language;
         public Sprite sprite;
     }
-
     [Serializable]
     public class DictList
     {
@@ -22,7 +21,38 @@ public class DictionaryEditor : ScriptableObject
 
     public string key;
     public List<DictList> imgList = new List<DictList>();
-    public DictionaryEdit edit;
+
+    public void Loading(string key)
+    {
+        if (string.IsNullOrEmpty(key))
+            Debug.Log("The 'Key' field is empty!");
+        else
+        {
+            if (!imgList.Exists(x => x.key == key))
+            {
+                imgList.Add(new DictList() { key = key });
+                Debug.Log("Added!");
+            }
+            else
+                Debug.Log("The Key already exists!");
+        }
+    }
+    public void Deleting(string key)
+    {
+        if (string.IsNullOrEmpty(key))
+            Debug.Log("The 'Key' field is empty!");
+        else
+        {
+            if (imgList.Exists(x => x.key == key))
+            {
+                int keyId = imgList.FindIndex(x => x.key == key);
+                imgList.RemoveAt(keyId);
+                Debug.Log("Deleted!");
+            }
+            else
+                Debug.Log("The Key doesn't exist!");
+        }
+    }
 }
 
 [CustomEditor(typeof(DictionaryEditor))]
@@ -32,7 +62,6 @@ public class DictionaryEditGUI : Editor
     {
         serializedObject.Update();
         DictionaryEditor editor = (DictionaryEditor)target;
-        editor.edit = (DictionaryEdit)EditorGUILayout.ObjectField("Script", editor.edit, typeof(DictionaryEdit), true);
 
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Key", GUILayout.MaxWidth(60));
@@ -42,14 +71,10 @@ public class DictionaryEditGUI : Editor
         EditorGUILayout.Space();
 
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Добавить"))
-        {
-            editor.edit.Loading(editor.key);
-        }
-        else if (GUILayout.Button("Удалить"))
-        {
-            editor.edit.Deleting(editor.key);
-        }
+        if (GUILayout.Button("Add"))
+            editor.Loading(editor.key);
+        else if (GUILayout.Button("Delete"))
+            editor.Deleting(editor.key);
         GUILayout.EndHorizontal();
 
         EditorGUILayout.Space();

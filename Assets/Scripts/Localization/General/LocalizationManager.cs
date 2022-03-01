@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Linq;
 /*
 Управляет всеми текстовыми переводами и изображениями. Должен быть доступен для всего, что имеет текст и изображение.
 Может дать правильный перевод и необходимое изображение для любого сохраненного идентификатора.
@@ -8,10 +7,9 @@ using System.Linq;
 */
 public class LocalizationManager : MonoBehaviour
 {
-    public static LocalizationManager Instance { get; private set; }
+    public static LocalizationManager instance;
 
-    [SerializeField]
-    private SystemLanguage DefaultLanguage = SystemLanguage.English;
+    public SystemLanguage DefaultLanguage = SystemLanguage.English;
 
     private SystemLanguage currentLanguage;
 
@@ -24,6 +22,7 @@ public class LocalizationManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         if (PlayerPrefs.HasKey("LastLanguage"))
         {
             SystemLanguage newLang = (SystemLanguage)PlayerPrefs.GetInt("LastLanguage");
@@ -40,14 +39,6 @@ public class LocalizationManager : MonoBehaviour
         }
         else
             SetLocalization(DefaultLanguage);
-
-        if (!Instance)
-        {
-            Instance = this;
-            return;
-        }
-        else
-            Destroy(this.gameObject);
     }
     /*
     Устанавливает текущий язык, используемый функцией GetText() и GetImage(), на указанный язык.

@@ -7,10 +7,7 @@ public class SnakeTracker : MonoBehaviour
     public Transform Target;
     private Vector3 transformPosition;
 
-    private void Start()
-    {
-        transformPosition = transform.position;
-    }
+    private void Start() => transformPosition = transform.position;
 
     private void Update()
     {

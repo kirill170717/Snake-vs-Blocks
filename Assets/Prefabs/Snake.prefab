@@ -412,7 +412,6 @@ MonoBehaviour:
   sensitivity: 90
   length: 5
   pointsText: {fileID: 3007074107407797159}
-  manager: {fileID: 0}
 --- !u!114 &7100775700576326398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce3846ce0b366e4a99f8142f8bb6709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finish: {fileID: 5784998743113696691, guid: 95baa1053e964844785eb89812e2915d, type: 3}
 --- !u!1 &8181674600717190029
 GameObject:
   m_ObjectHideFlags: 0

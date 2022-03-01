@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
-    public static UiManager Instance { get; private set; }
+    public static UiManager instance;
 
     [Header("Canvas")]
     public GameObject mainMenu;
@@ -23,17 +23,17 @@ public class UiManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         language.value = PlayerPrefs.GetInt("Language");
         SwitchLanguage(language.value);
         Time.timeScale = 0;
 
-        if (!Instance)
-        {
-            Instance = this;
-            return;
-        }
-        else
-            Destroy(this.gameObject);
+        settings.SetActive(false);
+        pause.SetActive(false);
+        gameOver.SetActive(false);
+        skins.SetActive(false);
+        challenge.SetActive(false);
+        game.SetActive(false);
     }
 
     private void Update()
@@ -47,15 +47,14 @@ public class UiManager : MonoBehaviour
             }
         }
         else if (mainMenu.activeSelf)
-        {
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
-        }
     }
 
     public void Play()
     {
         _camera.backgroundColor = new Color(Random.value, Random.value, Random.value);
+        GameMode.instance.Mode();
         mainMenu.SetActive(false);
         game.SetActive(true);
         Time.timeScale = 1;
@@ -88,9 +87,16 @@ public class UiManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+        SoundsManager.instance.Vibration();
         game.SetActive(false);
         gameOver.SetActive(true);
-        SoundsManager.Instance.Vibration();
+        Score.instance.UnlockingPoints();
+    }
+
+    public void Finish()
+    {
+        Score.instance.UnlockingPoints();
+        SceneManager.LoadScene(0);
     }
 
     public void OpenSkins()
@@ -117,34 +123,28 @@ public class UiManager : MonoBehaviour
         mainMenu.SetActive(true);
     }
 
-    public void OpenSettings()
-    {
-        settings.SetActive(true);
-    }
+    public void OpenSettings() => settings.SetActive(true);
 
-    public void CloseSettings()
-    {
-        settings.SetActive(false);
-    }
+    public void CloseSettings() => settings.SetActive(false);
 
     public void SwitchLanguage(int value)
     {
         switch (value)
         {
             case 0:
-                LocalizationManager.Instance.SetLocalization(SystemLanguage.English);
+                LocalizationManager.instance.SetLocalization(SystemLanguage.English);
                 break;
             case 1:
-                LocalizationManager.Instance.SetLocalization(SystemLanguage.Russian);
+                LocalizationManager.instance.SetLocalization(SystemLanguage.Russian);
                 break;
             case 2:
-                LocalizationManager.Instance.SetLocalization(SystemLanguage.German);
+                LocalizationManager.instance.SetLocalization(SystemLanguage.German);
                 break;
             case 3:
-                LocalizationManager.Instance.SetLocalization(SystemLanguage.Spanish);
+                LocalizationManager.instance.SetLocalization(SystemLanguage.Spanish);
                 break;
             case 4:
-                LocalizationManager.Instance.SetLocalization(SystemLanguage.French);
+                LocalizationManager.instance.SetLocalization(SystemLanguage.French);
                 break;
         }
         

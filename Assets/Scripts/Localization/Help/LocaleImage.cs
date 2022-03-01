@@ -6,8 +6,8 @@ using UnityEngine.UI;
 //Предоставляет возможность во время выполнения манипулировать родственным текстовым компонентом, чтобы он соответствовал текущей Locale.
 public class LocaleImage : MonoBehaviour
 {
-    public LocalizationManager manager;
-    public string textID; //Идентификатор ресурса, который мы хотим захватить.
+    [SerializeField]
+    private string textID; //Идентификатор ресурса, который мы хотим захватить.
 
     private Image imageComponent;
 
@@ -15,7 +15,7 @@ public class LocaleImage : MonoBehaviour
     {
         //Ссылки на кэш:
         imageComponent = GetComponent<Image>();
-        manager.LanguageChanged += UpdateLocale;
+        LocalizationManager.instance.LanguageChanged += UpdateLocale;
     }
 
     private void Start()
@@ -31,7 +31,7 @@ public class LocaleImage : MonoBehaviour
     {
         try
         {
-            Sprite response = manager.GetImage(textID);
+            Sprite response = LocalizationManager.instance.GetImage(textID);
             if (response != null)
                 imageComponent.sprite = response;
         }

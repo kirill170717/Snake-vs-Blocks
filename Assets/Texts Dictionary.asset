@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57597e803dcfe1947ae8d1b836e95495, type: 3}
+  m_Script: {fileID: 11500000, guid: a5957238d70872141a9d91299d80532b, type: 3}
   m_Name: Texts Dictionary
   m_EditorClassIdentifier: 
   key: gameOver
@@ -80,4 +80,3 @@ MonoBehaviour:
       text: Game over
     - language: 30
       text: "\u0418\u0433\u0440\u0430 \u043E\u043A\u043E\u043D\u0447\u0435\u043D\u0430"
-  edit: {fileID: 0}

@@ -20,4 +20,6 @@ public class Circle : MonoBehaviour
         Destroy(gameObject);
         return circleSize;
     }
+
+    private void OnBecameInvisible() => Destroy(gameObject);
 }

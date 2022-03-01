@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
 {
+    public static SnakeMovement instance;
+
     public float forwardSpeed = 4;
     public float sensitivity = 90;
     public int length = 5;
@@ -20,6 +22,7 @@ public class SnakeMovement : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         mainCamera = Camera.main;
         componentRigidbody = GetComponent<Rigidbody2D>();
         componentSnakeTail = GetComponent<SnakeTail>();
@@ -75,7 +78,7 @@ public class SnakeMovement : MonoBehaviour
             pointsText.SetText(length.ToString());
         }
         else
-            UiManager.Instance.GameOver();
+            UiManager.instance.GameOver();
     }
 
     private void OnCircleCollected(int circleSize)

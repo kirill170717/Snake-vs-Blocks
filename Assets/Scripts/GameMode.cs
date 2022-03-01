@@ -3,13 +3,11 @@ using UnityEngine.UI;
 
 public class GameMode : MonoBehaviour
 {
+    public static GameMode instance;
+
     [Header("Toggles")]
     public Toggle levels;
     public Toggle infinite;
-
-    [Header("Mode")]
-    public GameObject modeLevels;
-    public GameObject modeInfinite;
 
     [Header("Text")]
     public GameObject record;
@@ -17,25 +15,38 @@ public class GameMode : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         levels.isOn = PlayerPrefs.GetInt("Levels") != 0;
         infinite.isOn = PlayerPrefs.GetInt("Infinite") != 0;
     }
 
-    void Update()
+    private void Update()
     {
         if (levels.isOn)
         {
-            modeInfinite.SetActive(false);
             record.SetActive(false);
             level.SetActive(true);
-            modeLevels.SetActive(true);
         }
         else
         {
-            modeLevels.SetActive(false);
             level.SetActive(false);
             record.SetActive(true);
-            modeInfinite.SetActive(true);
+        }
+    }
+
+    public void Mode()
+    {
+        if (levels.isOn)
+        {
+            record.SetActive(false);
+            level.SetActive(true);
+            Spawner.instance.LevelMode();
+        }
+        else
+        {
+            level.SetActive(false);
+            record.SetActive(true);
+            Spawner.instance.InfiniteMode();
         }
     }
 

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a4bad02ec5262eb4ea0ff181f003c08b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - textEditor: {fileID: 11400000, guid: 3a36385324d139449a9faab65284f1be, type: 2}
+  - dictionaryEditor: {fileID: 11400000, guid: 05fb6d192232f7948be209439ea475dd, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

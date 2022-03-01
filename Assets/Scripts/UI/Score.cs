@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    public static Score Instance { get; private set; }
+    public static Score instance;
 
     public TMP_Text scoreView;
     public TMP_Text skinsView;
     public TMP_Text recordView;
+    public TMP_Text finalScore;
 
     private int destroyPoints;
     private int unlockingPoints;
@@ -15,12 +16,7 @@ public class Score : MonoBehaviour
 
     private void Awake()
     {
-        if (!Instance)
-        {
-            Instance = this;
-            return;
-        }
-        Destroy(this.gameObject);
+        instance = this;
     }
 
     public void Update()
@@ -32,6 +28,8 @@ public class Score : MonoBehaviour
                 PlayerPrefs.SetInt("Score", record);
             recordView.text = PlayerPrefs.GetInt("Score").ToString();
         }
+        else if (finalScore.IsActive())
+            finalScore.text = destroyPoints.ToString();
     }
 
     public void DestructionPoints()

@@ -3,7 +3,7 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Edit Json", menuName = "Language/Edit Json", order = 50)]
+[CreateAssetMenu(fileName = "Texts Dictionary", menuName = "Language/Texts Dictionary", order = 50)]
 public class TextEditor : ScriptableObject
 {
     [Serializable]
@@ -12,7 +12,6 @@ public class TextEditor : ScriptableObject
         public SystemLanguage language;
         public string text;
     }
-
     [Serializable]
     public class DictList
     {
@@ -22,7 +21,39 @@ public class TextEditor : ScriptableObject
 
     public string key;
     public List<DictList> txtList = new List<DictList>();
-    public TextEdit edit;
+
+    public void Loading(string key)
+    {
+        if (string.IsNullOrEmpty(key))
+            Debug.Log("The 'Key' field is empty");
+        else
+        {
+            if (!txtList.Exists(x => x.key == key))
+            {
+                txtList.Add(new DictList() { key = key });
+                Debug.Log("Added!");
+            }
+            else
+                Debug.Log("The Key already exists");
+        }
+    }
+
+    public void Deleting(string key)
+    {
+        if (string.IsNullOrEmpty(key))
+            Debug.Log("The 'Key' field is empty");
+        else
+        {
+            if (txtList.Exists(x => x.key == key))
+            {
+                int keyId = txtList.FindIndex(x => x.key == key);
+                txtList.RemoveAt(keyId);
+                Debug.Log("Deleted!");
+            }
+            else
+                Debug.Log("The Key doesn't exist!");
+        }
+    }
 }
 
 [CustomEditor(typeof(TextEditor))]
@@ -32,7 +63,6 @@ public class TextEditGUI : Editor
     {
         serializedObject.Update();
         TextEditor editor = (TextEditor)target;
-        editor.edit = (TextEdit)EditorGUILayout.ObjectField("Script", editor.edit, typeof(TextEdit), true);
 
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Key", GUILayout.MaxWidth(60));
@@ -42,14 +72,10 @@ public class TextEditGUI : Editor
         EditorGUILayout.Space();
 
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Добавить"))
-        {
-            editor.edit.Loading(editor.key);
-        }
-        else if (GUILayout.Button("Удалить"))
-        {
-            editor.edit.Deleting(editor.key);
-        }
+        if (GUILayout.Button("Add"))
+            editor.Loading(editor.key);
+        else if (GUILayout.Button("Delete"))
+            editor.Deleting(editor.key);
         GUILayout.EndHorizontal();
 
         EditorGUILayout.Space();

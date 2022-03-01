@@ -6,8 +6,8 @@ using UnityEngine.UI;
 //Предоставляет возможность во время выполнения манипулировать родственным текстовым компонентом, чтобы он соответствовал текущей Locale.
 public class LocaleText : MonoBehaviour
 {
-    public LocalizationManager manager;
-    public string textID; //Идентификатор ресурса, который мы хотим захватить.
+    [SerializeField]
+    private string textID; //Идентификатор ресурса, который мы хотим захватить.
 
     private Text textComponent;
    
@@ -15,7 +15,7 @@ public class LocaleText : MonoBehaviour
     {
         //Ссылки на кэш:
         textComponent = GetComponent<Text>();
-        manager.LanguageChanged += UpdateLocale;
+        LocalizationManager.instance.LanguageChanged += UpdateLocale;
     }
 
     private void Start()
@@ -31,7 +31,7 @@ public class LocaleText : MonoBehaviour
     {
         try
         {
-            string response = manager.GetText(textID);
+            string response = LocalizationManager.instance.GetText(textID);
             if (!string.IsNullOrEmpty(response))
                 textComponent.text = response;
         }
