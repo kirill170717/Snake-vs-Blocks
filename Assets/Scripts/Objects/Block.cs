@@ -23,7 +23,7 @@ public class Block : MonoBehaviour
         FillingUpdated?.Invoke(LeftToFill);
     }
 
-    private void FixedUpdate() => SetColor(SnakeMovement.instance.length);
+    private void Update() => SetColor(SnakeMovement.instance.length);
 
     public void Fill()
     {
@@ -33,7 +33,7 @@ public class Block : MonoBehaviour
 
         if (filling == destroyPrice)
         {
-            SoundsManager.instance.DestroySound();
+            SoundsManager.instance.EffectsSound(1);
             Destroy(gameObject);
         }
     }

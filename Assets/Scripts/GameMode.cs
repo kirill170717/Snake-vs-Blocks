@@ -22,11 +22,11 @@ public class GameMode : MonoBehaviour
 
     private void Update()
     {
+        PlayerPrefs.SetInt("Levels", levels.isOn ? 1 : 0);
+        PlayerPrefs.SetInt("Infinite", infinite.isOn ? 1 : 0);
+
         if (levels.isOn)
-        {
-            record.SetActive(false);
             level.SetActive(true);
-        }
         else
         {
             level.SetActive(false);
@@ -48,11 +48,5 @@ public class GameMode : MonoBehaviour
             record.SetActive(true);
             Spawner.instance.InfiniteMode();
         }
-    }
-
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.SetInt("Levels", levels.isOn ? 1 : 0);
-        PlayerPrefs.SetInt("Infinite", infinite.isOn ? 1 : 0);
     }
 }

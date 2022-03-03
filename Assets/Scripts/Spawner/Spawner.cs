@@ -9,23 +9,17 @@ public class Spawner : MonoBehaviour
     public Transform container;
     public int distanceBetweenFullLine;
     public int distanceBetweenRandomLine;
+    public int blockSpawnChance;
+    public int wallSpawnChance;
+    public int circleSpawnChance;
 
     [Header("Level mode")]
     public int repeatCount;
 
-    [Header("Block")]
+    [Header("Prefabs")]
     public GameObject block;
-    public int blockSpawnChance;
-
-    [Header("Wall")]
     public GameObject wall;
-    public int wallSpawnChance;
-
-    [Header("Circle")]
     public GameObject circle;
-    public int circleSpawnChance;
-    
-    [Header("Finish")]
     public GameObject finish;
 
     private BlockSpawnPoint[] blockSpawnPoints;

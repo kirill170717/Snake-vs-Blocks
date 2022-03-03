@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UiManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    public static UiManager instance;
+    public static UIManager instance;
 
     [Header("Canvas")]
     public GameObject mainMenu;
@@ -20,6 +20,11 @@ public class UiManager : MonoBehaviour
 
     [Header("Language")]
     public Dropdown language;
+
+    [Header("Ads")]
+    public float persentShowAds;
+
+    private float adsPersent;
 
     private void Awake()
     {
@@ -91,11 +96,28 @@ public class UiManager : MonoBehaviour
         game.SetActive(false);
         gameOver.SetActive(true);
         Score.instance.UnlockingPoints();
+
+        adsPersent = Random.Range(0f, 1f);
+
+        if (adsPersent < persentShowAds)
+            InterstitialAds.instance.ShowAd();
+    }
+
+    public void ReviveAfterAds()
+    {
+
     }
 
     public void Finish()
     {
         Score.instance.UnlockingPoints();
+        Score.instance.CompletedLevel();
+
+        adsPersent = Random.Range(0f, 1f);
+
+        if (adsPersent < persentShowAds)
+            InterstitialAds.instance.ShowAd();
+
         SceneManager.LoadScene(0);
     }
 
@@ -147,7 +169,7 @@ public class UiManager : MonoBehaviour
                 LocalizationManager.instance.SetLocalization(SystemLanguage.French);
                 break;
         }
-        
+
         PlayerPrefs.SetInt("Language", value);
     }
 }

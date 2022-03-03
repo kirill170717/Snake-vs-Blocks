@@ -10,16 +10,17 @@ public class LocaleText : MonoBehaviour
     private string textID; //Идентификатор ресурса, который мы хотим захватить.
 
     private Text textComponent;
-   
+    
+
     private void Awake()
     {
         //Ссылки на кэш:
         textComponent = GetComponent<Text>();
-        LocalizationManager.instance.LanguageChanged += UpdateLocale;
     }
 
     private void Start()
     {
+        LocalizationManager.instance.LanguageChanged += UpdateLocale;
         //Убедитесь, что при активации этого объекта отображается правильный язык:
         UpdateLocale();
     }

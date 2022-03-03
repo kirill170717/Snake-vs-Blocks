@@ -9,27 +9,41 @@ public class Score : MonoBehaviour
     public TMP_Text skinsView;
     public TMP_Text recordView;
     public TMP_Text finalScore;
+    public TMP_Text levelView;
 
     private int destroyPoints;
     private int unlockingPoints;
-    private int record;
+    private int recordLevel;
+    private int recordInfinite;
+    private int level;
 
-    private void Awake()
-    {
-        instance = this;
-    }
+    private void Awake() => instance = this;
 
     public void Update()
     {
-        if (recordView.IsActive())
+        if (levelView.IsActive())
         {
-            record = destroyPoints;
-            if (PlayerPrefs.GetInt("Score") <= record)
-                PlayerPrefs.SetInt("Score", record);
-            recordView.text = PlayerPrefs.GetInt("Score").ToString();
+            levelView.text = PlayerPrefs.GetInt("Level").ToString();
+            recordLevel = destroyPoints;
+
+            if (PlayerPrefs.GetInt("ScoreLevel") <= recordLevel)
+                PlayerPrefs.SetInt("ScoreLevel", recordLevel);
+
+            recordView.text = PlayerPrefs.GetInt("ScoreLevel").ToString();
+        }
+        else if (recordView.IsActive())
+        {
+            recordInfinite = destroyPoints;
+
+            if (PlayerPrefs.GetInt("ScoreInfinite") <= recordInfinite)
+                PlayerPrefs.SetInt("ScoreInfinite", recordInfinite);
+
+            recordView.text = PlayerPrefs.GetInt("ScoreInfinite").ToString();
         }
         else if (finalScore.IsActive())
             finalScore.text = destroyPoints.ToString();
+
+        PlayerPrefs.SetInt("Level", level);
     }
 
     public void DestructionPoints()
@@ -42,5 +56,11 @@ public class Score : MonoBehaviour
     {
         unlockingPoints++;
         skinsView.text = unlockingPoints.ToString();
+    }
+
+    public void CompletedLevel()
+    {
+        level++;
+        levelView.text = level.ToString();
     }
 }

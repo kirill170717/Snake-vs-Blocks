@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SaveController
 {
-    const string nameFileSave = "/data.sav";
+    const string nameFileSave = "/Savegame.sav";
 
     public static void Save<T>(T _data)
     {
@@ -24,17 +24,13 @@ public class SaveController
             byte[] bytes = new byte[charsCount / 2];
             // UnCrypt
             for (int i = 0; i < charsCount; i += 2)
-            {
-                bytes[i / 2] =
-                (byte)(byte.MaxValue - Convert.ToByte(filer.Substring(i, 2), 16));
-            }
+                bytes[i / 2] = (byte)(byte.MaxValue - Convert.ToByte(filer.Substring(i, 2), 16));
+
             var result = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
             return JsonUtility.FromJson<T>(result);
         }
         else
-        {
-            return default(T);
-        }
+            return default;
     }
 
     private static string DataToString<T>(T _data)
@@ -49,9 +45,7 @@ public class SaveController
         byte[] byteData = Encoding.UTF8.GetBytes(jsonSave);
         // Crypt
         for (int i = 0; i < byteData.Count(); i++)
-        {
             byteData[i] = (byte)(byte.MaxValue - byteData[i]);
-        }
 
         return byteData;
     }

@@ -28,16 +28,6 @@ public class Data
             skin = 1,
         };
     }
-
-    public void Pack()
-    {
-
-    }
-
-    public void UnPack()
-    {
-
-    }
 }
 
 [Serializable]

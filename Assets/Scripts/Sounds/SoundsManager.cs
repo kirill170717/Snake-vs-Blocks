@@ -10,10 +10,12 @@ public class SoundsManager : MonoBehaviour
     public Toggle effects;
     public Toggle vibration;
 
-    [Header("Sounds")]
+    [Header("Audio sources")]
     public AudioSource backgroundMusic;
-    public AudioSource buttonEffects;
-    public AudioSource blockEffects;
+    public AudioSource effectsSound;
+
+    [Header("Audio clips")]
+    public AudioClip[] effectsClips;
 
     private void Awake()
     {
@@ -22,7 +24,7 @@ public class SoundsManager : MonoBehaviour
         effects.isOn = PlayerPrefs.GetInt("Effects") != 0;
     }
 
-    private void OnApplicationQuit()
+    private void Update()
     {
         PlayerPrefs.SetInt("Music", music.isOn ? 1 : 0);
         PlayerPrefs.SetInt("Effects", effects.isOn ? 1 : 0);
@@ -30,16 +32,21 @@ public class SoundsManager : MonoBehaviour
 
     public void MuteMusic() => backgroundMusic.mute = !music.isOn;
 
-    public void ClickSound()
-    {
-        if(effects.isOn)
-            buttonEffects.Play();
-    }
-
-    public void DestroySound()
+    public void EffectsSound(int value)
     {
         if (effects.isOn)
-            blockEffects.Play();
+        {
+            switch (value)
+            {
+                case 0:
+                    effectsSound.clip = effectsClips[0];
+                    break;
+                case 1:
+                    effectsSound.clip = effectsClips[1];
+                    break;
+            }
+            effectsSound.Play();
+        }
     }
 
     public void Vibration()

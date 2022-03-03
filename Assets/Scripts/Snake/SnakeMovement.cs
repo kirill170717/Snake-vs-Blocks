@@ -18,6 +18,8 @@ public class SnakeMovement : MonoBehaviour
     private Vector2 touchLastPos;
     private Vector2 delta;
 
+    Vector3 prevPosition = Vector3.zero;
+
     private float sidewaysSpeed;
 
     private void Awake()
@@ -68,7 +70,6 @@ public class SnakeMovement : MonoBehaviour
         componentRigidbody.velocity = new Vector2(sidewaysSpeed * 5, forwardSpeed);
         sidewaysSpeed = 0;
     }
-
     private void OnBlockCollided()
     {
         if (length > 0)
@@ -78,7 +79,7 @@ public class SnakeMovement : MonoBehaviour
             pointsText.SetText(length.ToString());
         }
         else
-            UiManager.instance.GameOver();
+            UIManager.instance.GameOver();
     }
 
     private void OnCircleCollected(int circleSize)
