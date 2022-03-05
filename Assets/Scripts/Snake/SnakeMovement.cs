@@ -7,19 +7,19 @@ public class SnakeMovement : MonoBehaviour
 
     public float forwardSpeed = 4;
     public float sensitivity = 90;
-    public int length = 5;
+    public int SnakeLength
+    {
+        get { return Data.instance.player.snakeLength; }
+        set { Data.instance.player.snakeLength = value; }
+    }
     public TMP_Text pointsText;
 
     private Camera mainCamera;
     private Rigidbody2D componentRigidbody;
     private SnakeHead head;
     private SnakeTail componentSnakeTail;
-
     private Vector2 touchLastPos;
     private Vector2 delta;
-
-    Vector3 prevPosition = Vector3.zero;
-
     private float sidewaysSpeed;
 
     private void Awake()
@@ -30,10 +30,10 @@ public class SnakeMovement : MonoBehaviour
         componentSnakeTail = GetComponent<SnakeTail>();
         head = GetComponent<SnakeHead>();
 
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < SnakeLength; i++)
             componentSnakeTail.AddTail();
 
-        pointsText.SetText(length.ToString());
+        pointsText.SetText(SnakeLength.ToString());
     }
 
     private void OnEnable()
@@ -72,23 +72,26 @@ public class SnakeMovement : MonoBehaviour
     }
     private void OnBlockCollided()
     {
-        if (length > 0)
+        if (SnakeLength > 0)
         {
-            length--;
+            SnakeLength--;
             componentSnakeTail.RemoveTail();
-            pointsText.SetText(length.ToString());
+            pointsText.SetText(SnakeLength.ToString());
         }
         else
+        {
             UIManager.instance.GameOver();
+            SnakeLength = 5;
+        }
     }
 
     private void OnCircleCollected(int circleSize)
     {
         for (int i = 0; i < circleSize; i++)
         {
-            length++;
+            SnakeLength++;
             componentSnakeTail.AddTail();
-            pointsText.SetText(length.ToString());
+            pointsText.SetText(SnakeLength.ToString());
         }
     }
 }

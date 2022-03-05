@@ -2,21 +2,11 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    private void Awake()
-    {
-        SaveController.Load<Data>();
-    }
+    private void Awake() => Data.instance = SaveController.Load<Data>();
 
-    private void OnApplicationPause(bool pause)
+    private void OnApplicationFocus(bool focus)
     {
-        if (pause)
+        if (!focus)
             SaveController.Save(Data.instance);
-        else
-            SaveController.Load<Data>();
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveController.Save(Data.instance);
     }
 }

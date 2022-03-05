@@ -23,7 +23,7 @@ public class Block : MonoBehaviour
         FillingUpdated?.Invoke(LeftToFill);
     }
 
-    private void Update() => SetColor(SnakeMovement.instance.length);
+    private void Update() => SetColor(SnakeMovement.instance.SnakeLength);
 
     public void Fill()
     {

@@ -11,56 +11,94 @@ public class Score : MonoBehaviour
     public TMP_Text finalScore;
     public TMP_Text levelView;
 
-    private int destroyPoints;
-    private int unlockingPoints;
-    private int recordLevel;
-    private int recordInfinite;
-    private int level;
+    private int ScoreLevel
+    {
+        get { return Data.instance.player.scoreLevel; }
+        set { Data.instance.player.scoreLevel = value; }
+    }
+    private int ScoreInfinite
+    {
+        get { return Data.instance.player.scoreInfinite; }
+        set { Data.instance.player.scoreInfinite = value; }
+    }
+    private int RecordLevel
+    {
+        get { return Data.instance.player.recordLevel; }
+        set { Data.instance.player.recordLevel = value; }
+    }
+    private int RecordInfinite
+    {
+        get { return Data.instance.player.recordInfinite; }
+        set { Data.instance.player.recordInfinite = value; }
+    }
+    private int UnlockPoints
+    {
+        get { return Data.instance.player.unlockPoints; }
+        set { Data.instance.player.unlockPoints = value; }
+    }
+    private int Level
+    {
+        get { return Data.instance.player.completedLevel; }
+        set { Data.instance.player.completedLevel = value; }
+    }
 
-    private void Awake() => instance = this;
+    private void Awake()
+    {
+        instance = this;   
+    }
+
+    private void Start()
+    {
+        levelView.text = Level.ToString();
+        skinsView.text = UnlockPoints.ToString();
+    }
 
     public void Update()
     {
-        if (levelView.IsActive())
+        if (GameMode.instance.levels.isOn)
         {
-            levelView.text = PlayerPrefs.GetInt("Level").ToString();
-            recordLevel = destroyPoints;
-
-            if (PlayerPrefs.GetInt("ScoreLevel") <= recordLevel)
-                PlayerPrefs.SetInt("ScoreLevel", recordLevel);
+            RecordLevel = ScoreLevel;
+            if (PlayerPrefs.GetInt("ScoreLevel") <= RecordLevel)
+                PlayerPrefs.SetInt("ScoreLevel", RecordLevel);
 
             recordView.text = PlayerPrefs.GetInt("ScoreLevel").ToString();
+            finalScore.text = ScoreLevel.ToString();
         }
-        else if (recordView.IsActive())
+        else
         {
-            recordInfinite = destroyPoints;
-
-            if (PlayerPrefs.GetInt("ScoreInfinite") <= recordInfinite)
-                PlayerPrefs.SetInt("ScoreInfinite", recordInfinite);
+            RecordInfinite = ScoreInfinite;
+            if (PlayerPrefs.GetInt("ScoreInfinite") <= RecordInfinite)
+                PlayerPrefs.SetInt("ScoreInfinite", RecordInfinite);
 
             recordView.text = PlayerPrefs.GetInt("ScoreInfinite").ToString();
+            finalScore.text = ScoreInfinite.ToString();
         }
-        else if (finalScore.IsActive())
-            finalScore.text = destroyPoints.ToString();
-
-        PlayerPrefs.SetInt("Level", level);
     }
 
     public void DestructionPoints()
     {
-        destroyPoints++;
-        scoreView.text = destroyPoints.ToString();
+        if (GameMode.instance.levels.isOn)
+        {
+            ScoreLevel++;
+            scoreView.text = ScoreLevel.ToString();
+        }
+        else
+        {
+            ScoreInfinite++;
+            scoreView.text = ScoreInfinite.ToString();
+        }
     }
 
     public void UnlockingPoints()
     {
-        unlockingPoints++;
-        skinsView.text = unlockingPoints.ToString();
+        UnlockPoints++;
+        skinsView.text = UnlockPoints.ToString();
     }
 
     public void CompletedLevel()
     {
-        level++;
-        levelView.text = level.ToString();
+        Level++;
+        levelView.text = Level.ToString();
+        UnlockingPoints();
     }
 }

@@ -20,12 +20,15 @@ public class Data
 
         player = new Player()
         {
-            defaultSnakeLength = 5,
-            snakeLength = 0,
-            record = 0,
+            life = 1,
+            snakeLength = 5,
+            scoreLevel = 0,
+            scoreInfinite = 0,
+            recordLevel = 0,
+            recordInfinite = 0,
             completedLevel = 0,
-            unlockingPoints = 0,
-            skin = 1,
+            unlockPoints = 0,
+            skin = 0,
         };
     }
 }
@@ -33,11 +36,14 @@ public class Data
 [Serializable]
 public class Player
 {
-    public int defaultSnakeLength;
+    public int life;
     public int snakeLength;
-    public int record;
+    public int scoreLevel;
+    public int scoreInfinite;
+    public int recordLevel;
+    public int recordInfinite;
     public int completedLevel;
-    public int unlockingPoints;
+    public int unlockPoints;
     public int skin;
 }
 

@@ -20,6 +20,11 @@ public class UIManager : MonoBehaviour
 
     [Header("Language")]
     public Dropdown language;
+    private int SelectedLanguage
+    {
+        get { return Data.instance.settings.language; }
+        set { Data.instance.settings.language = value; }
+    }
 
     [Header("Ads")]
     public float persentShowAds;
@@ -29,7 +34,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        language.value = PlayerPrefs.GetInt("Language");
+        language.value = SelectedLanguage;
         SwitchLanguage(language.value);
         Time.timeScale = 0;
 
@@ -44,13 +49,11 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         if (game.activeSelf)
-        {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 pause.SetActive(true);
                 Time.timeScale = 0;
             }
-        }
         else if (mainMenu.activeSelf)
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
@@ -110,7 +113,6 @@ public class UIManager : MonoBehaviour
 
     public void Finish()
     {
-        Score.instance.UnlockingPoints();
         Score.instance.CompletedLevel();
 
         adsPersent = Random.Range(0f, 1f);
@@ -170,6 +172,6 @@ public class UIManager : MonoBehaviour
                 break;
         }
 
-        PlayerPrefs.SetInt("Language", value);
+        SelectedLanguage = value;
     }
 }
