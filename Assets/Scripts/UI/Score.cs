@@ -12,12 +12,12 @@ public class Score : MonoBehaviour
     public TMP_Text levelView;
     public TMP_Text lifeView;
 
-    private int ScoreLevel
+    public int ScoreLevel
     {
         get { return Data.instance.player.scoreLevel; }
         set { Data.instance.player.scoreLevel = value; }
     }
-    private int ScoreInfinite
+    public int ScoreInfinite
     {
         get { return Data.instance.player.scoreInfinite; }
         set { Data.instance.player.scoreInfinite = value; }
@@ -51,6 +51,8 @@ public class Score : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        if (Life < 1)
+            Life = 1;
     }
 
     private void Start()

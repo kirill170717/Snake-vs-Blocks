@@ -38,6 +38,7 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
         language.value = SelectedLanguage;
         SwitchLanguage(language.value);
         Time.timeScale = 0;
@@ -58,11 +59,11 @@ public class UiManager : MonoBehaviour
                 pause.SetActive(true);
                 Time.timeScale = 0;
             }
-        else if (mainMenu.activeSelf)
-            if (Input.GetKeyDown(KeyCode.Escape))
-                Application.Quit();
+            else if (mainMenu.activeSelf)
+                if (Input.GetKeyDown(KeyCode.Escape))
+                    Application.Quit();
 
-        if(Score.instance.Life == 0)
+        if (Score.instance.Life == 0)
             buttonRevive.SetActive(false);
     }
 
@@ -93,9 +94,11 @@ public class UiManager : MonoBehaviour
     {
         if (pause)
             pause.SetActive(false);
-        else
+        else if (gameOver)
             gameOver.SetActive(false);
 
+        Score.instance.ScoreLevel = 0;
+        Score.instance.ScoreInfinite = 0;
         SceneManager.LoadScene("Game");
     }
 
@@ -116,12 +119,13 @@ public class UiManager : MonoBehaviour
 
     public void Revive()
     {
-        
+
     }
 
     public void ReviveAfterAds()
     {
-        //Data.instance.player.life += 1;
+        Debug.Log(1);
+        Score.instance.Life++;
     }
 
     public void Finish()
@@ -160,7 +164,7 @@ public class UiManager : MonoBehaviour
         mainMenu.SetActive(true);
     }
 
-    public void OpenSettings() 
+    public void OpenSettings()
     {
         settings.SetActive(true);
     }
