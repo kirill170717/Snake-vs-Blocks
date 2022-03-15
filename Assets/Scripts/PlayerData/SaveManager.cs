@@ -3,19 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    public static SaveManager instance;
-
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-
         Data.instance = SaveController.Load<Data>();
+        if (Data.instance == null)
+        {
+            Data.instance = new Data();
+        }
+        DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene("Game");
     }
 

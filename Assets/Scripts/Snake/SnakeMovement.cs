@@ -80,7 +80,7 @@ public class SnakeMovement : MonoBehaviour
         }
         else
         {
-            UIManager.instance.GameOver();
+            UiManager.instance.GameOver();
             SnakeLength = 5;
         }
     }

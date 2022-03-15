@@ -66,8 +66,8 @@ public class PurchasingManager : MonoBehaviour, IStoreListener
         BannerAds.instance.StopAllCoroutines();
         BannerAds.instance.HideBannerAd();
         RewardedAds.instance.StopAllCoroutines();
-        UIManager.instance.persentShowAds = 0;
-        UIManager.instance.getLife.SetActive(false);
+        UiManager.instance.persentShowAds = 0;
+        UiManager.instance.getLife.SetActive(false);
     }
 
     private void Product_Life()

@@ -80,7 +80,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         if (adUnitId.Equals(placementId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Unity Ads rewarded ad completed!");
-            UIManager.instance.ReviveAfterAds();
+            UiManager.instance.ReviveAfterAds();
             Advertisement.Load(adUnitId, this);
         }
     }

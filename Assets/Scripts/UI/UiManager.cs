@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class UiManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static UiManager instance;
 
     [Header("Canvas")]
     public GameObject game;
