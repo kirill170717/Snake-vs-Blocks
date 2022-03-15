@@ -20,7 +20,10 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         reviveButton.interactable = false;
     }
 
-    private void Start() => StartCoroutine(LoadRewardedAds());
+    private void Start()
+    {
+        StartCoroutine(LoadRewardedAds());
+    }
 
     private IEnumerator LoadRewardedAds()
     {
@@ -82,5 +85,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         }
     }
 
-    private void OnDestroy() => reviveButton.onClick.RemoveAllListeners();
+    private void OnDestroy()
+    {
+        reviveButton.onClick.RemoveAllListeners();
+    }
 }

@@ -53,7 +53,10 @@ public class Spawner : MonoBehaviour
         GenerateElement(finishSpawnPoint.transform.position, finish);
     }
 
-    public void InfiniteMode() => StartCoroutine(InfiniteSpawn());
+    public void InfiniteMode()
+    {
+        StartCoroutine(InfiniteSpawn());
+    }
 
     public IEnumerator InfiniteSpawn()
     {
@@ -90,5 +93,8 @@ public class Spawner : MonoBehaviour
         return Instantiate(generatedElement, spawnPoint, Quaternion.identity, container);
     }
 
-    private void MoveSpawner(int distanceY) => transform.position = new Vector3(transform.position.x, transform.position.y + distanceY, transform.position.z);
+    private void MoveSpawner(int distanceY)
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y + distanceY, transform.position.z);
+    }
 }

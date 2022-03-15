@@ -23,7 +23,10 @@ public class Block : MonoBehaviour
         FillingUpdated?.Invoke(LeftToFill);
     }
 
-    private void Update() => SetColor(SnakeMovement.instance.SnakeLength);
+    private void Update()
+    {
+        SetColor(SnakeMovement.instance.SnakeLength);
+    }
 
     public void Fill()
     {
@@ -32,10 +35,7 @@ public class Block : MonoBehaviour
         Score.instance.DestructionPoints();
 
         if (filling == destroyPrice)
-        {
-            SoundsManager.instance.EffectsSound(1);
             Destroy(gameObject);
-        }
     }
 
     public void SetColor(int length)
@@ -52,5 +52,8 @@ public class Block : MonoBehaviour
             spriteRenderer.color = low;
     }
 
-    private void OnBecameInvisible() => Destroy(gameObject);
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

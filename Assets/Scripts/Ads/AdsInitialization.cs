@@ -4,12 +4,15 @@ using UnityEngine.Advertisements;
 public class AdsInitialization : MonoBehaviour, IUnityAdsInitializationListener
 {
     public bool testMode;
-    public string androidGameId = "4638783";
-    public string iOSGameId = "4638782";
+    public string androidGameId = "4658617";
+    public string iOSGameId = "4658616";
 
     private string gameId;
 
-    private void Awake() => InitializeAds();
+    private void Awake()
+    {
+        InitializeAds();
+    }
 
     public void InitializeAds()
     {

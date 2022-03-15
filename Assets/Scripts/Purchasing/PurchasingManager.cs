@@ -63,15 +63,16 @@ public class PurchasingManager : MonoBehaviour, IStoreListener
     {
         PlayerPrefs.SetInt("ads", 0);
         NoAds.SetActive(false);
-
-        //AdsCore.S.StopAllCoroutines();
-        //AdsCore.S.HideBanner();
+        BannerAds.instance.StopAllCoroutines();
+        BannerAds.instance.HideBannerAd();
+        RewardedAds.instance.StopAllCoroutines();
+        UIManager.instance.persentShowAds = 0;
+        UIManager.instance.getLife.SetActive(false);
     }
 
     private void Product_Life()
     {
-        PlayerPrefs.SetInt("life", 0);
-        Life.SetActive(false);
+        Data.instance.player.life += 10;
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)

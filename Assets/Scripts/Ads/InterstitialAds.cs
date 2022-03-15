@@ -16,7 +16,10 @@ public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
         adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer) ? iOSAdUnitId : androidAdUnitId;
     }
 
-    private void Start() => LoadAd();
+    private void Start()
+    {
+        LoadAd();
+    }
 
     public void LoadAd()
     {

@@ -1,8 +1,23 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    private void Awake() => Data.instance = SaveController.Load<Data>();
+    public static SaveManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
+
+        Data.instance = SaveController.Load<Data>();
+        SceneManager.LoadScene("Game");
+    }
 
     private void OnApplicationFocus(bool focus)
     {

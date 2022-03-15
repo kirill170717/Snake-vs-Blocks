@@ -4,13 +4,19 @@ using UnityEngine.Advertisements;
 
 public class BannerAds : MonoBehaviour
 {
+    public static BannerAds instance;
+
     public BannerPosition bannerPosition;
     public string androidAdUnitId = "Banner_Android";
     public string iOSAdUnitId = "Banner_iOS";
 
     private string adUnitId;
 
-    private void Awake() => adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer) ? iOSAdUnitId : androidAdUnitId;
+    private void Awake()
+    {
+        instance = this;
+        adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer) ? iOSAdUnitId : androidAdUnitId;
+    }
 
     private void Start()
     {
@@ -40,7 +46,10 @@ public class BannerAds : MonoBehaviour
         ShowAd();
     }
 
-    private void OnBannerError(string message) => Debug.Log($"Banner error: {message}");
+    private void OnBannerError(string message)
+    {
+        Debug.Log($"Banner error: {message}");
+    }
 
     public void ShowAd()
     {
@@ -68,5 +77,8 @@ public class BannerAds : MonoBehaviour
 
     }
 
-    public void HideBannerAd() => Advertisement.Banner.Hide();
+    public void HideBannerAd()
+    {
+        Advertisement.Banner.Hide();
+    }
 }

@@ -7,13 +7,13 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [Header("Canvas")]
+    public GameObject game;
     public GameObject mainMenu;
     public GameObject settings;
     public GameObject pause;
     public GameObject gameOver;
-    public GameObject skins;
     public GameObject challenge;
-    public GameObject game;
+    public GameObject skins;
 
     [Header("Camera")]
     public Camera _camera;
@@ -30,6 +30,10 @@ public class UIManager : MonoBehaviour
     public float persentShowAds;
 
     private float adsPersent;
+
+    [Header("Buttons")]
+    public GameObject buttonRevive;
+    public GameObject getLife;
 
     private void Awake()
     {
@@ -57,6 +61,9 @@ public class UIManager : MonoBehaviour
         else if (mainMenu.activeSelf)
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
+
+        if(Score.instance.Life == 0)
+            buttonRevive.SetActive(false);
     }
 
     public void Play()
@@ -89,12 +96,13 @@ public class UIManager : MonoBehaviour
         else
             gameOver.SetActive(false);
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Game");
     }
 
     public void GameOver()
     {
         Time.timeScale = 0;
+        Score.instance.Death();
         SoundsManager.instance.Vibration();
         game.SetActive(false);
         gameOver.SetActive(true);
@@ -106,9 +114,14 @@ public class UIManager : MonoBehaviour
             InterstitialAds.instance.ShowAd();
     }
 
+    public void Revive()
+    {
+        
+    }
+
     public void ReviveAfterAds()
     {
-
+        //Data.instance.player.life += 1;
     }
 
     public void Finish()
@@ -120,7 +133,7 @@ public class UIManager : MonoBehaviour
         if (adsPersent < persentShowAds)
             InterstitialAds.instance.ShowAd();
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Game");
     }
 
     public void OpenSkins()
@@ -147,9 +160,15 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(true);
     }
 
-    public void OpenSettings() => settings.SetActive(true);
+    public void OpenSettings() 
+    {
+        settings.SetActive(true);
+    }
 
-    public void CloseSettings() => settings.SetActive(false);
+    public void CloseSettings()
+    {
+        settings.SetActive(false);
+    }
 
     public void SwitchLanguage(int value)
     {

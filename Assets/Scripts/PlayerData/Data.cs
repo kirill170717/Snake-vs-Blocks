@@ -3,10 +3,10 @@ using System;
 [Serializable]
 public class Data
 {
-    public static Data instance = new();
+    public static Data instance;
 
-    public Settings settings = new();
-    public Player player = new();
+    public Settings settings;
+    public Player player;
 
     public Data()
     {
@@ -17,7 +17,6 @@ public class Data
             vibration = true,
             language = 0,
         };
-
         player = new Player()
         {
             life = 1,

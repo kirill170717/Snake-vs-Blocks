@@ -10,6 +10,7 @@ public class Score : MonoBehaviour
     public TMP_Text recordView;
     public TMP_Text finalScore;
     public TMP_Text levelView;
+    public TMP_Text lifeView;
 
     private int ScoreLevel
     {
@@ -41,10 +42,15 @@ public class Score : MonoBehaviour
         get { return Data.instance.player.completedLevel; }
         set { Data.instance.player.completedLevel = value; }
     }
+    public int Life
+    {
+        get { return Data.instance.player.life; }
+        set { Data.instance.player.life = value; }
+    }
 
     private void Awake()
     {
-        instance = this;   
+        instance = this;
     }
 
     private void Start()
@@ -55,6 +61,8 @@ public class Score : MonoBehaviour
 
     public void Update()
     {
+        lifeView.text = Life.ToString();
+
         if (GameMode.instance.levels.isOn)
         {
             RecordLevel = ScoreLevel;
@@ -100,5 +108,11 @@ public class Score : MonoBehaviour
         Level++;
         levelView.text = Level.ToString();
         UnlockingPoints();
+    }
+
+    public void Death()
+    {
+        Life--;
+        lifeView.text = Life.ToString();
     }
 }

@@ -21,5 +21,8 @@ public class Circle : MonoBehaviour
         return circleSize;
     }
 
-    private void OnBecameInvisible() => Destroy(gameObject);
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

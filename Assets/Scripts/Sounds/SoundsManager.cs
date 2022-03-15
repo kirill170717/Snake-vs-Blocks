@@ -16,7 +16,7 @@ public class SoundsManager : MonoBehaviour
 
     [Header("Audio clips")]
     public AudioClip[] effectsClips;
-    
+
     private bool MusicPlaying
     {
         get { return Data.instance.settings.music; }
@@ -54,7 +54,10 @@ public class SoundsManager : MonoBehaviour
         //PlayerPrefs.SetInt("Effects", effects.isOn ? 1 : 0);
     }
 
-    public void MuteMusic() => backgroundMusic.mute = !music.isOn;
+    public void MuteMusic()
+    {
+        backgroundMusic.mute = !music.isOn;
+    }
 
     public void EffectsSound(int value)
     {

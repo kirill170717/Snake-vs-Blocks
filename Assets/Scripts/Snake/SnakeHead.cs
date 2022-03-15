@@ -12,6 +12,7 @@ public class SnakeHead : MonoBehaviour
         {
             BlockCollided?.Invoke();
             block.Fill();
+            SoundsManager.instance.EffectsSound(1);
         }
     }
 
