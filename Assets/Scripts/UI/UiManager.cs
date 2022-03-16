@@ -32,7 +32,7 @@ public class UiManager : MonoBehaviour
     private float adsPersent;
 
     [Header("Buttons")]
-    public GameObject buttonRevive;
+    public GameObject revive;
     public GameObject getLife;
 
     private void Awake()
@@ -64,7 +64,7 @@ public class UiManager : MonoBehaviour
                     Application.Quit();
 
         if (Score.instance.Life == 0)
-            buttonRevive.SetActive(false);
+            revive.SetActive(false);
     }
 
     public void Play()
@@ -92,11 +92,6 @@ public class UiManager : MonoBehaviour
 
     public void MainMenu()
     {
-        if (pause)
-            pause.SetActive(false);
-        else if (gameOver)
-            gameOver.SetActive(false);
-
         Score.instance.ScoreLevel = 0;
         Score.instance.ScoreInfinite = 0;
         SceneManager.LoadScene("Game");
@@ -110,6 +105,7 @@ public class UiManager : MonoBehaviour
         game.SetActive(false);
         gameOver.SetActive(true);
         Score.instance.UnlockingPoints();
+        SnakeMovement.instance.SnakeLength = 5;
 
         adsPersent = Random.Range(0f, 1f);
 
@@ -124,8 +120,7 @@ public class UiManager : MonoBehaviour
 
     public void ReviveAfterAds()
     {
-        Debug.Log(1);
-        Score.instance.Life++;
+        //Score.instance.Life++;
     }
 
     public void Finish()
