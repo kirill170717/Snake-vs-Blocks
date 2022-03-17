@@ -79,15 +79,22 @@ public class SnakeMovement : MonoBehaviour
             pointsText.SetText(SnakeLength.ToString());
         }
         else
-        {
             UiManager.instance.GameOver();
-            SnakeLength = 5;
-        }
     }
 
     private void OnCircleCollected(int circleSize)
     {
         for (int i = 0; i < circleSize; i++)
+        {
+            SnakeLength++;
+            componentSnakeTail.AddTail();
+            pointsText.SetText(SnakeLength.ToString());
+        }
+    }
+
+    public void ReviveSnake(int length)
+    {
+        for (int i = 0; i < length; i++)
         {
             SnakeLength++;
             componentSnakeTail.AddTail();

@@ -7,7 +7,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 {
     public static RewardedAds instance;
 
-    public Button reviveButton;
+    public Button getLife;
     public string androidAdUnitId = "Rewarded_Android";
     public string iOSAdUnitId = "Rewarded_iOS";
 
@@ -17,7 +17,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     {
         instance = this;
         adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer) ? iOSAdUnitId : androidAdUnitId;
-        reviveButton.interactable = false;
+        getLife.interactable = false;
     }
 
     private void Start()
@@ -40,7 +40,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     public void ShowAd()
     {
         Debug.Log("Showing Ad:" + adUnitId);
-        reviveButton.interactable = false;
+        getLife.interactable = false;
         Advertisement.Show(adUnitId, this);
     }
 
@@ -50,8 +50,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
         if (placementId.Equals(adUnitId))
         {
-            reviveButton.onClick.AddListener(ShowAd);
-            reviveButton.interactable = true;
+            getLife.onClick.AddListener(ShowAd);
+            getLife.interactable = true;
         }
     }
 
@@ -80,13 +80,14 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         if (adUnitId.Equals(placementId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Unity Ads rewarded ad completed!");
-            UiManager.instance.ReviveAfterAds();
+            Score.instance.Life++;
+            getLife.gameObject.SetActive(false);
             Advertisement.Load(adUnitId, this);
         }
     }
 
     private void OnDestroy()
     {
-        reviveButton.onClick.RemoveAllListeners();
+        getLife.onClick.RemoveAllListeners();
     }
 }

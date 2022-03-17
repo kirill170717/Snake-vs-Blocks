@@ -13,6 +13,7 @@ public class UiManager : MonoBehaviour
     public GameObject pause;
     public GameObject gameOver;
     public GameObject challenge;
+    public GameObject selectedChallenge;
     public GameObject skins;
 
     [Header("Camera")]
@@ -35,6 +36,8 @@ public class UiManager : MonoBehaviour
     public GameObject revive;
     public GameObject getLife;
 
+    public bool btnStatus = false;
+
     private void Awake()
     {
         instance = this;
@@ -48,23 +51,30 @@ public class UiManager : MonoBehaviour
         gameOver.SetActive(false);
         skins.SetActive(false);
         challenge.SetActive(false);
+        selectedChallenge.SetActive(false);
         game.SetActive(false);
     }
 
     private void Update()
     {
         if (game.activeSelf)
+        {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 pause.SetActive(true);
                 Time.timeScale = 0;
             }
-            else if (mainMenu.activeSelf)
-                if (Input.GetKeyDown(KeyCode.Escape))
-                    Application.Quit();
+        }
+        else if (mainMenu.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
+        }
 
         if (Score.instance.Life == 0)
             revive.SetActive(false);
+        else
+            revive.SetActive(true);
     }
 
     public void Play()
@@ -94,6 +104,7 @@ public class UiManager : MonoBehaviour
     {
         Score.instance.ScoreLevel = 0;
         Score.instance.ScoreInfinite = 0;
+        SnakeMovement.instance.SnakeLength = 5;
         SceneManager.LoadScene("Game");
     }
 
@@ -105,7 +116,6 @@ public class UiManager : MonoBehaviour
         game.SetActive(false);
         gameOver.SetActive(true);
         Score.instance.UnlockingPoints();
-        SnakeMovement.instance.SnakeLength = 5;
 
         adsPersent = Random.Range(0f, 1f);
 
@@ -115,12 +125,11 @@ public class UiManager : MonoBehaviour
 
     public void Revive()
     {
-
-    }
-
-    public void ReviveAfterAds()
-    {
-        //Score.instance.Life++;
+        btnStatus = true;
+        SnakeMovement.instance.ReviveSnake(5);
+        gameOver.SetActive(false);
+        game.SetActive(true);
+        Time.timeScale = 1;
     }
 
     public void Finish()
@@ -157,6 +166,15 @@ public class UiManager : MonoBehaviour
     {
         challenge.SetActive(false);
         mainMenu.SetActive(true);
+    }
+    public void OpenSelectedChallenge()
+    {
+        selectedChallenge.SetActive(true);
+    }
+
+    public void CloseSelectedChallenge()
+    {
+        selectedChallenge.SetActive(false);
     }
 
     public void OpenSettings()

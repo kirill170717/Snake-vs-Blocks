@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5957238d70872141a9d91299d80532b, type: 3}
   m_Name: Texts Dictionary
   m_EditorClassIdentifier: 
-  key: removeAds
+  key: challenge_01
   txtList:
   - key: play
     textsList:
@@ -56,6 +56,12 @@ MonoBehaviour:
       text: Close
     - language: 30
       text: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"
+  - key: cancel
+    textsList:
+    - language: 10
+      text: Cancel
+    - language: 30
+      text: "\u041E\u0442\u043C\u0435\u043D\u0430"
   - key: pause
     textsList:
     - language: 10
@@ -86,3 +92,9 @@ MonoBehaviour:
       text: Remove Ads
     - language: 30
       text: "\u0423\u0431\u0440\u0430\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u0443"
+  - key: challenge_01
+    textsList:
+    - language: 10
+      text: Break 10 blocks
+    - language: 30
+      text: "\u0421\u043B\u043E\u043C\u0430\u0442\u044C 10 \u0431\u043B\u043E\u043A\u043E\u0432"

@@ -10,9 +10,17 @@ public class SnakeHead : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Block block))
         {
-            BlockCollided?.Invoke();
-            block.Fill();
-            SoundsManager.instance.EffectsSound(1);
+            if(UiManager.instance.btnStatus == true)
+            {
+                block.gameObject.SetActive(false);
+                UiManager.instance.btnStatus = false;
+            }
+            else
+            {
+                BlockCollided?.Invoke();
+                block.Fill();
+                SoundsManager.instance.EffectsSound(1);
+            }
         }
     }
 
