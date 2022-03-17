@@ -36,6 +36,7 @@ public class UiManager : MonoBehaviour
     public GameObject revive;
     public GameObject getLife;
 
+    [HideInInspector]
     public bool btnStatus = false;
 
     private void Awake()
