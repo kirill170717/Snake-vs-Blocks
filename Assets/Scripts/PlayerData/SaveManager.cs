@@ -19,4 +19,9 @@ public class SaveManager : MonoBehaviour
         if (!focus)
             SaveController.Save(Data.instance);
     }
+
+    private void OnApplicationQuit()
+    {
+        SaveController.Save(Data.instance);
+    }
 }

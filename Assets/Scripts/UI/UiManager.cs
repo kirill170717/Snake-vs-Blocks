@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class UiManager : MonoBehaviour
 {
@@ -20,8 +21,11 @@ public class UiManager : MonoBehaviour
     public Camera _camera;
 
     [Header("Language")]
-    public Dropdown language;
-    private int SelectedLanguage
+    public Sprite english;
+    public Sprite russian;
+    public Button swapLanguage;
+
+    private SystemLanguage Language
     {
         get { return Data.instance.settings.language; }
         set { Data.instance.settings.language = value; }
@@ -43,8 +47,13 @@ public class UiManager : MonoBehaviour
     {
         instance = this;
 
-        language.value = SelectedLanguage;
-        SwitchLanguage(language.value);
+        LocalizationManager.instance.SetLocalization(Language);
+
+        if (Language == SystemLanguage.English)
+            swapLanguage.image.sprite = english;
+        else
+            swapLanguage.image.sprite = russian;
+
         Time.timeScale = 0;
 
         settings.SetActive(false);
@@ -133,6 +142,12 @@ public class UiManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void Restart()
+    {
+        SnakeMovement.instance.SnakeLength = 5;
+        RestartGame.instance.Restart();
+    }
+
     public void Finish()
     {
         Score.instance.CompletedLevel();
@@ -188,27 +203,19 @@ public class UiManager : MonoBehaviour
         settings.SetActive(false);
     }
 
-    public void SwitchLanguage(int value)
+    public void SwitchLanguage()
     {
-        switch (value)
+        if (swapLanguage.image.sprite == english)
         {
-            case 0:
-                LocalizationManager.instance.SetLocalization(SystemLanguage.English);
-                break;
-            case 1:
-                LocalizationManager.instance.SetLocalization(SystemLanguage.Russian);
-                break;
-            case 2:
-                LocalizationManager.instance.SetLocalization(SystemLanguage.German);
-                break;
-            case 3:
-                LocalizationManager.instance.SetLocalization(SystemLanguage.Spanish);
-                break;
-            case 4:
-                LocalizationManager.instance.SetLocalization(SystemLanguage.French);
-                break;
+            swapLanguage.image.sprite = russian;
+            LocalizationManager.instance.SetLocalization(SystemLanguage.Russian);
+            Language = SystemLanguage.Russian;
         }
-
-        SelectedLanguage = value;
+        else
+        {
+            swapLanguage.image.sprite = english;
+            LocalizationManager.instance.SetLocalization(SystemLanguage.English);
+            Language = SystemLanguage.English;
+        }
     }
 }

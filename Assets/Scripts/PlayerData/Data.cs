@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class Data
@@ -15,7 +16,7 @@ public class Data
             music = true,
             effects = true,
             vibration = true,
-            language = 0,
+            language = SystemLanguage.English,
         };
         player = new Player()
         {
@@ -52,5 +53,5 @@ public class Settings
     public bool music;
     public bool effects;
     public bool vibration;
-    public int language;
+    public SystemLanguage language;
 }
