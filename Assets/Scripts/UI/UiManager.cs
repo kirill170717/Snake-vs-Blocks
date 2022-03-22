@@ -15,15 +15,11 @@ public class UiManager : MonoBehaviour
     public GameObject gameOver;
     public GameObject challenge;
     public GameObject selectedChallenge;
+    public GameObject challengeComplete;
     public GameObject skins;
 
     [Header("Camera")]
     public Camera _camera;
-
-    [Header("Language")]
-    public Sprite english;
-    public Sprite russian;
-    public Button swapLanguage;
 
     private SystemLanguage Language
     {
@@ -48,12 +44,6 @@ public class UiManager : MonoBehaviour
         instance = this;
 
         LocalizationManager.instance.SetLocalization(Language);
-
-        if (Language == SystemLanguage.English)
-            swapLanguage.image.sprite = english;
-        else
-            swapLanguage.image.sprite = russian;
-
         Time.timeScale = 0;
 
         settings.SetActive(false);
@@ -62,6 +52,7 @@ public class UiManager : MonoBehaviour
         skins.SetActive(false);
         challenge.SetActive(false);
         selectedChallenge.SetActive(false);
+        challengeComplete.SetActive(false);
         game.SetActive(false);
     }
 
@@ -92,6 +83,16 @@ public class UiManager : MonoBehaviour
         _camera.backgroundColor = new Color(Random.value, Random.value, Random.value);
         GameMode.instance.Mode();
         mainMenu.SetActive(false);
+        game.SetActive(true);
+        Time.timeScale = 1;
+    }
+
+    public void PlayChallenge()
+    {
+        _camera.backgroundColor = new Color(Random.value, Random.value, Random.value);
+        Spawner.instance.InfiniteMode();
+        challenge.SetActive(false);
+        selectedChallenge.SetActive(false);
         game.SetActive(true);
         Time.timeScale = 1;
     }
@@ -192,6 +193,11 @@ public class UiManager : MonoBehaviour
     {
         selectedChallenge.SetActive(false);
     }
+    public void CompleteChallenge()
+    {
+        challengeComplete.SetActive(true);
+        Time.timeScale = 0;
+    }
 
     public void OpenSettings()
     {
@@ -205,15 +211,13 @@ public class UiManager : MonoBehaviour
 
     public void SwitchLanguage()
     {
-        if (swapLanguage.image.sprite == english)
+        if (Language == SystemLanguage.English)
         {
-            swapLanguage.image.sprite = russian;
             LocalizationManager.instance.SetLocalization(SystemLanguage.Russian);
             Language = SystemLanguage.Russian;
         }
         else
         {
-            swapLanguage.image.sprite = english;
             LocalizationManager.instance.SetLocalization(SystemLanguage.English);
             Language = SystemLanguage.English;
         }

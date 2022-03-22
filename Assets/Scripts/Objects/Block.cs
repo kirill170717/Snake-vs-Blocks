@@ -35,7 +35,9 @@ public class Block : MonoBehaviour
         Score.instance.DestructionPoints();
 
         if (filling == destroyPrice)
+        {
             Destroy(gameObject);
+        }
     }
 
     public void SetColor(int length)

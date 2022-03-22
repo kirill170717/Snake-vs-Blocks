@@ -10,7 +10,7 @@ public class SnakeHead : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Block block))
         {
-            if(UiManager.instance.btnStatus == true)
+            if (UiManager.instance.btnStatus == true)
             {
                 block.gameObject.SetActive(false);
                 UiManager.instance.btnStatus = false;

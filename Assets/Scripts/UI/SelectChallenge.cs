@@ -3,10 +3,20 @@ using UnityEngine.UI;
 
 public class SelectChallenge : MonoBehaviour
 {
+    public static SelectChallenge instance;
+
     public Text label;
     public Text description;
 
+    [HideInInspector]
+    public bool challenge = false;
+
     private string challengeDescription;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void ChallengeNumber(int number)
     {
@@ -48,6 +58,7 @@ public class SelectChallenge : MonoBehaviour
 
     public void PlayingChallenge()
     {
-
+        challenge = true;
+        UiManager.instance.PlayChallenge();
     }
 }

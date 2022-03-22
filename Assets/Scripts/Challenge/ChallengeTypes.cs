@@ -12,38 +12,59 @@ public class ChallengeTypes : MonoBehaviour
         DestroyBlocksSizeCount
     }
     
-    [SerializeReference]
     public Type type;
+    public int value;
 
-    public int count;
-    public int length;
-    public int score;
-    public int balls;
-    public int time;
+    [HideInInspector]
     public int size;
 
+    private string typeName;
+    private int typeValue;
+    private int typeSize;
+    private float time;
     public void CurrentType(ChallengeTypes currentType)
     {
-        switch (currentType.type)
+        typeName = currentType.type.ToString();
+
+        if(currentType.type == Type.Survive)
+            time = currentType.value;
+        else if (currentType.type == Type.DestroyBlocksSizeCount)
         {
-            case Type.DestroyBlocksCount:
-                
-                break;
-            case Type.SnakeLength:
+            typeValue = currentType.value;
+            typeSize = currentType.size;
+        } 
+        else
+            typeValue = currentType.value;
+    }
 
-                break;
-            case Type.ScorePoints:
+    private void Update()
+    {
+        if (typeName == Type.DestroyBlocksCount.ToString())
+        {
 
-                break;
-            case Type.CollectBalls:
+        }
+        else if (typeName == Type.SnakeLength.ToString())
+        {
 
-                break;
-            case Type.Survive:
+        }
+        else if (typeName == Type.ScorePoints.ToString())
+        {
 
-                break;
-            case Type.DestroyBlocksSizeCount:
+        }
+        else if (typeName == Type.CollectBalls.ToString())
+        {
 
-                break;
+        }
+        else if (typeName == Type.Survive.ToString())
+        {
+            time -= Time.deltaTime;
+            //= Mathf.Round(time).ToString();
+            if (time == 0)
+                UiManager.instance.CompleteChallenge();
+        }
+        else if(typeName == Type.DestroyBlocksSizeCount.ToString())
+        {
+
         }
     }
 }

@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2538e64dacc73ed419db193231a72d78, type: 3}
   m_Name: Images Dictionary
   m_EditorClassIdentifier: 
-  key: 
-  imgList: []
+  key: language
+  imgList:
+  - key: language
+    imagesList:
+    - language: 10
+      sprite: {fileID: 21300000, guid: 52f706272ff786e408cf00fb2499149a, type: 3}
+    - language: 30
+      sprite: {fileID: 21300000, guid: c2a0463de9c12584ab89051f415a8b12, type: 3}

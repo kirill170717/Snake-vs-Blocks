@@ -10,7 +10,6 @@ public class LocaleText : MonoBehaviour
     private string textID; //Идентификатор ресурса, который мы хотим захватить.
 
     private Text textComponent;
-    
 
     private void Awake()
     {

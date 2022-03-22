@@ -37,16 +37,8 @@ public class GameMode : MonoBehaviour
     public void Mode()
     {
         if (levels.isOn)
-        {
-            record.SetActive(false);
-            level.SetActive(true);
             Spawner.instance.LevelMode();
-        }
         else
-        {
-            level.SetActive(false);
-            record.SetActive(true);
             Spawner.instance.InfiniteMode();
-        }
     }
 }
