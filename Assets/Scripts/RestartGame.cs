@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class RestartGame : MonoBehaviour
 {
     public static RestartGame instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -25,6 +26,6 @@ public class RestartGame : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
         yield return null;
-        UiManager.instance.Play();
+        UiManager.instance.Play(ChallengeTypes.NoType);
     }
 }

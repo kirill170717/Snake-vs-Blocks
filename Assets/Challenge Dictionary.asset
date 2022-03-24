@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b290913cc0d194fa84b1a567f83361, type: 3}
+  m_Name: Challenge Dictionary
+  m_EditorClassIdentifier: 
+  key: 6
+  challenges:
+  - key: 1
+    type: 1
+    description: challenge_1
+    value: 10
+    size: 0
+  - key: 2
+    type: 2
+    description: challenge_2
+    value: 20
+    size: 0
+  - key: 3
+    type: 3
+    description: challenge_3
+    value: 50
+    size: 0
+  - key: 4
+    type: 4
+    description: challenge_4
+    value: 10
+    size: 0
+  - key: 5
+    type: 5
+    description: challenge_5
+    value: 30
+    size: 0
+  - key: 6
+    type: 6
+    description: challenge_6
+    value: 3
+    size: 10

@@ -17,6 +17,9 @@ public class Circle : MonoBehaviour
 
     public int Collect()
     {
+        if(Score.instance.typeChallenge == ChallengeTypes.CollectBalls.ToString())
+            Score.instance.Counter();
+
         Destroy(gameObject);
         return circleSize;
     }

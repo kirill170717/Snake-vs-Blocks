@@ -5,6 +5,8 @@ public class Score : MonoBehaviour
 {
     public static Score instance;
 
+    public ChallengeDict dict;
+
     public TMP_Text scoreView;
     public TMP_Text skinsView;
     public TMP_Text recordView;
@@ -12,16 +14,15 @@ public class Score : MonoBehaviour
     public TMP_Text levelView;
     public TMP_Text lifeView;
 
-    public int ScoreLevel
-    {
-        get { return Data.instance.player.scoreLevel; }
-        set { Data.instance.player.scoreLevel = value; }
-    }
-    public int ScoreInfinite
-    {
-        get { return Data.instance.player.scoreInfinite; }
-        set { Data.instance.player.scoreInfinite = value; }
-    }
+    [HideInInspector] public string typeChallenge;
+    [HideInInspector] public int challengeNumber;
+
+    private int scoreLevel;
+    private int tempScoreLevel;
+    private int scoreInfinite;
+    private int tempScoreInfinite;
+    private float time;
+
     private int RecordLevel
     {
         get { return Data.instance.player.recordLevel; }
@@ -42,6 +43,7 @@ public class Score : MonoBehaviour
         get { return Data.instance.player.completedLevel; }
         set { Data.instance.player.completedLevel = value; }
     }
+
     public int Life
     {
         get { return Data.instance.player.life; }
@@ -51,12 +53,10 @@ public class Score : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
         if (Life < 1)
             Life = 1;
-    }
 
-    private void Start()
-    {
         levelView.text = Level.ToString();
         skinsView.text = UnlockPoints.ToString();
     }
@@ -67,35 +67,94 @@ public class Score : MonoBehaviour
 
         if (GameMode.instance.levels.isOn)
         {
-            RecordLevel = ScoreLevel;
-            if (PlayerPrefs.GetInt("ScoreLevel") <= RecordLevel)
-                PlayerPrefs.SetInt("ScoreLevel", RecordLevel);
+            tempScoreLevel = scoreLevel;
 
-            recordView.text = PlayerPrefs.GetInt("ScoreLevel").ToString();
-            finalScore.text = ScoreLevel.ToString();
+            if (RecordLevel <= tempScoreLevel)
+                RecordLevel = tempScoreLevel;
+
+            recordView.text = RecordLevel.ToString();
+            finalScore.text = scoreLevel.ToString();
         }
         else
         {
-            RecordInfinite = ScoreInfinite;
-            if (PlayerPrefs.GetInt("ScoreInfinite") <= RecordInfinite)
-                PlayerPrefs.SetInt("ScoreInfinite", RecordInfinite);
+            tempScoreInfinite = scoreInfinite;
 
-            recordView.text = PlayerPrefs.GetInt("ScoreInfinite").ToString();
-            finalScore.text = ScoreInfinite.ToString();
+            if (RecordInfinite <= tempScoreInfinite)
+                RecordInfinite = tempScoreInfinite;
+            scoreView.text = scoreInfinite.ToString();
+            recordView.text = RecordInfinite.ToString();
+            finalScore.text = scoreInfinite.ToString();
+
         }
+
+        if (typeChallenge == ChallengeTypes.NoType.ToString())
+        {
+            if (GameMode.instance.levels.isOn)
+                scoreView.text = scoreLevel.ToString();
+            else
+                scoreView.text = scoreInfinite.ToString();
+        }   
+        else if (typeChallenge == ChallengeTypes.SnakeLength.ToString())
+        {
+            scoreView.text = SnakeMovement.instance.SnakeLength.ToString() + "/" + dict.challenges[challengeNumber].value;
+            if (SnakeMovement.instance.SnakeLength >= dict.challenges[challengeNumber].value)
+                UiManager.instance.CompleteChallenge();
+        }
+        else if (typeChallenge == ChallengeTypes.Survive.ToString())
+        {
+            time -= Time.deltaTime;
+            scoreView.text = Mathf.Round(time).ToString();
+
+            if (time < 0)
+                UiManager.instance.CompleteChallenge();
+        }
+        else
+        {
+            scoreView.text = scoreInfinite.ToString() + "/" + dict.challenges[challengeNumber].value;
+
+            if (scoreInfinite == dict.challenges[challengeNumber].value)
+                UiManager.instance.CompleteChallenge();
+        }
+    }
+
+    public void ChallengeMode(ChallengeTypes type, int number)
+    {
+        typeChallenge = type.ToString();
+        challengeNumber = number;
+
+        if (type == ChallengeTypes.NoType)
+            scoreView.text = number.ToString();
+        else if (type == ChallengeTypes.Survive)
+            time = dict.challenges[number].value;
+    }
+
+    public void Counter()
+    {
+        scoreInfinite++;
+    }
+
+    public void SizeCounter(int size)
+    {
+        if (size >= dict.challenges[challengeNumber].size)
+            scoreInfinite++;
     }
 
     public void DestructionPoints()
     {
-        if (GameMode.instance.levels.isOn)
-        {
-            ScoreLevel++;
-            scoreView.text = ScoreLevel.ToString();
-        }
+        if (typeChallenge == ChallengeTypes.ScorePoints.ToString())
+            scoreInfinite++;
         else
         {
-            ScoreInfinite++;
-            scoreView.text = ScoreInfinite.ToString();
+            if (GameMode.instance.levels.isOn)
+            {
+                scoreLevel++;
+                scoreView.text = scoreLevel.ToString();
+            }
+            else
+            {
+                scoreInfinite++;
+                scoreView.text = scoreInfinite.ToString();
+            }
         }
     }
 
@@ -115,7 +174,7 @@ public class Score : MonoBehaviour
     public void Death()
     {
         Life--;
-        if(Life < 0)
+        if (Life < 0)
             Life = 0;
 
         lifeView.text = Life.ToString();

@@ -4,17 +4,24 @@ using UnityEngine.Events;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Block : MonoBehaviour
 {
+    public static Block instance;
+
     public int minPriceRange;
     public int maxPriceRange;
     public Color low, downMedium, medium, upMedium,  high;
 
     private SpriteRenderer spriteRenderer;
     private int destroyPrice;
-    private int filling;
+    [HideInInspector] public int filling;
 
     public int LeftToFill => destroyPrice - filling;
 
     public event UnityAction<int> FillingUpdated;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -32,10 +39,17 @@ public class Block : MonoBehaviour
     {
         filling++;
         FillingUpdated?.Invoke(LeftToFill);
-        Score.instance.DestructionPoints();
+
+        if(Score.instance.typeChallenge == ChallengeTypes.NoType.ToString() || Score.instance.typeChallenge == ChallengeTypes.ScorePoints.ToString())
+            Score.instance.DestructionPoints();
 
         if (filling == destroyPrice)
         {
+            if(Score.instance.typeChallenge == ChallengeTypes.DestroyBlocksCount.ToString())
+                Score.instance.Counter();
+            else if(Score.instance.typeChallenge == ChallengeTypes.DestroyBlocksSizeCount.ToString())
+                Score.instance.SizeCounter(filling);
+
             Destroy(gameObject);
         }
     }

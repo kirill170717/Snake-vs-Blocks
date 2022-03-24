@@ -34,10 +34,17 @@ public class GameMode : MonoBehaviour
         }
     }
 
-    public void Mode()
+    public void Mode(ChallengeTypes type)
     {
-        if (levels.isOn)
-            Spawner.instance.LevelMode();
+        if (type == ChallengeTypes.NoType)
+        {
+            Score.instance.ChallengeMode(type, 0);
+
+            if (levels.isOn)
+                Spawner.instance.LevelMode();
+            else
+                Spawner.instance.InfiniteMode();
+        }
         else
             Spawner.instance.InfiniteMode();
     }

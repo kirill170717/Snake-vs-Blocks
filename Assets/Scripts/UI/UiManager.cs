@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class UiManager : MonoBehaviour
 {
@@ -16,8 +15,12 @@ public class UiManager : MonoBehaviour
     public GameObject challenge;
     public GameObject selectedChallenge;
     public GameObject challengeComplete;
+    public GameObject challengeFailed;
     public GameObject skins;
 
+    [Header("Button Play")]
+    public Button playGame;
+    
     [Header("Camera")]
     public Camera _camera;
 
@@ -44,6 +47,7 @@ public class UiManager : MonoBehaviour
         instance = this;
 
         LocalizationManager.instance.SetLocalization(Language);
+        playGame.onClick.AddListener(() => Play(ChallengeTypes.NoType));
         Time.timeScale = 0;
 
         settings.SetActive(false);
@@ -53,6 +57,7 @@ public class UiManager : MonoBehaviour
         challenge.SetActive(false);
         selectedChallenge.SetActive(false);
         challengeComplete.SetActive(false);
+        challengeFailed.SetActive(false);
         game.SetActive(false);
     }
 
@@ -78,21 +83,19 @@ public class UiManager : MonoBehaviour
             revive.SetActive(true);
     }
 
-    public void Play()
+    public void Play(ChallengeTypes type)
     {
         _camera.backgroundColor = new Color(Random.value, Random.value, Random.value);
-        GameMode.instance.Mode();
-        mainMenu.SetActive(false);
-        game.SetActive(true);
-        Time.timeScale = 1;
-    }
+        GameMode.instance.Mode(type);
 
-    public void PlayChallenge()
-    {
-        _camera.backgroundColor = new Color(Random.value, Random.value, Random.value);
-        Spawner.instance.InfiniteMode();
-        challenge.SetActive(false);
-        selectedChallenge.SetActive(false);
+        if (type == ChallengeTypes.NoType)
+            mainMenu.SetActive(false);
+        else
+        {
+            challenge.SetActive(false);
+            selectedChallenge.SetActive(false);
+        }
+
         game.SetActive(true);
         Time.timeScale = 1;
     }
@@ -113,8 +116,6 @@ public class UiManager : MonoBehaviour
 
     public void MainMenu()
     {
-        Score.instance.ScoreLevel = 0;
-        Score.instance.ScoreInfinite = 0;
         SnakeMovement.instance.SnakeLength = 5;
         SceneManager.LoadScene("Game");
     }
@@ -197,6 +198,18 @@ public class UiManager : MonoBehaviour
     {
         challengeComplete.SetActive(true);
         Time.timeScale = 0;
+    }
+    public void FailedChallenge()
+    {
+        Time.timeScale = 0;
+        SoundsManager.instance.Vibration();
+        game.SetActive(false);
+        challengeFailed.SetActive(true);
+
+        adsPersent = Random.Range(0f, 1f);
+
+        if (adsPersent < persentShowAds)
+            InterstitialAds.instance.ShowAd();
     }
 
     public void OpenSettings()

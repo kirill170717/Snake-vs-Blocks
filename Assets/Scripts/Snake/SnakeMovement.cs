@@ -7,11 +7,13 @@ public class SnakeMovement : MonoBehaviour
 
     public float forwardSpeed = 4;
     public float sensitivity = 90;
+
     public int SnakeLength
     {
         get { return Data.instance.player.snakeLength; }
         set { Data.instance.player.snakeLength = value; }
     }
+
     public TMP_Text pointsText;
 
     private Camera mainCamera;
@@ -20,6 +22,7 @@ public class SnakeMovement : MonoBehaviour
     private SnakeTail componentSnakeTail;
     private Vector2 touchLastPos;
     private Vector2 delta;
+
     private float sidewaysSpeed;
 
     private void Awake()
@@ -79,7 +82,12 @@ public class SnakeMovement : MonoBehaviour
             pointsText.SetText(SnakeLength.ToString());
         }
         else
-            UiManager.instance.GameOver();
+        {
+            if (Score.instance.typeChallenge == ChallengeTypes.NoType.ToString())
+                UiManager.instance.GameOver();
+            else
+                UiManager.instance.FailedChallenge();
+        }
     }
 
     private void OnCircleCollected(int circleSize)

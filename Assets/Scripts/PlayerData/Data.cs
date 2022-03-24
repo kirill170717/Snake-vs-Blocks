@@ -22,8 +22,6 @@ public class Data
         {
             life = 1,
             snakeLength = 5,
-            scoreLevel = 0,
-            scoreInfinite = 0,
             recordLevel = 0,
             recordInfinite = 0,
             completedLevel = 0,
@@ -38,8 +36,6 @@ public class Player
 {
     public int life;
     public int snakeLength;
-    public int scoreLevel;
-    public int scoreInfinite;
     public int recordLevel;
     public int recordInfinite;
     public int completedLevel;
