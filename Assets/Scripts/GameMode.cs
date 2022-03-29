@@ -34,9 +34,9 @@ public class GameMode : MonoBehaviour
         }
     }
 
-    public void Mode(ChallengeTypes type)
+    public void Mode(ChallengesTypes type)
     {
-        if (type == ChallengeTypes.NoType)
+        if (type == ChallengesTypes.NoType)
         {
             Score.instance.ChallengeMode(type, 0);
 

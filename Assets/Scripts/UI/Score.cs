@@ -5,7 +5,7 @@ public class Score : MonoBehaviour
 {
     public static Score instance;
 
-    public ChallengeDict dict;
+    public ChallengesDict dict;
 
     public TMP_Text scoreView;
     public TMP_Text skinsView;
@@ -14,7 +14,7 @@ public class Score : MonoBehaviour
     public TMP_Text levelView;
     public TMP_Text lifeView;
 
-    [HideInInspector] public string typeChallenge;
+    [HideInInspector] public ChallengesTypes typeChallenge;
     [HideInInspector] public int challengeNumber;
 
     private int scoreLevel;
@@ -81,50 +81,55 @@ public class Score : MonoBehaviour
 
             if (RecordInfinite <= tempScoreInfinite)
                 RecordInfinite = tempScoreInfinite;
-            scoreView.text = scoreInfinite.ToString();
+
             recordView.text = RecordInfinite.ToString();
             finalScore.text = scoreInfinite.ToString();
 
         }
 
-        if (typeChallenge == ChallengeTypes.NoType.ToString())
+        switch (typeChallenge)
         {
-            if (GameMode.instance.levels.isOn)
-                scoreView.text = scoreLevel.ToString();
-            else
-                scoreView.text = scoreInfinite.ToString();
-        }   
-        else if (typeChallenge == ChallengeTypes.SnakeLength.ToString())
-        {
-            scoreView.text = SnakeMovement.instance.SnakeLength.ToString() + "/" + dict.challenges[challengeNumber].value;
-            if (SnakeMovement.instance.SnakeLength >= dict.challenges[challengeNumber].value)
-                UiManager.instance.CompleteChallenge();
-        }
-        else if (typeChallenge == ChallengeTypes.Survive.ToString())
-        {
-            time -= Time.deltaTime;
-            scoreView.text = Mathf.Round(time).ToString();
+            case ChallengesTypes.NoType:
+                if (GameMode.instance.levels.isOn)
+                    scoreView.text = scoreLevel.ToString();
+                else
+                    scoreView.text = scoreInfinite.ToString();
+                break;
 
-            if (time < 0)
-                UiManager.instance.CompleteChallenge();
-        }
-        else
-        {
-            scoreView.text = scoreInfinite.ToString() + "/" + dict.challenges[challengeNumber].value;
+            case ChallengesTypes.SnakeLength:
+                scoreView.text = SnakeMovement.instance.SnakeLength.ToString() + "/" + dict.challenges[challengeNumber].value;
+                if (SnakeMovement.instance.SnakeLength >= dict.challenges[challengeNumber].value)
+                    UiManager.instance.CompleteChallenge(challengeNumber);
+                break;
 
-            if (scoreInfinite == dict.challenges[challengeNumber].value)
-                UiManager.instance.CompleteChallenge();
+            case ChallengesTypes.Survive:
+                time -= Time.deltaTime;
+                scoreView.text = Mathf.Round(time).ToString();
+
+                if (time < 0)
+                    UiManager.instance.CompleteChallenge(challengeNumber);
+                break;
+
+            case ChallengesTypes.DestroyBlocksCount:
+            case ChallengesTypes.CollectBalls:
+            case ChallengesTypes.ScorePoints:
+            case ChallengesTypes.DestroyBlocksSizeCount:
+                scoreView.text = scoreInfinite.ToString() + "/" + dict.challenges[challengeNumber].value;
+
+                if (scoreInfinite == dict.challenges[challengeNumber].value)
+                    UiManager.instance.CompleteChallenge(challengeNumber);
+                break;
         }
     }
 
-    public void ChallengeMode(ChallengeTypes type, int number)
+    public void ChallengeMode(ChallengesTypes type, int number)
     {
-        typeChallenge = type.ToString();
+        typeChallenge = type;
         challengeNumber = number;
 
-        if (type == ChallengeTypes.NoType)
+        if (type == ChallengesTypes.NoType)
             scoreView.text = number.ToString();
-        else if (type == ChallengeTypes.Survive)
+        else if (type == ChallengesTypes.Survive)
             time = dict.challenges[number].value;
     }
 
@@ -141,7 +146,7 @@ public class Score : MonoBehaviour
 
     public void DestructionPoints()
     {
-        if (typeChallenge == ChallengeTypes.ScorePoints.ToString())
+        if (typeChallenge == ChallengesTypes.ScorePoints)
             scoreInfinite++;
         else
         {

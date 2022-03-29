@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -32,6 +33,13 @@ public class Data
 }
 
 [Serializable]
+public class Challenges
+{
+    public int key;
+    public bool complete = false;
+}
+
+[Serializable]
 public class Player
 {
     public int life;
@@ -41,6 +49,8 @@ public class Player
     public int completedLevel;
     public int unlockPoints;
     public int skin;
+    public List<bool> purchaseSkins;
+    public List<Challenges> challenges;
 }
 
 [Serializable]

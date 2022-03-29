@@ -6,8 +6,7 @@ using UnityEngine.UI;
 //Предоставляет возможность во время выполнения манипулировать родственным текстовым компонентом, чтобы он соответствовал текущей Locale.
 public class LocaleText : MonoBehaviour
 {
-    [SerializeField]
-    private string textID; //Идентификатор ресурса, который мы хотим захватить.
+    public string textID; //Идентификатор ресурса, который мы хотим захватить.
 
     private Text textComponent;
 

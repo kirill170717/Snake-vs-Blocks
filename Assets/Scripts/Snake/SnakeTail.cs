@@ -1,29 +1,32 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SnakeTail : MonoBehaviour
 {
-    public Transform snakeTail;
+    public GameObject snakeTail;
     public float tailDiameter;
 
     private List<Transform> Tail = new List<Transform>();
     private List<Vector2> Positions = new List<Vector2>();
 
     private Vector2 direction;
-    private Transform tail;
+    private GameObject tail;
+    private Color color;
 
     private void Awake()
     {
-        Positions.Add(snakeTail.position);
+        Positions.Add(snakeTail.transform.position);
+        color = snakeTail.GetComponent<SpriteRenderer>().color;
     }
 
     private void Update()
     {
-        float distance = ((Vector2)snakeTail.position - Positions[0]).magnitude;
+        float distance = ((Vector2)snakeTail.transform.position - Positions[0]).magnitude;
 
         if (distance > tailDiameter)
         {
-            direction = ((Vector2)snakeTail.position - Positions[0]).normalized;
+            direction = ((Vector2)snakeTail.transform.position - Positions[0]).normalized;
 
             Positions.Insert(0, Positions[0] + direction * tailDiameter);
             Positions.RemoveAt(Positions.Count - 1);
@@ -37,9 +40,12 @@ public class SnakeTail : MonoBehaviour
 
     public void AddTail()
     {
+        color.a = 1;
         tail = Instantiate(snakeTail, Positions[Positions.Count - 1], Quaternion.identity, transform);
-        Tail.Add(tail);
-        Positions.Add(tail.position);
+        tail.name = snakeTail.name;
+        tail.GetComponent<SpriteRenderer>().color = color;
+        Tail.Add(tail.transform);
+        Positions.Add(tail.transform.position);
     }
 
     public void RemoveTail()

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class UiManager : MonoBehaviour
 {
@@ -18,9 +19,11 @@ public class UiManager : MonoBehaviour
     public GameObject challengeFailed;
     public GameObject skins;
 
-    [Header("Button Play")]
+    [Header("Buttons")]
     public Button playGame;
-    
+    public GameObject revive;
+    public GameObject getLife;
+
     [Header("Camera")]
     public Camera _camera;
 
@@ -35,19 +38,14 @@ public class UiManager : MonoBehaviour
 
     private float adsPersent;
 
-    [Header("Buttons")]
-    public GameObject revive;
-    public GameObject getLife;
-
-    [HideInInspector]
-    public bool btnStatus = false;
+    [HideInInspector] public bool btnStatus = false;
 
     private void Awake()
     {
         instance = this;
 
         LocalizationManager.instance.SetLocalization(Language);
-        playGame.onClick.AddListener(() => Play(ChallengeTypes.NoType));
+        playGame.onClick.AddListener(() => Play(ChallengesTypes.NoType));
         Time.timeScale = 0;
 
         settings.SetActive(false);
@@ -83,12 +81,12 @@ public class UiManager : MonoBehaviour
             revive.SetActive(true);
     }
 
-    public void Play(ChallengeTypes type)
+    public void Play(ChallengesTypes type)
     {
         _camera.backgroundColor = new Color(Random.value, Random.value, Random.value);
         GameMode.instance.Mode(type);
 
-        if (type == ChallengeTypes.NoType)
+        if (type == ChallengesTypes.NoType)
             mainMenu.SetActive(false);
         else
         {
@@ -194,9 +192,10 @@ public class UiManager : MonoBehaviour
     {
         selectedChallenge.SetActive(false);
     }
-    public void CompleteChallenge()
+    public void CompleteChallenge(int number)
     {
         challengeComplete.SetActive(true);
+        ChallengesManager.instance.ChallengeComplete(number);
         Time.timeScale = 0;
     }
     public void FailedChallenge()

@@ -17,7 +17,7 @@ public class Circle : MonoBehaviour
 
     public int Collect()
     {
-        if(Score.instance.typeChallenge == ChallengeTypes.CollectBalls.ToString())
+        if(Score.instance.typeChallenge == ChallengesTypes.CollectBalls)
             Score.instance.Counter();
 
         Destroy(gameObject);

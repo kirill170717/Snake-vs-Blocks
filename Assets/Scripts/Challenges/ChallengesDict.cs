@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Challenge Dictionary", menuName = "Challenge/Challenge Dictionary", order = 50)]
-public class ChallengeDict : ScriptableObject
+public class ChallengesDict : ScriptableObject
 {
     [Serializable]
     public class Challenge
     {
         public int key;
-        public ChallengeTypes type;
+        public ChallengesTypes type;
         public string description;
         public int value;
         public int size;

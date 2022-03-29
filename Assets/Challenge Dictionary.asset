@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b290913cc0d194fa84b1a567f83361, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c1010f0a6bb96d4a9d15cb2e176441d, type: 3}
   m_Name: Challenge Dictionary
   m_EditorClassIdentifier: 
-  key: 6
+  key: 0
   challenges:
   - key: 1
     type: 1
@@ -44,3 +44,63 @@ MonoBehaviour:
     description: challenge_6
     value: 3
     size: 10
+  - key: 7
+    type: 1
+    description: challenge_7
+    value: 20
+    size: 0
+  - key: 8
+    type: 2
+    description: challenge_8
+    value: 30
+    size: 0
+  - key: 9
+    type: 3
+    description: challenge_9
+    value: 75
+    size: 0
+  - key: 10
+    type: 4
+    description: challenge_10
+    value: 15
+    size: 0
+  - key: 11
+    type: 5
+    description: challenge_11
+    value: 45
+    size: 0
+  - key: 12
+    type: 6
+    description: challenge_12
+    value: 5
+    size: 12
+  - key: 13
+    type: 1
+    description: challenge_13
+    value: 30
+    size: 0
+  - key: 14
+    type: 2
+    description: challenge_14
+    value: 45
+    size: 0
+  - key: 15
+    type: 3
+    description: challenge_15
+    value: 150
+    size: 0
+  - key: 16
+    type: 4
+    description: challenge_16
+    value: 25
+    size: 0
+  - key: 17
+    type: 5
+    description: challenge_17
+    value: 60
+    size: 0
+  - key: 18
+    type: 6
+    description: challenge_18
+    value: 8
+    size: 15

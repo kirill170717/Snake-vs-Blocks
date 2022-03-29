@@ -11,6 +11,7 @@ public class TextEditor : ScriptableObject
         public SystemLanguage language;
         public string text;
     }
+
     [Serializable]
     public class DictList
     {

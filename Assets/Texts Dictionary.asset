@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5957238d70872141a9d91299d80532b, type: 3}
   m_Name: Texts Dictionary
   m_EditorClassIdentifier: 
-  key: challengeFailed
+  key: challenge_18
   txtList:
   - key: play
     textsList:
@@ -165,3 +165,87 @@ MonoBehaviour:
     - language: 30
       text: "\u0420\u0430\u0437\u0431\u0438\u0442\u044C \u0431\u043B\u043E\u043A\u0438
         > 10: 3"
+  - key: challenge_7
+    textsList:
+    - language: 10
+      text: 'Break down the blocks: 20'
+    - language: 30
+      text: "\u0420\u0430\u0437\u0431\u0438\u0442\u044C \u0431\u043B\u043E\u043A\u0438:
+        20"
+  - key: challenge_8
+    textsList:
+    - language: 10
+      text: 'Achieve snake length: 30'
+    - language: 30
+      text: "\u0414\u043E\u0441\u0442\u0438\u0447\u044C \u0434\u043B\u0438\u043D\u044B
+        \u0437\u043C\u0435\u0439\u043A\u0438: 30"
+  - key: challenge_9
+    textsList:
+    - language: 10
+      text: 'Score points: 75'
+    - language: 30
+      text: "\u041D\u0430\u0431\u0440\u0430\u0442\u044C \u043E\u0447\u043A\u043E\u0432:
+        75"
+  - key: challenge_10
+    textsList:
+    - language: 10
+      text: 'Collect balls: 15'
+    - language: 30
+      text: "\u0421\u043E\u0431\u0440\u0430\u0442\u044C \u0448\u0430\u0440\u0438\u043A\u0438:
+        15"
+  - key: challenge_11
+    textsList:
+    - language: 10
+      text: Survive for 45 sec.
+    - language: 30
+      text: "\u0412\u044B\u0436\u0438\u0442\u044C \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435
+        45 \u0441\u0435\u043A."
+  - key: challenge_12
+    textsList:
+    - language: 10
+      text: 'Break down blocks > 12: 5'
+    - language: 30
+      text: "\u0420\u0430\u0437\u0431\u0438\u0442\u044C \u0431\u043B\u043E\u043A\u0438
+        > 12: 5"
+  - key: challenge_13
+    textsList:
+    - language: 10
+      text: 'Break down the blocks: 30'
+    - language: 30
+      text: "\u0420\u0430\u0437\u0431\u0438\u0442\u044C \u0431\u043B\u043E\u043A\u0438:
+        30"
+  - key: challenge_14
+    textsList:
+    - language: 10
+      text: 'Achieve snake length: 45'
+    - language: 30
+      text: "\u0414\u043E\u0441\u0442\u0438\u0447\u044C \u0434\u043B\u0438\u043D\u044B
+        \u0437\u043C\u0435\u0439\u043A\u0438: 45"
+  - key: challenge_15
+    textsList:
+    - language: 10
+      text: 'Score points: 150'
+    - language: 30
+      text: "\u041D\u0430\u0431\u0440\u0430\u0442\u044C \u043E\u0447\u043A\u043E\u0432:
+        150"
+  - key: challenge_16
+    textsList:
+    - language: 10
+      text: 'Collect balls: 25'
+    - language: 30
+      text: "\u0421\u043E\u0431\u0440\u0430\u0442\u044C \u0448\u0430\u0440\u0438\u043A\u0438:
+        25"
+  - key: challenge_17
+    textsList:
+    - language: 10
+      text: Survive for 60 sec.
+    - language: 30
+      text: "\u0412\u044B\u0436\u0438\u0442\u044C \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435
+        60 \u0441\u0435\u043A."
+  - key: challenge_18
+    textsList:
+    - language: 10
+      text: 'Break down blocks > 15: 8'
+    - language: 30
+      text: "\u0420\u0430\u0437\u0431\u0438\u0442\u044C \u0431\u043B\u043E\u043A\u0438
+        > 15: 8"

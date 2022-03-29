@@ -40,14 +40,14 @@ public class Block : MonoBehaviour
         filling++;
         FillingUpdated?.Invoke(LeftToFill);
 
-        if(Score.instance.typeChallenge == ChallengeTypes.NoType.ToString() || Score.instance.typeChallenge == ChallengeTypes.ScorePoints.ToString())
+        if(Score.instance.typeChallenge == ChallengesTypes.NoType || Score.instance.typeChallenge == ChallengesTypes.ScorePoints)
             Score.instance.DestructionPoints();
 
         if (filling == destroyPrice)
         {
-            if(Score.instance.typeChallenge == ChallengeTypes.DestroyBlocksCount.ToString())
+            if(Score.instance.typeChallenge == ChallengesTypes.DestroyBlocksCount)
                 Score.instance.Counter();
-            else if(Score.instance.typeChallenge == ChallengeTypes.DestroyBlocksSizeCount.ToString())
+            else if(Score.instance.typeChallenge == ChallengesTypes.DestroyBlocksSizeCount)
                 Score.instance.SizeCounter(filling);
 
             Destroy(gameObject);

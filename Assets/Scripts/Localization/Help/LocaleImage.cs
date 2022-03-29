@@ -6,8 +6,7 @@ using UnityEngine.UI;
 //ѕредоставл€ет возможность во врем€ выполнени€ манипулировать родственным текстовым компонентом, чтобы он соответствовал текущей Locale.
 public class LocaleImage : MonoBehaviour
 {
-    [SerializeField]
-    private string imageID; //»дентификатор ресурса, который мы хотим захватить.
+    public string imageID; //»дентификатор ресурса, который мы хотим захватить.
 
     private Image imageComponent;
 

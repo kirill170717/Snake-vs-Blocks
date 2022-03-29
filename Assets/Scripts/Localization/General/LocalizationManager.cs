@@ -9,8 +9,6 @@ public class LocalizationManager : MonoBehaviour
 {
     public static LocalizationManager instance;
 
-    public SystemLanguage DefaultLanguage = SystemLanguage.English;
-
     private SystemLanguage currentLanguage;
 
     public TextEditor textEditor;
@@ -19,6 +17,8 @@ public class LocalizationManager : MonoBehaviour
     //Создайте делегат и события для использования в файлах LocaleText.cs и LocaleImage.cs:
     public delegate void LanguageChangedEventHandler();
     public event LanguageChangedEventHandler LanguageChanged;
+
+    public SystemLanguage DefaultLanguage = SystemLanguage.English;
 
     private void Awake()
     {

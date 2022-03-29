@@ -26,6 +26,6 @@ public class RestartGame : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
         yield return null;
-        UiManager.instance.Play(ChallengeTypes.NoType);
+        UiManager.instance.Play(ChallengesTypes.NoType);
     }
 }

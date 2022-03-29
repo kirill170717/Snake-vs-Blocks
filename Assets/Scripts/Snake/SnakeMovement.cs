@@ -83,7 +83,7 @@ public class SnakeMovement : MonoBehaviour
         }
         else
         {
-            if (Score.instance.typeChallenge == ChallengeTypes.NoType.ToString())
+            if (Score.instance.typeChallenge == ChallengesTypes.NoType)
                 UiManager.instance.GameOver();
             else
                 UiManager.instance.FailedChallenge();

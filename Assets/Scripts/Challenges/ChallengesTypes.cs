@@ -1,4 +1,4 @@
-public enum ChallengeTypes
+public enum ChallengesTypes
 {
     NoType,
     DestroyBlocksCount,

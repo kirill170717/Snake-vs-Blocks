@@ -11,6 +11,7 @@ public class DictionaryEditor : ScriptableObject
         public SystemLanguage language;
         public Sprite sprite;
     }
+
     [Serializable]
     public class DictList
     {
