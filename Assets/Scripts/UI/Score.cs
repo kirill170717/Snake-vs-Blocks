@@ -5,8 +5,14 @@ public class Score : MonoBehaviour
 {
     public static Score instance;
 
-    public ChallengesDict dict;
+    [Header("Dictionaries")]
+    public ChallengesDict challengeDict;
+    public SkinsDict skinDict;
 
+    [Header("Skin")]
+    public GameObject buttonSkin;
+
+    [Header("Text")]
     public TMP_Text scoreView;
     public TMP_Text skinsView;
     public TMP_Text recordView;
@@ -57,13 +63,14 @@ public class Score : MonoBehaviour
         if (Life < 1)
             Life = 1;
 
+        UnlockPoints = 1;
         levelView.text = Level.ToString();
-        skinsView.text = UnlockPoints.ToString();
     }
 
     public void Update()
     {
         lifeView.text = Life.ToString();
+        skinsView.text = UnlockPoints.ToString();
 
         if (GameMode.instance.levels.isOn)
         {
@@ -97,8 +104,8 @@ public class Score : MonoBehaviour
                 break;
 
             case ChallengesTypes.SnakeLength:
-                scoreView.text = SnakeMovement.instance.SnakeLength.ToString() + "/" + dict.challenges[challengeNumber].value;
-                if (SnakeMovement.instance.SnakeLength >= dict.challenges[challengeNumber].value)
+                scoreView.text = SnakeMovement.instance.SnakeLength.ToString() + "/" + challengeDict.challenges[challengeNumber].value;
+                if (SnakeMovement.instance.SnakeLength >= challengeDict.challenges[challengeNumber].value)
                     UiManager.instance.CompleteChallenge(challengeNumber);
                 break;
 
@@ -114,11 +121,25 @@ public class Score : MonoBehaviour
             case ChallengesTypes.CollectBalls:
             case ChallengesTypes.ScorePoints:
             case ChallengesTypes.DestroyBlocksSizeCount:
-                scoreView.text = scoreInfinite.ToString() + "/" + dict.challenges[challengeNumber].value;
+                scoreView.text = scoreInfinite.ToString() + "/" + challengeDict.challenges[challengeNumber].value;
 
-                if (scoreInfinite == dict.challenges[challengeNumber].value)
+                if (scoreInfinite == challengeDict.challenges[challengeNumber].value)
                     UiManager.instance.CompleteChallenge(challengeNumber);
                 break;
+        }
+    }
+
+    public void UnlockingSkin(int c)
+    {
+        Debug.Log(c);
+        if (skinDict.skins[c].price <= UnlockPoints)
+        {
+            UnlockPoints -= skinDict.skins[c].price;
+            skinDict.skins[c].price = 0;
+        }
+        else
+        {
+            UiManager.instance.OpenBuySkinPoints();
         }
     }
 
@@ -130,7 +151,7 @@ public class Score : MonoBehaviour
         if (type == ChallengesTypes.NoType)
             scoreView.text = number.ToString();
         else if (type == ChallengesTypes.Survive)
-            time = dict.challenges[number].value;
+            time = challengeDict.challenges[number].value;
     }
 
     public void Counter()
@@ -140,7 +161,7 @@ public class Score : MonoBehaviour
 
     public void SizeCounter(int size)
     {
-        if (size >= dict.challenges[challengeNumber].size)
+        if (size >= challengeDict.challenges[challengeNumber].size)
             scoreInfinite++;
     }
 

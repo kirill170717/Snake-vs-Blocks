@@ -10,6 +10,7 @@ public class SkinsDict : ScriptableObject
     public class Skin
     {
         public string key;
+        public int price;
         public Sprite head;
         public Sprite tail;
     }

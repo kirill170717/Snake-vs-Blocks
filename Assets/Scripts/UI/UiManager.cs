@@ -13,11 +13,12 @@ public class UiManager : MonoBehaviour
     public GameObject settings;
     public GameObject pause;
     public GameObject gameOver;
+    public GameObject skins;
+    public GameObject buySkinPoints;
     public GameObject challenge;
     public GameObject selectedChallenge;
     public GameObject challengeComplete;
     public GameObject challengeFailed;
-    public GameObject skins;
 
     [Header("Buttons")]
     public Button playGame;
@@ -52,6 +53,7 @@ public class UiManager : MonoBehaviour
         pause.SetActive(false);
         gameOver.SetActive(false);
         skins.SetActive(false);
+        buySkinPoints.SetActive(false);
         challenge.SetActive(false);
         selectedChallenge.SetActive(false);
         challengeComplete.SetActive(false);
@@ -170,6 +172,16 @@ public class UiManager : MonoBehaviour
     {
         skins.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    public void OpenBuySkinPoints()
+    {
+        buySkinPoints.SetActive(true);
+    }
+    
+    public void CloseBuySkinPoints()
+    {
+        buySkinPoints.SetActive(false);
     }
 
     public void OpenChallenge()
