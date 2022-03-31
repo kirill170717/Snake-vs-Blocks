@@ -23,7 +23,7 @@ MonoBehaviour:
     head: {fileID: 21300000, guid: 200212da3a2a84743befb5af3e77b627, type: 3}
     tail: {fileID: 21300000, guid: f8ddd90e716cea44b9d1fedafe9c92d8, type: 3}
   - key: Snake
-    price: 0
+    price: 1
     head: {fileID: 21300000, guid: 7ce2e6899329859429c8415afaa7f9e0, type: 3}
     tail: {fileID: 21300000, guid: 936ace58e0db5d3478477b9d3358f40c, type: 3}
   - key: Snake2
@@ -36,5 +36,17 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 936ace58e0db5d3478477b9d3358f40c, type: 3}
   - key: Snake4
     price: 2
+    head: {fileID: 21300000, guid: 7ce2e6899329859429c8415afaa7f9e0, type: 3}
+    tail: {fileID: 21300000, guid: 936ace58e0db5d3478477b9d3358f40c, type: 3}
+  - key: Snake5
+    price: 3
+    head: {fileID: 21300000, guid: 7ce2e6899329859429c8415afaa7f9e0, type: 3}
+    tail: {fileID: 21300000, guid: 936ace58e0db5d3478477b9d3358f40c, type: 3}
+  - key: Snake6
+    price: 3
+    head: {fileID: 21300000, guid: 7ce2e6899329859429c8415afaa7f9e0, type: 3}
+    tail: {fileID: 21300000, guid: 936ace58e0db5d3478477b9d3358f40c, type: 3}
+  - key: Snake7
+    price: 3
     head: {fileID: 21300000, guid: 7ce2e6899329859429c8415afaa7f9e0, type: 3}
     tail: {fileID: 21300000, guid: 936ace58e0db5d3478477b9d3358f40c, type: 3}

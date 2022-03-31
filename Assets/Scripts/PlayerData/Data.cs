@@ -26,7 +26,7 @@ public class Data
             recordLevel = 0,
             recordInfinite = 0,
             completedLevel = 0,
-            unlockPoints = 0,
+            coin = 0,
             skin = 0,
         };
     }
@@ -47,7 +47,7 @@ public class Player
     public int recordLevel;
     public int recordInfinite;
     public int completedLevel;
-    public int unlockPoints;
+    public int coin;
     public int skin;
     public List<bool> purchaseSkins;
     public List<Challenges> challenges;

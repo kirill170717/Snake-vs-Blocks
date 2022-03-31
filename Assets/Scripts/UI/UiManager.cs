@@ -195,12 +195,12 @@ public class UiManager : MonoBehaviour
         challenge.SetActive(false);
         mainMenu.SetActive(true);
     }
-    public void OpenSelectedChallenge()
+    public void OpenChallengeMenu()
     {
         selectedChallenge.SetActive(true);
     }
 
-    public void CloseSelectedChallenge()
+    public void CloseChallengeMenu()
     {
         selectedChallenge.SetActive(false);
     }

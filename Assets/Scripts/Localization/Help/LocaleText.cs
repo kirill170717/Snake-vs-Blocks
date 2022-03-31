@@ -1,19 +1,20 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(TMP_Text))]
 //Предоставляет возможность во время выполнения манипулировать родственным текстовым компонентом, чтобы он соответствовал текущей Locale.
 public class LocaleText : MonoBehaviour
 {
     public string textID; //Идентификатор ресурса, который мы хотим захватить.
 
-    private Text textComponent;
+    private TMP_Text textComponent;
 
     private void Awake()
     {
         //Ссылки на кэш:
-        textComponent = GetComponent<Text>();
+        textComponent = GetComponent<TMP_Text>();
     }
 
     private void Start()

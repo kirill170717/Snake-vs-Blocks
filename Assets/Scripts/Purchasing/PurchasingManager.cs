@@ -5,11 +5,13 @@ public class PurchasingManager : MonoBehaviour, IStoreListener
 {
     public GameObject NoAds;
     public GameObject Life;
+    public GameObject Coin;
 
     IStoreController m_StoreController;
 
-    private string noads = "com.ilink.snakevsblocks.noads";
-    private string life = "com.ilink.snakevsblocks.lifex10";
+    private string noads = "com.ilink.snake.noads";
+    private string life = "com.ilink.snake.lifex10";
+    private string coin = "com.ilink.snake.coinx10";
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class PurchasingManager : MonoBehaviour, IStoreListener
 
         builder.AddProduct(noads, ProductType.NonConsumable);
         builder.AddProduct(life, ProductType.Consumable);
+        builder.AddProduct(coin, ProductType.Consumable);
 
         UnityPurchasing.Initialize(this, builder);
     }
@@ -54,6 +57,9 @@ public class PurchasingManager : MonoBehaviour, IStoreListener
 
         if (product.definition.id == life)
             Product_Life();
+        
+        if (product.definition.id == coin)
+            Product_Coin();
 
         Debug.Log($"Purchase Complete - Product: {product.definition.id}");
         return PurchaseProcessingResult.Complete;
@@ -73,6 +79,11 @@ public class PurchasingManager : MonoBehaviour, IStoreListener
     private void Product_Life()
     {
         Data.instance.player.life += 10;
+    }
+    
+    private void Product_Coin()
+    {
+        Data.instance.player.coin += 10;
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)

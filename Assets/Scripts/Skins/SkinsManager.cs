@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SkinsManager : MonoBehaviour
 {
@@ -16,13 +14,9 @@ public class SkinsManager : MonoBehaviour
     [Header("Button")]
     public GameObject buttonSkin;
     public Transform container;
+    [HideInInspector] public List<SnakeSkin> buttons;
 
-    [HideInInspector] public List<TMP_Text> buttonText;
-    [HideInInspector] public List<GameObject> buttonPanel;
-
-    private GameObject clone;
-
-    private int Skin
+    private int SnakeSkin
     {
         get { return Data.instance.player.skin; }
         set { Data.instance.player.skin = value; }
@@ -37,72 +31,30 @@ public class SkinsManager : MonoBehaviour
     {
         instance = this;
 
-        InstantiateButtons();
+        for (int i = 0; i < dict.skins.Count; i++)
+        {
+            var obj = Instantiate(buttonSkin, container);
+            obj.name = dict.skins[i].key;
+            buttons.Add(obj.GetComponent<SnakeSkin>());
+            buttons[i].id = i;
 
-        foreach (bool a in PurchaseSkins)
-            Debug.Log(a);
+            if (i + 1 > PurchaseSkins.Count)
+                PurchaseSkins.Add(false);
+
+            PurchaseSkins[0] = true;
+        } 
     }
 
     private void Start()
     {
-        SetSkin(Skin);
+        SetSkin(SnakeSkin);
     }
 
-    private void InstantiateButtons()
+    public void SetSkin(int id)
     {
-        int number = 0;
-        foreach (SkinsDict.Skin skin in dict.skins)
-        {
-            int c = number;
-            
-            clone = Instantiate(buttonSkin, container);
-            clone.name = dict.skins[c].key;
-            clone.GetComponent<ButtonComponents>().button.image.sprite = dict.skins[c].head;
-            clone.GetComponent<ButtonComponents>().button.onClick.AddListener(() => SetSkin(c));
-            clone.GetComponent<ButtonComponents>().button.onClick.AddListener(() => SoundsManager.instance.EffectsSound(0));
-            clone.GetComponent<ButtonComponents>().panel.GetComponent<Button>().onClick.AddListener(() => UnlockSkin(c));
-            clone.GetComponent<ButtonComponents>().panel.GetComponent<Button>().onClick.AddListener(() => SoundsManager.instance.EffectsSound(1));
-            clone.GetComponent<ButtonComponents>().text.text = dict.skins[c].price.ToString();
+        Head.GetComponent<SpriteRenderer>().sprite = dict.skins[id].head;
 
-            buttonText.Add(clone.GetComponent<ButtonComponents>().text);
-            buttonPanel.Add(clone.GetComponent<ButtonComponents>().panel);
-
-            if (c + 1 > PurchaseSkins.Count)
-                PurchaseSkins.Add(false);
-
-            if (clone.GetComponent<ButtonComponents>().text.text == "0")
-            {
-                clone.GetComponent<ButtonComponents>().panel.SetActive(false);
-                PurchaseSkins[c] = true;
-            }
-            else
-                PurchaseSkins[c] = false;
-
-            number++;
-        }
-    }
-
-    public void UnlockSkin(int c)
-    {
-        Score.instance.UnlockingSkin(c);
-        buttonText[c].text = dict.skins[c].price.ToString();
-
-        if(dict.skins[c].price == 0)
-        {
-            buttonPanel[c].SetActive(false);
-            PurchaseSkins[c] = true;
-        }
-    }
-
-    public void SetSkin(int key)
-    {
-        if (PurchaseSkins[key])
-        {
-            Skin = key;
-            Head.GetComponent<SpriteRenderer>().sprite = dict.skins[key].head;
-
-            for (int i = 0; i <= SnakeMovement.instance.SnakeLength; i++)
-                Snake.transform.GetChild(i + 2).GetComponent<SpriteRenderer>().sprite = dict.skins[key].tail;
-        }
+        for (int i = 0; i <= SnakeMovement.instance.SnakeLength; i++)
+            Snake.transform.GetChild(i + 2).GetComponent<SpriteRenderer>().sprite = dict.skins[id].tail;
     }
 }

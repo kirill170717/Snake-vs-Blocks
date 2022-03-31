@@ -8,6 +8,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     public static RewardedAds instance;
 
     public Button getLife;
+    public Button getCoin;
     public string androidAdUnitId = "Rewarded_Android";
     public string iOSAdUnitId = "Rewarded_iOS";
 
@@ -80,8 +81,16 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         if (adUnitId.Equals(placementId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Unity Ads rewarded ad completed!");
-            Score.instance.Life++;
-            getLife.gameObject.SetActive(false);
+            if(UiManager.instance.gameOver.activeSelf)
+            {
+                Score.instance.Life++;
+                getLife.gameObject.SetActive(false);
+            }
+            else
+            {
+                Score.instance.Coin++;
+                getCoin.gameObject.SetActive(false);
+            }
             Advertisement.Load(adUnitId, this);
         }
     }

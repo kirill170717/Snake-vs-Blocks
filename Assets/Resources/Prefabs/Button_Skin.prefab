@@ -256,7 +256,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1392725046856899689}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6398831175919670522}
+        m_TargetAssemblyTypeName: ButtonComponents, Assembly-CSharp
+        m_MethodName: UnlockSkin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1392725047104573073
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +389,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1392725047104573074}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6398831175919670522}
+        m_TargetAssemblyTypeName: ButtonComponents, Assembly-CSharp
+        m_MethodName: SetSkin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1392725048426646280
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,3 +457,4 @@ MonoBehaviour:
   button: {fileID: 1392725047104573075}
   panel: {fileID: 1392725046856899687}
   text: {fileID: 1392725046799967162}
+  buttons: []

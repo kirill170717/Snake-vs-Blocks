@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +13,12 @@ public class ChallengesManager : MonoBehaviour
     public Button buttonChallenge;
     public Transform container;
 
-    private Button clone;
-
-    [HideInInspector] public List<Image> buttonImages;
+    [HideInInspector] public List<Challenge> buttons;
 
     [Header("Selected challenge")]
     public Button buttonPlay;
-    public Text label;
-    public Text description;
+    public TMP_Text label;
+    public TMP_Text description;
 
     private List<Challenges> Challenges
     {
@@ -31,51 +30,37 @@ public class ChallengesManager : MonoBehaviour
     {
         instance = this;
 
-        InstantiateButtons();
-    }
-
-    private void InstantiateButtons()
-    {
-        int number = 0;
-        foreach (ChallengesDict.Challenge challenge in dict.challenges)
+        for (int i = 0; i < dict.challenges.Count; i++)
         {
-            ChallengesTypes challengeTypes = challenge.type;
-            int c = number;
+            var obj = Instantiate(buttonChallenge, container);
+            obj.name = dict.challenges[i].key.ToString();
 
-            buttonChallenge.GetComponentInChildren<Text>().text = dict.challenges[c].key.ToString();
-            clone = Instantiate(buttonChallenge, container);
-            clone.name = dict.challenges[c].key.ToString();
-            clone.onClick.AddListener(() => OpenSelectedChallenge(challengeTypes, c));
-            buttonImages.Add(clone.image);
+            buttons.Add(obj.GetComponent<Challenge>());
+            buttons[i].type = dict.challenges[i].type;
+            buttons[i].id = i;
 
-            if (c + 1 > Challenges.Count)
-                Challenges.Add(new Challenges() { key = dict.challenges[c].key });
-
-            number++;
+            if (i + 1 > Challenges.Count)
+                Challenges.Add(new Challenges() { key = dict.challenges[i].key });
         }
-
-        for (int i = 0; i < Challenges.Count; i++)
-            if (Challenges[i].complete == true)
-                buttonImages[i].color = Color.gray;
     }
 
-    public void OpenSelectedChallenge(ChallengesTypes type, int number)
+    public void OpenSelectedChallenge(ChallengesTypes type, int id)
     {
         buttonPlay.onClick.RemoveAllListeners();
-        buttonPlay.onClick.AddListener(() => PlayChallenge(type, number));
-        UiManager.instance.OpenSelectedChallenge();
-        label.text = dict.challenges[number].key.ToString();
-        description.text = LocalizationManager.instance.GetText(dict.challenges[number].description);
+        buttonPlay.onClick.AddListener(() => PlayChallenge(type, id));
+        UiManager.instance.OpenChallengeMenu();
+        label.text = dict.challenges[id].key.ToString();
+        description.text = LocalizationManager.instance.GetText(dict.challenges[id].description);
     }
 
-    public void PlayChallenge(ChallengesTypes type, int number)
+    public void PlayChallenge(ChallengesTypes type, int id)
     {
         UiManager.instance.Play(type);
-        Score.instance.ChallengeMode(type, number);
+        Score.instance.ChallengeMode(type, id);
     }
 
-    public void ChallengeComplete(int number)
+    public void ChallengeComplete(int id)
     {
-        Challenges[number].complete = true;
+        Challenges[id].complete = true;
     }
 }

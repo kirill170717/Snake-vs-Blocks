@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,9 +10,6 @@ public class Score : MonoBehaviour
     public ChallengesDict challengeDict;
     public SkinsDict skinDict;
 
-    [Header("Skin")]
-    public GameObject buttonSkin;
-
     [Header("Text")]
     public TMP_Text scoreView;
     public TMP_Text skinsView;
@@ -21,7 +19,7 @@ public class Score : MonoBehaviour
     public TMP_Text lifeView;
 
     [HideInInspector] public ChallengesTypes typeChallenge;
-    [HideInInspector] public int challengeNumber;
+    [HideInInspector] public int challengeId;
 
     private int scoreLevel;
     private int tempScoreLevel;
@@ -39,10 +37,10 @@ public class Score : MonoBehaviour
         get { return Data.instance.player.recordInfinite; }
         set { Data.instance.player.recordInfinite = value; }
     }
-    private int UnlockPoints
+    private List<bool> PurchaseSkins
     {
-        get { return Data.instance.player.unlockPoints; }
-        set { Data.instance.player.unlockPoints = value; }
+        get { return Data.instance.player.purchaseSkins; }
+        set { Data.instance.player.purchaseSkins = value; }
     }
     private int Level
     {
@@ -55,6 +53,11 @@ public class Score : MonoBehaviour
         get { return Data.instance.player.life; }
         set { Data.instance.player.life = value; }
     }
+    public int Coin
+    {
+        get { return Data.instance.player.coin; }
+        set { Data.instance.player.coin = value; }
+    }
 
     private void Awake()
     {
@@ -63,14 +66,13 @@ public class Score : MonoBehaviour
         if (Life < 1)
             Life = 1;
 
-        UnlockPoints = 1;
         levelView.text = Level.ToString();
     }
 
     public void Update()
     {
         lifeView.text = Life.ToString();
-        skinsView.text = UnlockPoints.ToString();
+        skinsView.text = Coin.ToString();
 
         if (GameMode.instance.levels.isOn)
         {
@@ -104,9 +106,9 @@ public class Score : MonoBehaviour
                 break;
 
             case ChallengesTypes.SnakeLength:
-                scoreView.text = SnakeMovement.instance.SnakeLength.ToString() + "/" + challengeDict.challenges[challengeNumber].value;
-                if (SnakeMovement.instance.SnakeLength >= challengeDict.challenges[challengeNumber].value)
-                    UiManager.instance.CompleteChallenge(challengeNumber);
+                scoreView.text = SnakeMovement.instance.SnakeLength.ToString() + "/" + challengeDict.challenges[challengeId].value;
+                if (SnakeMovement.instance.SnakeLength >= challengeDict.challenges[challengeId].value)
+                    UiManager.instance.CompleteChallenge(challengeId);
                 break;
 
             case ChallengesTypes.Survive:
@@ -114,44 +116,42 @@ public class Score : MonoBehaviour
                 scoreView.text = Mathf.Round(time).ToString();
 
                 if (time < 0)
-                    UiManager.instance.CompleteChallenge(challengeNumber);
+                    UiManager.instance.CompleteChallenge(challengeId);
                 break;
 
             case ChallengesTypes.DestroyBlocksCount:
             case ChallengesTypes.CollectBalls:
             case ChallengesTypes.ScorePoints:
             case ChallengesTypes.DestroyBlocksSizeCount:
-                scoreView.text = scoreInfinite.ToString() + "/" + challengeDict.challenges[challengeNumber].value;
+                scoreView.text = scoreInfinite.ToString() + "/" + challengeDict.challenges[challengeId].value;
 
-                if (scoreInfinite == challengeDict.challenges[challengeNumber].value)
-                    UiManager.instance.CompleteChallenge(challengeNumber);
+                if (scoreInfinite == challengeDict.challenges[challengeId].value)
+                    UiManager.instance.CompleteChallenge(challengeId);
                 break;
         }
     }
 
-    public void UnlockingSkin(int c)
+    public void BuySkin(int id)
     {
-        Debug.Log(c);
-        if (skinDict.skins[c].price <= UnlockPoints)
+        Debug.Log(id);
+        if (skinDict.skins[id].price <= Coin)
         {
-            UnlockPoints -= skinDict.skins[c].price;
-            skinDict.skins[c].price = 0;
+            Coin -= skinDict.skins[id].price;
+            PurchaseSkins[id] = true;
         }
         else
-        {
             UiManager.instance.OpenBuySkinPoints();
-        }
     }
 
-    public void ChallengeMode(ChallengesTypes type, int number)
+    public void ChallengeMode(ChallengesTypes type, int id)
     {
         typeChallenge = type;
-        challengeNumber = number;
+        challengeId = id;
 
         if (type == ChallengesTypes.NoType)
-            scoreView.text = number.ToString();
+            scoreView.text = id.ToString();
         else if (type == ChallengesTypes.Survive)
-            time = challengeDict.challenges[number].value;
+            time = challengeDict.challenges[id].value;
     }
 
     public void Counter()
@@ -161,7 +161,7 @@ public class Score : MonoBehaviour
 
     public void SizeCounter(int size)
     {
-        if (size >= challengeDict.challenges[challengeNumber].size)
+        if (size >= challengeDict.challenges[challengeId].size)
             scoreInfinite++;
     }
 
@@ -186,8 +186,8 @@ public class Score : MonoBehaviour
 
     public void UnlockingPoints()
     {
-        UnlockPoints++;
-        skinsView.text = UnlockPoints.ToString();
+        Coin++;
+        skinsView.text = Coin.ToString();
     }
 
     public void CompletedLevel()
