@@ -24,7 +24,7 @@ public class SnakeSkin : MonoBehaviour
         set { Data.instance.player.purchaseSkins = value; }
     }
 
-    private void Awake()
+    private void Start()
     {
         button.image.sprite = dict.skins[id].head;
         button.onClick.AddListener(() => SoundsManager.instance.EffectsSound(0));
