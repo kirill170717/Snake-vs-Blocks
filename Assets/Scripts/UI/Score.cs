@@ -37,11 +37,6 @@ public class Score : MonoBehaviour
         get { return Data.instance.player.recordInfinite; }
         set { Data.instance.player.recordInfinite = value; }
     }
-    private List<bool> PurchaseSkins
-    {
-        get { return Data.instance.player.purchaseSkins; }
-        set { Data.instance.player.purchaseSkins = value; }
-    }
     private int Level
     {
         get { return Data.instance.player.completedLevel; }
@@ -137,7 +132,7 @@ public class Score : MonoBehaviour
         if (skinDict.skins[id].price <= Coin)
         {
             Coin -= skinDict.skins[id].price;
-            PurchaseSkins[id] = true;
+            SkinsManager.instance.UpdatePurchase(id);
         }
         else
             UiManager.instance.OpenBuySkinPoints();

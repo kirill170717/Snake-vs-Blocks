@@ -28,6 +28,8 @@ public class Data
             completedLevel = 0,
             coin = 0,
             skin = 0,
+            purchaseSkins = new List<bool> { true },
+            challenges = new List<Challenges>(),
         };
     }
 }

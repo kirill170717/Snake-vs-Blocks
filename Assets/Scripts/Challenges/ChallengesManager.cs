@@ -32,15 +32,15 @@ public class ChallengesManager : MonoBehaviour
 
         for (int i = 0; i < dict.challenges.Count; i++)
         {
+            if (i + 1 > Challenges.Count)
+                Challenges.Add(new Challenges() { key = dict.challenges[i].key });
+
             var obj = Instantiate(buttonChallenge, container);
-            obj.name = dict.challenges[i].key.ToString();
 
             buttons.Add(obj.GetComponent<Challenge>());
             buttons[i].type = dict.challenges[i].type;
             buttons[i].id = i;
-
-            if (i + 1 > Challenges.Count)
-                Challenges.Add(new Challenges() { key = dict.challenges[i].key });
+            buttons[i].UpdateUI(Challenges[i]);
         }
     }
 
@@ -62,5 +62,6 @@ public class ChallengesManager : MonoBehaviour
     public void ChallengeComplete(int id)
     {
         Challenges[id].complete = true;
+        buttons[id].UpdateUI(Challenges[id]);
     }
 }

@@ -13,20 +13,14 @@ public class Challenge : MonoBehaviour
     public ChallengesTypes type;
     public int id;
 
-    private List<Challenges> Challenges
-    {
-        get { return Data.instance.player.challenges; }
-        set { Data.instance.player.challenges = value; }
-    }
-
     private void Start()
     {
         text.text = dict.challenges[id].key.ToString();
     }
 
-    private void Update()
+    public void UpdateUI(Challenges challenges)
     {
-        if (Challenges[id].complete)
+        if (challenges.complete == true)
             image.color = Color.gray;
     }
 

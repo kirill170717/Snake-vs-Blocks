@@ -16,7 +16,7 @@ public class SkinsManager : MonoBehaviour
     public Transform container;
     [HideInInspector] public List<SnakeSkin> buttons;
 
-    private int SnakeSkin
+    public int SnakeSkin
     {
         get { return Data.instance.player.skin; }
         set { Data.instance.player.skin = value; }
@@ -33,16 +33,16 @@ public class SkinsManager : MonoBehaviour
 
         for (int i = 0; i < dict.skins.Count; i++)
         {
-            var obj = Instantiate(buttonSkin, container);
-            obj.name = dict.skins[i].key;
-            buttons.Add(obj.GetComponent<SnakeSkin>());
-            buttons[i].id = i;
-
             if (i + 1 > PurchaseSkins.Count)
                 PurchaseSkins.Add(false);
 
-            PurchaseSkins[0] = true;
-        } 
+            var obj = Instantiate(buttonSkin, container);
+
+            buttons.Add(obj.GetComponent<SnakeSkin>());
+            buttons[i].id = i;
+            buttons[i].skin = PurchaseSkins[i];
+            buttons[i].UpdateUI();
+        }
     }
 
     private void Start()
@@ -50,8 +50,19 @@ public class SkinsManager : MonoBehaviour
         SetSkin(SnakeSkin);
     }
 
+    public void UpdatePurchase(int id)
+    {
+        PurchaseSkins[id] = true;
+        buttons[id].skin = PurchaseSkins[id];
+    }
+
     public void SetSkin(int id)
     {
+        buttons[SnakeSkin].chekmark.SetActive(false);
+        buttons[id].chekmark.SetActive(true);
+        SnakeSkin = id;
+        
+
         Head.GetComponent<SpriteRenderer>().sprite = dict.skins[id].head;
 
         for (int i = 0; i <= SnakeMovement.instance.SnakeLength; i++)
