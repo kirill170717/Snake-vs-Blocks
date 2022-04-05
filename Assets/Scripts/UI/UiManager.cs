@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 public class UiManager : MonoBehaviour
 {
@@ -9,16 +8,18 @@ public class UiManager : MonoBehaviour
 
     [Header("Canvas")]
     public GameObject game;
-    public GameObject mainMenu;
-    public GameObject settings;
     public GameObject pause;
     public GameObject gameOver;
+    public GameObject mainMenu;
+    public GameObject settings;
     public GameObject skins;
     public GameObject buySkinPoints;
     public GameObject challenge;
     public GameObject selectedChallenge;
     public GameObject challengeComplete;
     public GameObject challengeFailed;
+    public GameObject Authentification;
+    public GameObject Registration;
 
     [Header("Buttons")]
     public Button playGame;
@@ -49,6 +50,7 @@ public class UiManager : MonoBehaviour
         playGame.onClick.AddListener(() => Play(ChallengesTypes.NoType));
         Time.timeScale = 0;
 
+        game.SetActive(false);
         settings.SetActive(false);
         pause.SetActive(false);
         gameOver.SetActive(false);
@@ -58,7 +60,7 @@ public class UiManager : MonoBehaviour
         selectedChallenge.SetActive(false);
         challengeComplete.SetActive(false);
         challengeFailed.SetActive(false);
-        game.SetActive(false);
+        
     }
 
     private void Update()

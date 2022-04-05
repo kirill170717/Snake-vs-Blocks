@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "563294986686",
+    "firebase_url": "https://snake-vs-blocks-50bc0-default-rtdb.firebaseio.com",
+    "project_id": "snake-vs-blocks-50bc0",
+    "storage_bucket": "snake-vs-blocks-50bc0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563294986686:android:53999c2f978cdd671d99ef",
+        "android_client_info": {
+          "package_name": "com.Ilink.SnakevsBlocks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563294986686-6bc40kg26n2t7r75bi019gs1jpdlkslv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIhV5t9cy9lFnJ2munDlJ_HcDRZ36aUVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563294986686-6bc40kg26n2t7r75bi019gs1jpdlkslv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "563294986686-she1k9nk68r0va1cpqubk6rk104j4nv8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Ilink.SnakevsBlocks"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
