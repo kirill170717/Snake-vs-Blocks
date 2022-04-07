@@ -18,8 +18,9 @@ public class UiManager : MonoBehaviour
     public GameObject selectedChallenge;
     public GameObject challengeComplete;
     public GameObject challengeFailed;
-    public GameObject Authentification;
-    public GameObject Registration;
+    public GameObject profile;
+    public GameObject registration;
+    public GameObject authentification;
 
     [Header("Buttons")]
     public Button playGame;
@@ -60,7 +61,8 @@ public class UiManager : MonoBehaviour
         selectedChallenge.SetActive(false);
         challengeComplete.SetActive(false);
         challengeFailed.SetActive(false);
-        
+        profile.SetActive(false);
+        registration.SetActive(false);
     }
 
     private void Update()
@@ -164,6 +166,19 @@ public class UiManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void SwitchLanguage()
+    {
+        if (Language == SystemLanguage.English)
+        {
+            LocalizationManager.instance.SetLocalization(SystemLanguage.Russian);
+            Language = SystemLanguage.Russian;
+        }
+        else
+        {
+            LocalizationManager.instance.SetLocalization(SystemLanguage.English);
+            Language = SystemLanguage.English;
+        }
+    }
     public void OpenSkins()
     {
         mainMenu.SetActive(false);
@@ -235,17 +250,34 @@ public class UiManager : MonoBehaviour
         settings.SetActive(false);
     }
 
-    public void SwitchLanguage()
+    public void OpenAuth()
     {
-        if (Language == SystemLanguage.English)
-        {
-            LocalizationManager.instance.SetLocalization(SystemLanguage.Russian);
-            Language = SystemLanguage.Russian;
-        }
-        else
-        {
-            LocalizationManager.instance.SetLocalization(SystemLanguage.English);
-            Language = SystemLanguage.English;
-        }
+        authentification.SetActive(true);
+    }
+    
+    public void CloseAuth()
+    {
+        authentification.SetActive(false);
+    }
+    
+    public void OpenReg()
+    {
+        authentification.SetActive(false);
+        registration.SetActive(true);
+    }
+
+    public void CloseReg()
+    {
+        registration.SetActive(false);
+        authentification.SetActive(true);
+    }
+    public void OpenProfile()
+    {
+        profile.SetActive(true);
+    }
+
+    public void CloseProfile()
+    {
+        profile.SetActive(false);
     }
 }
