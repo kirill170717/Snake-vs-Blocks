@@ -39,9 +39,6 @@ public class SoundsManager : MonoBehaviour
         music.isOn = MusicPlaying;
         effects.isOn = EffectsPlaying;
         vibration.isOn = VibrationPlaying;
-
-        //music.isOn = PlayerPrefs.GetInt("Music") != 0;
-        //effects.isOn = PlayerPrefs.GetInt("Effects") != 0;
     }
 
     private void Update()
@@ -49,9 +46,6 @@ public class SoundsManager : MonoBehaviour
         MusicPlaying = music.isOn;
         EffectsPlaying = effects.isOn;
         VibrationPlaying = vibration.isOn;
-
-        //PlayerPrefs.SetInt("Music", music.isOn ? 1 : 0);
-        //PlayerPrefs.SetInt("Effects", effects.isOn ? 1 : 0);
     }
 
     public void MuteMusic()

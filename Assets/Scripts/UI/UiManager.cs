@@ -63,6 +63,7 @@ public class UiManager : MonoBehaviour
         challengeFailed.SetActive(false);
         profile.SetActive(false);
         registration.SetActive(false);
+        authentification.SetActive(false);
     }
 
     private void Update()

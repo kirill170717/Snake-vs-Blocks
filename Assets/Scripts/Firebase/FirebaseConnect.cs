@@ -44,7 +44,7 @@ public class FirebaseConnect : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        if(user != null)
+        if (user != null)
         {
             var reloadUserTask = user.ReloadAsync();
             yield return new WaitUntil(predicate: () => reloadUserTask.IsCompleted);
@@ -56,8 +56,11 @@ public class FirebaseConnect : MonoBehaviour
 
     private void AutoLogin()
     {
-        if(user != null)
+        if (user != null)
+        {
             UiManager.instance.CloseAuth();
+            FirebaseDB.instance.LoadData();
+        }
         else
             UiManager.instance.OpenAuth();
     }

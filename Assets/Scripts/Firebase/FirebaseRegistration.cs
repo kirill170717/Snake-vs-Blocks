@@ -23,6 +23,7 @@ public class FirebaseRegistration : MonoBehaviour
     private IEnumerator Register(string username, string email, string password, string confirmPassword)
     {
         auth = FirebaseAuth.DefaultInstance;
+        status.color = Color.red;
 
         if (string.IsNullOrWhiteSpace(username))
             status.text = LocalizationManager.instance.GetText("missingUsername");
@@ -30,35 +31,17 @@ public class FirebaseRegistration : MonoBehaviour
             status.text = LocalizationManager.instance.GetText("passDoesNotMatch");
         else
         {
-            var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(email, password);
-            yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
+            var registerTask = auth.CreateUserWithEmailAndPasswordAsync(email, password);
+            yield return new WaitUntil(predicate: () => registerTask.IsCompleted);
 
-            if (RegisterTask.Exception != null)
+            if (registerTask.Exception != null)
             {
-                FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
-                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
-                string message = LocalizationManager.instance.GetText("registerFailed");
-
-                switch (errorCode)
-                {
-                    case AuthError.MissingEmail:
-                        message = LocalizationManager.instance.GetText("missingEmail");
-                        break;
-                    case AuthError.MissingPassword:
-                        message = LocalizationManager.instance.GetText("missingPass");
-                        break;
-                    case AuthError.WeakPassword:
-                        message = LocalizationManager.instance.GetText("weakPass");
-                        break;
-                    case AuthError.EmailAlreadyInUse:
-                        message = LocalizationManager.instance.GetText("emailAlreadyInUse");
-                        break;
-                }
-                status.text = message;
+                FirebaseErrors.instance.WhatErrorOut(registerTask.Exception.GetBaseException() as FirebaseException);
+                status.text = FirebaseErrors.instance.error;
             }
             else
             {
-                user = RegisterTask.Result;
+                user = registerTask.Result;
 
                 if (user != null)
                 {
@@ -67,13 +50,13 @@ public class FirebaseRegistration : MonoBehaviour
                     yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
 
                     if (ProfileTask.Exception != null)
-                    {
-                        FirebaseException firebaseEx = ProfileTask.Exception.GetBaseException() as FirebaseException;
-                        AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
                         status.text = LocalizationManager.instance.GetText("usernameSetFailed");
-                    }
                     else
+                    {
+                        status.color = Color.green;
                         status.text = LocalizationManager.instance.GetText("success");
+                        FirebaseDB.instance.SaveData();
+                    }
                 }
             }
         }
