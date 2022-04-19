@@ -17,11 +17,15 @@ public class SaveManager : MonoBehaviour
     private void OnApplicationFocus(bool focus)
     {
         if (!focus)
+        {
+            Debug.Log("Фокус");
             SaveController.Save(Data.instance);
+        }
     }
 
     private void OnApplicationQuit()
     {
+        Debug.Log("Выход");
         SaveController.Save(Data.instance);
     }
 }
