@@ -1673,7 +1673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sign in
+  m_text: Authorization
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1700,7 +1700,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 49.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1762,7 +1762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea051960530101a4e9751b4c050399db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textID: signIn
+  textID: authorization
 --- !u!1 &131645280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,7 +2636,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274248996}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.05, y: 1.05, z: 1.05}
   m_ConstrainProportionsScale: 1
@@ -5939,6 +5939,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1141643486}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
+        m_MethodName: DontAuth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 717455484}
         m_TargetAssemblyTypeName: SoundsManager, Assembly-CSharp
         m_MethodName: EffectsSound
@@ -6658,7 +6670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sign up
+  m_text: Registration
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6747,7 +6759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea051960530101a4e9751b4c050399db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textID: signUp
+  textID: registration
 --- !u!1 &743882174
 GameObject:
   m_ObjectHideFlags: 0
@@ -8520,7 +8532,6 @@ GameObject:
   - component: {fileID: 923338408}
   - component: {fileID: 923338410}
   - component: {fileID: 923338409}
-  - component: {fileID: 923338411}
   - component: {fileID: 923338412}
   m_Layer: 0
   m_Name: Firebase_Manager
@@ -8576,19 +8587,6 @@ MonoBehaviour:
   email: {fileID: 762063377}
   password: {fileID: 1170566786}
   status: {fileID: 411960720}
---- !u!114 &923338411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923338407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e913bad6cc8d8040bff5a964bb8b6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  error: 
 --- !u!114 &923338412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8809,7 +8807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Authentication
+  m_text: Authorization
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8898,7 +8896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea051960530101a4e9751b4c050399db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textID: authentication
+  textID: authorization
 --- !u!1 &951979439
 GameObject:
   m_ObjectHideFlags: 0
@@ -8924,7 +8922,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951979439}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8935,7 +8933,7 @@ RectTransform:
   m_AnchorMin: {x: 0.03718519, y: 0.8838518}
   m_AnchorMax: {x: 0.5, y: 0.939463}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951979441
 MonoBehaviour:
@@ -10796,7 +10794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sign up
+  m_text: Registration
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10885,7 +10883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea051960530101a4e9751b4c050399db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textID: signUp
+  textID: registration
 --- !u!1 &1146439894
 GameObject:
   m_ObjectHideFlags: 0
@@ -11044,7 +11042,7 @@ GameObject:
   - component: {fileID: 1158429619}
   - component: {fileID: 1158429618}
   m_Layer: 5
-  m_Name: Button_SignUp
+  m_Name: Button_Reg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17123,7 +17121,7 @@ GameObject:
   - component: {fileID: 1679732827}
   - component: {fileID: 1679732826}
   m_Layer: 5
-  m_Name: Button_SignIn
+  m_Name: Button_Auth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17614,7 +17612,7 @@ RectTransform:
   m_AnchorMin: {x: 0.03718519, y: 0.79348135}
   m_AnchorMax: {x: 0.22051851, y: 0.8838518}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -0.000015258789, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1727386551
 GameObject:
@@ -19692,7 +19690,7 @@ GameObject:
   - component: {fileID: 1949730349}
   - component: {fileID: 1949730348}
   m_Layer: 5
-  m_Name: Button_SignUp
+  m_Name: Button_Reg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

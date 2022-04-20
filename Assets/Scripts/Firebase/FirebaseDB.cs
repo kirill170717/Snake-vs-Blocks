@@ -2,6 +2,7 @@ using UnityEngine;
 using Firebase.Database;
 using System.Collections.Generic;
 using TMPro;
+using Firebase.Extensions;
 
 public class FirebaseDB : MonoBehaviour
 {
@@ -96,20 +97,35 @@ public class FirebaseDB : MonoBehaviour
 
             for (int i = 0; i < args.Snapshot.Child(userId).Child("challenges").ChildrenCount; i++)
                 Challenges[i].complete = (bool)args.Snapshot.Child(userId).Child("challenges").Child(i.ToString()).Child("complete").Value;
-
-            username.text = args.Snapshot.Child(userId).Child("username").Value.ToString();
-            lifes.text = Life.ToString();
         }
     }
 
+    public void ProfileStat()
+    {
+        userId = FirebaseConnect.instance.user.UserId;
+        FirebaseDatabase.DefaultInstance.GetReference("Users").GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                username.text = snapshot.Child(userId).Child("username").Value.ToString();
+                lifes.text = snapshot.Child(userId).Child("life").Value.ToString();
+            }
+        });
+    }
+
+    private bool quit;
+
     private void OnApplicationFocus(bool focus)
     {
+        quit = focus;
         if (!focus)
             SaveData();
     }
 
     private void OnApplicationQuit()
     {
-        SaveData();
+        if (quit)
+            SaveData();
     }
 }

@@ -51,7 +51,10 @@ public class FirebaseConnect : MonoBehaviour
             AutoLogin();
         }
         else
-            UiManager.instance.OpenAuth();
+        {
+            if (!Data.instance.player.unknown)
+                UiManager.instance.OpenAuth();
+        }
     }
 
     private void AutoLogin()
@@ -59,10 +62,14 @@ public class FirebaseConnect : MonoBehaviour
         if (user != null)
         {
             UiManager.instance.CloseAuth();
+            Data.instance.player.unknown = false;
             FirebaseDB.instance.LoadData();
         }
         else
-            UiManager.instance.OpenAuth();
+        {
+            if (!Data.instance.player.unknown)
+                UiManager.instance.OpenAuth();
+        }
     }
 
     private void AuthStateChanged(object sender, System.EventArgs e)

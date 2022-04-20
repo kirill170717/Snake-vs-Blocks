@@ -8,6 +8,7 @@ public class FirebaseAuthentication : MonoBehaviour
 {
     public FirebaseAuth auth;
     public FirebaseUser user;
+    FirebaseErrors errors = new FirebaseErrors();
 
     public TMP_InputField email;
     public TMP_InputField password;
@@ -28,8 +29,8 @@ public class FirebaseAuthentication : MonoBehaviour
 
         if (loginTask.Exception != null)
         {
-            FirebaseErrors.instance.WhatErrorOut(loginTask.Exception.GetBaseException() as FirebaseException);
-            status.text = FirebaseErrors.instance.error;
+            errors.WhatErrorOut(loginTask.Exception.GetBaseException() as FirebaseException);
+            status.text = errors.error;
         }
         else
         {
@@ -37,6 +38,7 @@ public class FirebaseAuthentication : MonoBehaviour
             status.color = Color.green;
             status.text = LocalizationManager.instance.GetText("success");
             UiManager.instance.CloseAuth();
+            Data.instance.player.unknown = false;
         }
     }
 

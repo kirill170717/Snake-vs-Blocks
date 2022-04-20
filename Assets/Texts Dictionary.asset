@@ -349,12 +349,12 @@ MonoBehaviour:
     - language: 30
       text: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C
         \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F!"
-  - key: authentication
+  - key: authorization
     textsList:
     - language: 10
-      text: Authentication
+      text: Authorization
     - language: 30
-      text: "\u0410\u0443\u0442\u0435\u043D\u0442\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u044F"
+      text: "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F"
   - key: registration
     textsList:
     - language: 10
@@ -391,15 +391,3 @@ MonoBehaviour:
       text: Remember me
     - language: 30
       text: "\u0417\u0430\u043F\u043E\u043C\u043D\u0438\u0442\u044C \u043C\u0435\u043D\u044F"
-  - key: signIn
-    textsList:
-    - language: 10
-      text: Sign in
-    - language: 30
-      text: "\u0412\u043E\u0439\u0442\u0438"
-  - key: signUp
-    textsList:
-    - language: 10
-      text: Sign up
-    - language: 30
-      text: "\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F"

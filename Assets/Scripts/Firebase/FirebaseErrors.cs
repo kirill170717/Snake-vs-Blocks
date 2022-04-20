@@ -1,17 +1,9 @@
-using UnityEngine;
 using Firebase.Auth;
 using Firebase;
 
-public class FirebaseErrors : MonoBehaviour
+public class FirebaseErrors
 {
-    public static FirebaseErrors instance;
-
-    [HideInInspector] public string error;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    public string error;
 
     public void WhatErrorOut(FirebaseException firebaseException)
     {

@@ -14,18 +14,18 @@ public class SaveManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    private bool quit;
+
     private void OnApplicationFocus(bool focus)
     {
+        quit = focus;
         if (!focus)
-        {
-            Debug.Log("Фокус");
             SaveController.Save(Data.instance);
-        }
     }
 
     private void OnApplicationQuit()
     {
-        Debug.Log("Выход");
-        SaveController.Save(Data.instance);
+        if (quit)
+            SaveController.Save(Data.instance);
     }
 }

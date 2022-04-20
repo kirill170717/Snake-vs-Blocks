@@ -21,6 +21,7 @@ public class Data
         };
         player = new Player()
         {
+            unknown = false,
             life = 1,
             snakeLength = 5,
             recordLevel = 0,
@@ -44,6 +45,7 @@ public class Challenges
 [Serializable]
 public class Player
 {
+    public bool unknown;
     public int life;
     public int snakeLength;
     public int recordLevel;

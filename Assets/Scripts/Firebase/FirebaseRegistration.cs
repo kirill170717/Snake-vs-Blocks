@@ -8,6 +8,7 @@ public class FirebaseRegistration : MonoBehaviour
 {
     public FirebaseAuth auth;
     public FirebaseUser user;
+    FirebaseErrors errors = new FirebaseErrors();
 
     public TMP_InputField username;
     public TMP_InputField email;
@@ -36,8 +37,8 @@ public class FirebaseRegistration : MonoBehaviour
 
             if (registerTask.Exception != null)
             {
-                FirebaseErrors.instance.WhatErrorOut(registerTask.Exception.GetBaseException() as FirebaseException);
-                status.text = FirebaseErrors.instance.error;
+                errors.WhatErrorOut(registerTask.Exception.GetBaseException() as FirebaseException);
+                status.text = errors.error;
             }
             else
             {

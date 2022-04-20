@@ -260,6 +260,11 @@ public class UiManager : MonoBehaviour
     {
         authentification.SetActive(false);
     }
+
+    public void DontAuth()
+    {
+        Data.instance.player.unknown = true;
+    }
     
     public void OpenReg()
     {
@@ -272,9 +277,16 @@ public class UiManager : MonoBehaviour
         registration.SetActive(false);
         authentification.SetActive(true);
     }
+
     public void OpenProfile()
     {
-        profile.SetActive(true);
+        if (!Data.instance.player.unknown)
+        {
+            profile.SetActive(true);
+            FirebaseDB.instance.ProfileStat();
+        }  
+        else
+            authentification.SetActive(true);
     }
 
     public void CloseProfile()
