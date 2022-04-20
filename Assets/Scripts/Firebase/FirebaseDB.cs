@@ -14,6 +14,10 @@ public class FirebaseDB : MonoBehaviour
 
     public TMP_Text username;
     public TMP_Text lifes;
+    public TMP_Text purchasedSkin;
+    public TMP_Text notPurchasedSkin;
+    public TMP_Text completedChallenge;
+    public TMP_Text notCompletedChallenge;
 
     public int Life
     {
@@ -108,8 +112,32 @@ public class FirebaseDB : MonoBehaviour
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                username.text = snapshot.Child(userId).Child("username").Value.ToString();
+                username.text = LocalizationManager.instance.GetText("name") + snapshot.Child(userId).Child("username").Value.ToString();
                 lifes.text = snapshot.Child(userId).Child("life").Value.ToString();
+
+                int purcahsed = 0;
+                int notPurcahsed = 0;
+                for (int i = 0; i < snapshot.Child(userId).Child("purchaseSkin").ChildrenCount; i++)
+                {
+                    if ((bool)snapshot.Child(userId).Child("purchaseSkin").Child(i.ToString()).Value)
+                        purcahsed++;
+                    else
+                        notPurcahsed++;
+                }
+                purchasedSkin.text = LocalizationManager.instance.GetText("purchasedSkin") + purcahsed.ToString();
+                notPurchasedSkin.text = LocalizationManager.instance.GetText("notPurchasedSkin") + notPurcahsed.ToString();
+
+                int completed = 0;
+                int notCompleted = 0;
+                for (int i = 0; i < snapshot.Child(userId).Child("challenges").ChildrenCount; i++)
+                {
+                    if ((bool)snapshot.Child(userId).Child("challenges").Child(i.ToString()).Child("complete").Value)
+                        completed++;
+                    else
+                        notCompleted++;
+                }
+                completedChallenge.text = LocalizationManager.instance.GetText("completedChallenge") + completed.ToString();
+                notCompletedChallenge.text = LocalizationManager.instance.GetText("notCompletedChallenge") + notCompleted.ToString();
             }
         });
     }
