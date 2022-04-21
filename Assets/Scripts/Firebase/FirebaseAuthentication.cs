@@ -13,6 +13,8 @@ public class FirebaseAuthentication : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public TMP_Text status;
+    public TMP_InputField resetPassEmail;
+    public TMP_Text resetPassStatus;
 
     public void LoginButton()
     {
@@ -39,6 +41,38 @@ public class FirebaseAuthentication : MonoBehaviour
             status.text = LocalizationManager.instance.GetText("success");
             UiManager.instance.CloseAuth();
             Data.instance.player.unknown = false;
+        }
+    }
+
+    public void ResetPassword()
+    {
+        StartCoroutine(ResetPass(resetPassEmail.text));
+    }
+
+    private IEnumerator ResetPass(string email)
+    {
+        auth = FirebaseAuth.DefaultInstance;
+        resetPassStatus.color = Color.red;
+        var resetPassTask = auth.SendPasswordResetEmailAsync(email);
+        yield return new WaitUntil(predicate: () => resetPassTask.IsCompleted);
+
+        if (resetPassTask.Exception != null)
+        {
+            if (resetPassTask.IsCanceled)
+            {
+                resetPassStatus.text = LocalizationManager.instance.GetText("resetPasswordCanceled");
+                yield return null;
+            }
+            if (resetPassTask.IsFaulted)
+            {
+                resetPassStatus.text = LocalizationManager.instance.GetText("resetPasswordFaulted");
+                yield return null;
+            }
+        }
+        else
+        {
+            resetPassStatus.color = Color.green;
+            resetPassStatus.text = LocalizationManager.instance.GetText("resetPasswordSuccess");
         }
     }
 

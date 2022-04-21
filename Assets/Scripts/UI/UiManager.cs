@@ -21,6 +21,7 @@ public class UiManager : MonoBehaviour
     public GameObject profile;
     public GameObject registration;
     public GameObject authentification;
+    public GameObject resetPassword;
 
     [Header("Buttons")]
     public Button playGame;
@@ -64,6 +65,7 @@ public class UiManager : MonoBehaviour
         profile.SetActive(false);
         registration.SetActive(false);
         authentification.SetActive(false);
+        resetPassword.SetActive(false);
     }
 
     private void Update()
@@ -122,6 +124,7 @@ public class UiManager : MonoBehaviour
     public void MainMenu()
     {
         SnakeMovement.instance.SnakeLength = 5;
+        FirebaseDB.instance.SaveData();
         SceneManager.LoadScene("Game");
     }
 
@@ -276,6 +279,16 @@ public class UiManager : MonoBehaviour
     {
         registration.SetActive(false);
         authentification.SetActive(true);
+    }
+
+    public void OpenResetPass()
+    {
+        resetPassword.SetActive(true);
+    }
+
+    public void CloseResetPass()
+    {
+        resetPassword.SetActive(false);
     }
 
     public void OpenProfile()
