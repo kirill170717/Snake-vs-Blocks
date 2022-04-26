@@ -18,6 +18,9 @@ public class FirebaseDB : MonoBehaviour
     public TMP_Text notPurchasedSkin;
     public TMP_Text completedChallenge;
     public TMP_Text notCompletedChallenge;
+    public TMP_Text brokenBlocks;
+    public TMP_Text circleCollected;
+    public TMP_Text totalSnakeLength;
 
     public int Life
     {
@@ -54,11 +57,31 @@ public class FirebaseDB : MonoBehaviour
         get { return Data.instance.player.challenges; }
         set { Data.instance.player.challenges = value; }
     }
+    public int BrokenBlocks
+    {
+        get { return Data.instance.player.brokenBlocks; }
+        set { Data.instance.player.brokenBlocks = value; }
+    }
+    public int CirclesCollected
+    {
+        get { return Data.instance.player.circlesCollected; }
+        set { Data.instance.player.circlesCollected = value; }
+    }
+    public int TotalSnakeLength
+    {
+        get { return Data.instance.player.totalSnakeLength; }
+        set { Data.instance.player.totalSnakeLength = value; }
+    }
 
     private void Awake()
     {
         instance = this;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
+    }
+
+    private void Start()
+    {
+        LoadData();
     }
 
     public void SaveData()
@@ -67,7 +90,8 @@ public class FirebaseDB : MonoBehaviour
         {
             userId = FirebaseConnect.instance.user.UserId;
             FirebaseUserData userData = new FirebaseUserData(FirebaseConnect.instance.user.DisplayName,
-                        FirebaseConnect.instance.user.Email, Life, RecordLevel, CompletedLevel, RecordInfinite, Coin, PurchaseSkin, Challenges);
+                        FirebaseConnect.instance.user.Email, Life, RecordLevel, CompletedLevel, RecordInfinite,
+                        Coin, PurchaseSkin, Challenges, BrokenBlocks, CirclesCollected, TotalSnakeLength);
             string json = JsonUtility.ToJson(userData);
 
             reference.Child("Users").Child(userId).SetRawJsonValueAsync(json);
@@ -101,6 +125,10 @@ public class FirebaseDB : MonoBehaviour
 
             for (int i = 0; i < args.Snapshot.Child(userId).Child("challenges").ChildrenCount; i++)
                 Challenges[i].complete = (bool)args.Snapshot.Child(userId).Child("challenges").Child(i.ToString()).Child("complete").Value;
+
+            BrokenBlocks = int.Parse(args.Snapshot.Child(userId).Child("brokenBlocks").Value.ToString());
+            CirclesCollected = int.Parse(args.Snapshot.Child(userId).Child("circlesCollected").Value.ToString());
+            TotalSnakeLength = int.Parse(args.Snapshot.Child(userId).Child("totalSnakeLength").Value.ToString());
         }
     }
 
@@ -138,6 +166,9 @@ public class FirebaseDB : MonoBehaviour
                 }
                 completedChallenge.text = LocalizationManager.instance.GetText("completedChallenge") + completed.ToString();
                 notCompletedChallenge.text = LocalizationManager.instance.GetText("notCompletedChallenge") + notCompleted.ToString();
+                brokenBlocks.text = LocalizationManager.instance.GetText("brokenBlocks") + snapshot.Child(userId).Child("brokenBlocks").Value.ToString(); ;
+                circleCollected.text = LocalizationManager.instance.GetText("circlesCollected") + snapshot.Child(userId).Child("circlesCollected").Value.ToString(); ;
+                totalSnakeLength.text = LocalizationManager.instance.GetText("totalSnakeLength") + snapshot.Child(userId).Child("totalSnakeLength").Value.ToString(); ;
             }
         });
     }

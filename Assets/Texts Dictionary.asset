@@ -465,3 +465,22 @@ MonoBehaviour:
       text: 'Challenges '
     - language: 30
       text: "\u0418\u0441\u043F\u044B\u0442\u0430\u043D\u0438\u044F"
+  - key: brokenBlocks
+    textsList:
+    - language: 10
+      text: 'Broken blocks: '
+    - language: 30
+      text: "\u0421\u043B\u043E\u043C\u0430\u043D\u043D\u044B\u0445 \u0431\u043B\u043E\u043A\u043E\u0432: "
+  - key: circlesCollected
+    textsList:
+    - language: 10
+      text: 'Collected circles: '
+    - language: 30
+      text: "\u0421\u043E\u0431\u0440\u0430\u043D\u043E \u0448\u0430\u0440\u0438\u043A\u043E\u0432: "
+  - key: totalSnakeLength
+    textsList:
+    - language: 10
+      text: 'Total snake length: '
+    - language: 30
+      text: "\u0421\u0443\u043C\u043C\u0430\u0440\u043D\u0430\u044F \u0434\u043B\u0438\u043D\u0430
+        \u0437\u043C\u0435\u0439\u043A\u0438: "

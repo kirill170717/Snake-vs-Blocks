@@ -7,6 +7,12 @@ public class Circle : MonoBehaviour
     public int minSizeRange;
     public int maxSizeRange;
 
+    public int CirclesCollected
+    {
+        get { return Data.instance.player.circlesCollected; }
+        set { Data.instance.player.circlesCollected = value; }
+    }
+
     private int circleSize;
 
     private void Start()
@@ -20,6 +26,7 @@ public class Circle : MonoBehaviour
         if(Score.instance.typeChallenge == ChallengesTypes.CollectBalls)
             Score.instance.Counter();
 
+        CirclesCollected++;
         Destroy(gameObject);
         return circleSize;
     }

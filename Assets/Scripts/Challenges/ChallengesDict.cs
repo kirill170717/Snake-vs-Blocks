@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Challenge Dictionary", menuName = "Challenge/Challenge Dictionary", order = 50)]
+[CreateAssetMenu(fileName = "Challenges Dictionary", menuName = "Challenges/Challenges Dictionary", order = 50)]
 public class ChallengesDict : ScriptableObject
 {
     [Serializable]

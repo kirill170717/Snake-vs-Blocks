@@ -28,9 +28,6 @@ public class UiManager : MonoBehaviour
     public GameObject revive;
     public GameObject getLife;
 
-    [Header("Camera")]
-    public Camera _camera;
-
     private SystemLanguage Language
     {
         get { return Data.instance.settings.language; }
@@ -92,7 +89,6 @@ public class UiManager : MonoBehaviour
 
     public void Play(ChallengesTypes type)
     {
-        _camera.backgroundColor = new Color(Random.value, Random.value, Random.value);
         GameMode.instance.Mode(type);
 
         if (type == ChallengesTypes.NoType)

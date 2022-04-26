@@ -6,8 +6,6 @@ public class Block : MonoBehaviour
 {
     public static Block instance;
 
-    public int minPriceRange;
-    public int maxPriceRange;
     public Color low, downMedium, medium, upMedium,  high;
 
     private SpriteRenderer spriteRenderer;
@@ -18,6 +16,20 @@ public class Block : MonoBehaviour
 
     public event UnityAction<int> FillingUpdated;
 
+    public int BrokenBlocks
+    {
+        get { return Data.instance.player.brokenBlocks; }
+        set { Data.instance.player.brokenBlocks = value; }
+    }
+
+    public LevelsDict dict;
+
+    private int Level
+    {
+        get { return Data.instance.player.completedLevel; }
+        set { Data.instance.player.completedLevel = value; }
+    }
+
     private void Awake()
     {
         instance = this;
@@ -26,7 +38,21 @@ public class Block : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        destroyPrice = Random.Range(minPriceRange, maxPriceRange);
+        int min;
+        int max;
+
+        if (GameMode.instance.levels.isOn)
+        {
+            min = dict.levels[Level].averageValue - (dict.levels[Level].averageValue * dict.levels[Level].percentValue / 100);
+            max = dict.levels[Level].averageValue + (dict.levels[Level].averageValue * dict.levels[Level].percentValue / 100);
+        }
+        else
+        {
+            min = Spawner.instance.averageValue - (Spawner.instance.averageValue * Spawner.instance.percentValue / 100);
+            max = Spawner.instance.averageValue + (Spawner.instance.averageValue * Spawner.instance.percentValue / 100);
+        }
+
+        destroyPrice = Random.Range(min, max);
         FillingUpdated?.Invoke(LeftToFill);
     }
 
@@ -50,6 +76,7 @@ public class Block : MonoBehaviour
             else if(Score.instance.typeChallenge == ChallengesTypes.DestroyBlocksSizeCount)
                 Score.instance.SizeCounter(filling);
 
+            BrokenBlocks++;
             Destroy(gameObject);
         }
     }

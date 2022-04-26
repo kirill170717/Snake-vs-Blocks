@@ -195,7 +195,7 @@ public class Score : MonoBehaviour
     {
         Life--;
         if (Life < 0)
-            Life = 0;
+            Life = 1;
 
         lifeView.text = Life.ToString();
     }

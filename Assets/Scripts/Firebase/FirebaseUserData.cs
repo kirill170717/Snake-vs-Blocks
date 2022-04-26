@@ -11,9 +11,13 @@ public class FirebaseUserData
     public int coin;
     public List<bool> purchaseSkin;
     public List<Challenges> challenges;
+    public int brokenBlocks;
+    public int circlesCollected;
+    public int totalSnakeLength;
 
     public FirebaseUserData(string username, string email, int life, int recordLevel,
-        int completedLevel, int recordInfinite, int coin, List<bool> purchaseSkin, List<Challenges> challenges)
+        int completedLevel, int recordInfinite, int coin, List<bool> purchaseSkin, 
+        List<Challenges> challenges, int brokenBlocks, int circlesCollected, int totalSnakeLength)
     {
         this.username = username;
         this.email = email;
@@ -24,5 +28,8 @@ public class FirebaseUserData
         this.coin = coin;
         this.purchaseSkin = purchaseSkin;
         this.challenges = challenges;
+        this.brokenBlocks = brokenBlocks;
+        this.circlesCollected = circlesCollected;
+        this.totalSnakeLength = totalSnakeLength;
     }
 }

@@ -31,6 +31,9 @@ public class Data
             skin = 0,
             purchaseSkins = new List<bool> { true },
             challenges = new List<Challenges>(),
+            brokenBlocks = 0,
+            circlesCollected = 0,
+            totalSnakeLength = 0,
         };
     }
 }
@@ -55,6 +58,9 @@ public class Player
     public int skin;
     public List<bool> purchaseSkins;
     public List<Challenges> challenges;
+    public int brokenBlocks;
+    public int circlesCollected;
+    public int totalSnakeLength;
 }
 
 [Serializable]

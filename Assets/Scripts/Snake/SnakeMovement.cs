@@ -13,6 +13,11 @@ public class SnakeMovement : MonoBehaviour
         get { return Data.instance.player.snakeLength; }
         set { Data.instance.player.snakeLength = value; }
     }
+    public int TotalSnakeLength
+    {
+        get { return Data.instance.player.totalSnakeLength; }
+        set { Data.instance.player.totalSnakeLength = value; }
+    }
 
     public TMP_Text pointsText;
 
@@ -95,6 +100,7 @@ public class SnakeMovement : MonoBehaviour
         for (int i = 0; i < circleSize; i++)
         {
             SnakeLength++;
+            TotalSnakeLength++;
             componentSnakeTail.AddTail();
             pointsText.SetText(SnakeLength.ToString());
         }
