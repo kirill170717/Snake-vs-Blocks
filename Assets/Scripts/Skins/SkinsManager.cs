@@ -16,6 +16,11 @@ public class SkinsManager : MonoBehaviour
     public Transform container;
     [HideInInspector] public List<SnakeSkin> buttons;
 
+    public int SnakeLength
+    {
+        get { return Data.instance.player.snakeLength; }
+        set { Data.instance.player.snakeLength = value; }
+    }
     public int SnakeSkin
     {
         get { return Data.instance.player.skin; }
@@ -62,10 +67,18 @@ public class SkinsManager : MonoBehaviour
         buttons[id].chekmark.SetActive(true);
         SnakeSkin = id;
         
-
         Head.GetComponent<SpriteRenderer>().sprite = dict.skins[id].head;
 
-        for (int i = 0; i <= SnakeMovement.instance.SnakeLength; i++)
-            Snake.transform.GetChild(i + 2).GetComponent<SpriteRenderer>().sprite = dict.skins[id].tail;
+        int repeat = SnakeLength / dict.skins[id].sprites.Count;
+        int count = 0;
+
+        for (int i = 0; i < repeat; i++)
+        {
+            for(int j = 0; j < dict.skins[id].sprites.Count; j++)
+            {
+                Snake.transform.GetChild(count + 3).GetComponent<SpriteRenderer>().sprite = dict.skins[id].sprites[j];
+                count++;
+            }
+        }
     }
 }

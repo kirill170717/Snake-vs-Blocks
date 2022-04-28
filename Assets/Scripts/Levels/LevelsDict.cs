@@ -10,7 +10,7 @@ public class LevelsDict : ScriptableObject
     {
         public int key;
         public int distanceBetweenFullLine;
-        public int distanceBetweenRandomLine;
+        public int distanceBetweenRandom;
         public int repeatCount;
         public int averageValue;
         public int percentValue;
@@ -18,33 +18,19 @@ public class LevelsDict : ScriptableObject
         public int wallSpawnChance;
         public int circleSpawnChance;
     }
-
-    public int key;
-    public List<Level> levels = new();
     public int levelsCount;
-
-    public void Loading(int key)
-    {
-        if (!levels.Exists(x => x.key == key))
-        {
-            levels.Add(new Level() { key = key });
-            Debug.Log("Added!");
-        }
-        else
-            Debug.Log("The Key already exists!");
-    }
-
-    public void Deleting(int key)
-    {
-        if (levels.Exists(x => x.key == key))
-        {
-            int keyId = levels.FindIndex(x => x.key == key);
-            levels.RemoveAt(keyId);
-            Debug.Log("Deleted!");
-        }
-        else
-            Debug.Log("The Key doesn't exist!");
-    }
+    public int beginKey;
+    public int endKey;
+    public int distanceBetweenFullLine;
+    public int distanceBetweenRandom;
+    public int repeatCount;
+    public int averageValue;
+    public int percentValue;
+    public int blockSpawnChance;
+    public int wallSpawnChance;
+    public int circleSpawnChance;
+    public List<Level> levels = new();
+    
 
     public void LoadingCount(int levelsCount)
     {
@@ -52,9 +38,7 @@ public class LevelsDict : ScriptableObject
         for (int i = 0; i < levelsCount; i++)
         {
             c++;
-            levels.Add(new Level() { key = c, distanceBetweenFullLine = 5, 
-                distanceBetweenRandomLine = 5, repeatCount = 10, averageValue = 5, percentValue = 50,
-                blockSpawnChance = 50, circleSpawnChance = 50, wallSpawnChance = 50 });
+            levels.Add(new Level() { key = c });
         }
 
         Debug.Log("Added!");
@@ -76,5 +60,36 @@ public class LevelsDict : ScriptableObject
         }
         else
             Debug.Log("The entered number is greater than the number of levels!");
+    }
+
+    public void ChangeValues(int beginKey, int endKey, int fullLine, int random, int repeatCount,
+        int averageValue, int percentValue, int blockSpawnChance, int wallSpawnChance, int circleSpawnChance)
+    {
+        if (beginKey <= 0 || endKey <= 0 || fullLine <= 0 || random <= 0 || repeatCount <= 0 ||
+        averageValue <= 0 || percentValue < 0 || blockSpawnChance < 0 || wallSpawnChance < 0 || circleSpawnChance < 0)
+            Debug.Log("Only positive numbers!");
+        else
+        {
+            if (beginKey >= endKey)
+                Debug.Log("The level interval is not entered correctly!");
+            else
+            {
+                int begin = levels.FindIndex(x => x.key == beginKey);
+                int end = levels.FindIndex(x => x.key == endKey);
+
+                for (int i = begin; i <= end; i++)
+                {
+                    levels[i].distanceBetweenFullLine = fullLine;
+                    levels[i].distanceBetweenRandom = random;
+                    levels[i].repeatCount = repeatCount;
+                    levels[i].averageValue = averageValue;
+                    levels[i].percentValue = percentValue;
+                    levels[i].blockSpawnChance = blockSpawnChance;
+                    levels[i].wallSpawnChance = wallSpawnChance;
+                    levels[i].circleSpawnChance = circleSpawnChance;
+                }
+                Debug.Log("Modified!");
+            }
+        }
     }
 }

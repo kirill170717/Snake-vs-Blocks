@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44d9ae673b31114ea6467563d77dbe8, type: 3}
   m_Name: Levels Dictionary
   m_EditorClassIdentifier: 
-  key: 1
+  levelsCount: 5
+  beginKey: 1
+  endKey: 5
+  distanceBetweenFullLine: 5
+  distanceBetweenRandom: 5
+  repeatCount: 10
+  averageValue: 5
+  percentValue: 50
+  blockSpawnChance: 50
+  wallSpawnChance: 50
+  circleSpawnChance: 50
   levels:
   - key: 1
     distanceBetweenFullLine: 5
-    distanceBetweenRandomLine: 5
+    distanceBetweenRandom: 5
     repeatCount: 10
     averageValue: 5
     percentValue: 50
@@ -25,7 +35,7 @@ MonoBehaviour:
     circleSpawnChance: 50
   - key: 2
     distanceBetweenFullLine: 5
-    distanceBetweenRandomLine: 5
+    distanceBetweenRandom: 5
     repeatCount: 10
     averageValue: 5
     percentValue: 50
@@ -34,7 +44,7 @@ MonoBehaviour:
     circleSpawnChance: 50
   - key: 3
     distanceBetweenFullLine: 5
-    distanceBetweenRandomLine: 5
+    distanceBetweenRandom: 5
     repeatCount: 10
     averageValue: 5
     percentValue: 50
@@ -43,7 +53,7 @@ MonoBehaviour:
     circleSpawnChance: 50
   - key: 4
     distanceBetweenFullLine: 5
-    distanceBetweenRandomLine: 5
+    distanceBetweenRandom: 5
     repeatCount: 10
     averageValue: 5
     percentValue: 50
@@ -52,11 +62,10 @@ MonoBehaviour:
     circleSpawnChance: 50
   - key: 5
     distanceBetweenFullLine: 5
-    distanceBetweenRandomLine: 5
+    distanceBetweenRandom: 5
     repeatCount: 10
     averageValue: 5
     percentValue: 50
     blockSpawnChance: 50
     wallSpawnChance: 50
     circleSpawnChance: 50
-  levelsCount: 5

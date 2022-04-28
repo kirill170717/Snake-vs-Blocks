@@ -12,7 +12,7 @@ public class SkinsDict : ScriptableObject
         public string key;
         public int price;
         public Sprite head;
-        public Sprite tail;
+        public List<Sprite> sprites = new();
     }
 
     public string key;

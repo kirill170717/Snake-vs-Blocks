@@ -18,6 +18,11 @@ public class SnakeMovement : MonoBehaviour
         get { return Data.instance.player.totalSnakeLength; }
         set { Data.instance.player.totalSnakeLength = value; }
     }
+    public int SnakeSkin
+    {
+        get { return Data.instance.player.skin; }
+        set { Data.instance.player.skin = value; }
+    }
 
     public TMP_Text pointsText;
 
@@ -104,6 +109,7 @@ public class SnakeMovement : MonoBehaviour
             componentSnakeTail.AddTail();
             pointsText.SetText(SnakeLength.ToString());
         }
+        SkinsManager.instance.SetSkin(SnakeSkin);
     }
 
     public void ReviveSnake(int length)

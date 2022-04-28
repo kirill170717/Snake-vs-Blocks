@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
 
     [Header("General")]
     public Transform container;
+    public GameObject background;
     public GameObject gums;
     public GameObject block;
     public GameObject wall;
@@ -15,7 +16,7 @@ public class Spawner : MonoBehaviour
 
     [Header("Infifnite mode")]
     public int distanceBetweenFullLine;
-    public int distanceBetweenRandomLine;
+    public int distanceBetweenRandom;
     public int averageValue;
     public int percentValue;
     public int blockSpawnChance;
@@ -36,6 +37,7 @@ public class Spawner : MonoBehaviour
     private CircleSpawnPoint[] circleSpawnPoints;
     private FinishSpawnPoint finishSpawnPoint;
     private GumsSpawnPoint gumsSpawnPoint;
+    private BackgroundSpawnPoint backgroundSpawnPoint;
 
     private void Awake()
     {
@@ -45,24 +47,28 @@ public class Spawner : MonoBehaviour
         circleSpawnPoints = GetComponentsInChildren<CircleSpawnPoint>();
         finishSpawnPoint = GetComponentInChildren<FinishSpawnPoint>();
         gumsSpawnPoint = GetComponentInChildren<GumsSpawnPoint>();
+        backgroundSpawnPoint = GetComponentInChildren<BackgroundSpawnPoint>();
     }
 
     public void LevelMode()
     {
+        GenerateBackground(backgroundSpawnPoint.transform.position, background);
         for (int i = 0; i < dict.levels[Level].repeatCount; i++)
         {
-            GenerateElement(gumsSpawnPoint.transform.position, gums);
+            GenerateGums(gumsSpawnPoint.transform.position, gums);
             GenerateRandomElements(blockSpawnPoints, block, dict.levels[Level].blockSpawnChance);
             GenerateRandomElements(wallSpawnPoints, wall, dict.levels[Level].wallSpawnChance);
             GenerateRandomElements(circleSpawnPoints, circle, dict.levels[Level].circleSpawnChance);
-            MoveSpawner(dict.levels[Level].distanceBetweenRandomLine);
-            GenerateElement(gumsSpawnPoint.transform.position, gums);
+            MoveSpawner(dict.levels[Level].distanceBetweenRandom);
+            GenerateBackground(backgroundSpawnPoint.transform.position, background);
+            GenerateGums(gumsSpawnPoint.transform.position, gums);
             GenerateFullLine(blockSpawnPoints, block);
             GenerateRandomElements(wallSpawnPoints, wall, dict.levels[Level].wallSpawnChance);
             GenerateRandomElements(circleSpawnPoints, circle, dict.levels[Level].circleSpawnChance);
             MoveSpawner(dict.levels[Level].distanceBetweenFullLine);
+            GenerateBackground(backgroundSpawnPoint.transform.position, background);
         }
-        GenerateElement(finishSpawnPoint.transform.position, finish);
+        GenerateFinish(finishSpawnPoint.transform.position, finish);
     }
 
     public void InfiniteMode()
@@ -74,12 +80,14 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            GenerateElement(gumsSpawnPoint.transform.position, gums);
+            GenerateBackground(backgroundSpawnPoint.transform.position, background);
+            GenerateGums(gumsSpawnPoint.transform.position, gums);
             GenerateRandomElements(blockSpawnPoints, block, blockSpawnChance);
             GenerateRandomElements(wallSpawnPoints, wall, wallSpawnChance);
             GenerateRandomElements(circleSpawnPoints, circle, circleSpawnChance);
-            MoveSpawner(distanceBetweenRandomLine);
-            GenerateElement(gumsSpawnPoint.transform.position, gums);
+            MoveSpawner(distanceBetweenRandom);
+            GenerateBackground(backgroundSpawnPoint.transform.position, background);
+            GenerateGums(gumsSpawnPoint.transform.position, gums);
             GenerateFullLine(blockSpawnPoints, block);
             GenerateRandomElements(wallSpawnPoints, wall, wallSpawnChance);
             GenerateRandomElements(circleSpawnPoints, circle, circleSpawnChance);
@@ -111,9 +119,23 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private GameObject GenerateElement(Vector3 spawnPoint, GameObject generatedElement)
+    private GameObject GenerateFinish(Vector3 spawnPoint, GameObject generatedElement)
     {
         spawnPoint.y -= generatedElement.transform.localScale.y;
+        return Instantiate(generatedElement, spawnPoint, Quaternion.identity, container);
+    }
+
+    private GameObject GenerateBackground(Vector3 spawnPoint, GameObject generatedElement)
+    {
+        spawnPoint.y -= generatedElement.transform.localScale.y;
+        spawnPoint.z += generatedElement.transform.localScale.z;
+        return Instantiate(generatedElement, spawnPoint, Quaternion.identity, container);
+    }
+
+    private GameObject GenerateGums(Vector3 spawnPoint, GameObject generatedElement)
+    {
+        spawnPoint.y -= generatedElement.transform.localScale.y;
+        spawnPoint.z -= generatedElement.transform.localScale.z;
         return Instantiate(generatedElement, spawnPoint, Quaternion.identity, container);
     }
 

@@ -81,7 +81,8 @@ public class FirebaseDB : MonoBehaviour
 
     private void Start()
     {
-        LoadData();
+        if(FirebaseConnect.instance.user != null)
+            LoadData();
     }
 
     public void SaveData()
