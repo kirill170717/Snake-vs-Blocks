@@ -193,8 +193,7 @@ public class Score : MonoBehaviour
 
     public void Death()
     {
-        Life--;
-        if (Life < 0)
+        if (Life <= 0)
             Life = 1;
 
         lifeView.text = Life.ToString();

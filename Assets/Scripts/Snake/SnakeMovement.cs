@@ -28,11 +28,10 @@ public class SnakeMovement : MonoBehaviour
 
     private Camera mainCamera;
     private Rigidbody2D componentRigidbody;
-    private SnakeHead head;
+    private SnakeHead SnakeHead;
     private SnakeTail componentSnakeTail;
     private Vector2 touchLastPos;
     private Vector2 delta;
-
     private float sidewaysSpeed;
 
     private void Awake()
@@ -41,7 +40,7 @@ public class SnakeMovement : MonoBehaviour
         mainCamera = Camera.main;
         componentRigidbody = GetComponent<Rigidbody2D>();
         componentSnakeTail = GetComponent<SnakeTail>();
-        head = GetComponent<SnakeHead>();
+        SnakeHead = GetComponent<SnakeHead>();
 
         for (int i = 0; i < SnakeLength; i++)
             componentSnakeTail.AddTail();
@@ -51,14 +50,14 @@ public class SnakeMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        head.BlockCollided += OnBlockCollided;
-        head.CircleCollect += OnCircleCollected;
+        SnakeHead.BlockCollided += OnBlockCollided;
+        SnakeHead.CircleCollect += OnCircleCollected;
     }
 
     private void OnDisable()
     {
-        head.BlockCollided -= OnBlockCollided;
-        head.CircleCollect -= OnCircleCollected;
+        SnakeHead.BlockCollided -= OnBlockCollided;
+        SnakeHead.CircleCollect -= OnCircleCollected;
     }
 
     private void Update()
@@ -83,6 +82,7 @@ public class SnakeMovement : MonoBehaviour
         componentRigidbody.velocity = new Vector2(sidewaysSpeed * 5, forwardSpeed);
         sidewaysSpeed = 0;
     }
+
     private void OnBlockCollided()
     {
         if (SnakeLength > 0)
@@ -109,6 +109,7 @@ public class SnakeMovement : MonoBehaviour
             componentSnakeTail.AddTail();
             pointsText.SetText(SnakeLength.ToString());
         }
+
         SkinsManager.instance.SetSkin(SnakeSkin);
     }
 
@@ -120,5 +121,7 @@ public class SnakeMovement : MonoBehaviour
             componentSnakeTail.AddTail();
             pointsText.SetText(SnakeLength.ToString());
         }
+
+        SkinsManager.instance.SetSkin(SnakeSkin);
     }
 }

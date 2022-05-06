@@ -69,16 +69,19 @@ public class SkinsManager : MonoBehaviour
         
         Head.GetComponent<SpriteRenderer>().sprite = dict.skins[id].head;
 
-        int repeat = SnakeLength / dict.skins[id].sprites.Count;
         int count = 0;
+        int idTail = 0;
 
-        for (int i = 0; i < repeat; i++)
+        for (int i = 0; i < SnakeLength; i++)
         {
-            for(int j = 0; j < dict.skins[id].sprites.Count; j++)
-            {
-                Snake.transform.GetChild(count + 3).GetComponent<SpriteRenderer>().sprite = dict.skins[id].sprites[j];
-                count++;
-            }
+            Snake.transform.GetChild(count + 4).GetComponent<SpriteRenderer>().sprite = dict.skins[id].sprites[idTail];
+
+            if (idTail == dict.skins[id].sprites.Count - 1)
+                idTail = 0;
+            else
+                idTail++;
+
+            count++;
         }
     }
 }

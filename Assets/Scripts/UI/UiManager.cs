@@ -25,8 +25,8 @@ public class UiManager : MonoBehaviour
 
     [Header("Buttons")]
     public Button playGame;
-    public GameObject revive;
     public GameObject getLife;
+    public GameObject revive;
 
     private SystemLanguage Language
     {
@@ -81,7 +81,7 @@ public class UiManager : MonoBehaviour
                 Application.Quit();
         }
 
-        if (Score.instance.Life == 0)
+        if (Score.instance.Life <= 0)
             revive.SetActive(false);
         else
             revive.SetActive(true);
@@ -120,6 +120,7 @@ public class UiManager : MonoBehaviour
     public void MainMenu()
     {
         SnakeMovement.instance.SnakeLength = 5;
+        Score.instance.Death();
         FirebaseDB.instance.SaveData();
         SceneManager.LoadScene("Game");
     }
@@ -127,12 +128,11 @@ public class UiManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
-        Score.instance.Death();
         SoundsManager.instance.Vibration();
         game.SetActive(false);
         gameOver.SetActive(true);
         Score.instance.UnlockingPoints();
-
+        Score.instance.Life--;
         adsPersent = Random.Range(0f, 1f);
 
         if (adsPersent < persentShowAds)
@@ -151,6 +151,7 @@ public class UiManager : MonoBehaviour
     public void Restart()
     {
         SnakeMovement.instance.SnakeLength = 5;
+        Score.instance.Death();
         RestartGame.instance.Restart();
     }
 
@@ -163,6 +164,7 @@ public class UiManager : MonoBehaviour
         if (adsPersent < persentShowAds)
             InterstitialAds.instance.ShowAd();
 
+        FirebaseDB.instance.SaveData();
         SceneManager.LoadScene("Game");
     }
 

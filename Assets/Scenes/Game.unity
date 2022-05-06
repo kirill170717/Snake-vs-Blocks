@@ -11619,8 +11619,8 @@ MonoBehaviour:
   authentification: {fileID: 823991119}
   resetPassword: {fileID: 381987442}
   playGame: {fileID: 1907852891}
-  revive: {fileID: 1568431955}
   getLife: {fileID: 800150345}
+  revive: {fileID: 1568431955}
   persentShowAds: 0.3
   btnStatus: 0
 --- !u!1 &1143643062

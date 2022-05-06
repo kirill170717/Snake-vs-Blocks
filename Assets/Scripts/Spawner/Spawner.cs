@@ -69,6 +69,8 @@ public class Spawner : MonoBehaviour
             GenerateBackground(backgroundSpawnPoint.transform.position, background);
         }
         GenerateFinish(finishSpawnPoint.transform.position, finish);
+        MoveSpawner(dict.levels[Level].distanceBetweenRandom);
+        GenerateBackground(backgroundSpawnPoint.transform.position, background);
     }
 
     public void InfiniteMode()

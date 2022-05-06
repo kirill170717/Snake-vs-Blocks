@@ -6,9 +6,9 @@ public class Block : MonoBehaviour
 {
     public static Block instance;
 
-    public Color low, downMedium, medium, upMedium,  high;
+    //public Color low, downMedium, medium, upMedium,  high;
 
-    private SpriteRenderer spriteRenderer;
+    //private SpriteRenderer spriteRenderer;
     private int destroyPrice;
     [HideInInspector] public int filling;
 
@@ -37,7 +37,7 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
         int min;
         int max;
 
@@ -56,10 +56,10 @@ public class Block : MonoBehaviour
         FillingUpdated?.Invoke(LeftToFill);
     }
 
-    private void Update()
-    {
-        SetColor(SnakeMovement.instance.SnakeLength);
-    }
+    //private void Update()
+    //{
+    //    SetColor(SnakeMovement.instance.SnakeLength);
+    //}
 
     public void Fill()
     {
@@ -81,19 +81,19 @@ public class Block : MonoBehaviour
         }
     }
 
-    public void SetColor(int length)
-    {
-        if (destroyPrice > length)
-            spriteRenderer.color = high;
-        else if (destroyPrice > length * 0.75)
-            spriteRenderer.color = upMedium;
-        else if (destroyPrice > length * 0.5)
-            spriteRenderer.color = medium;
-        else if(destroyPrice > length * 0.25)
-            spriteRenderer.color = downMedium;
-        else
-            spriteRenderer.color = low;
-    }
+    //public void SetColor(int length)
+    //{
+    //    if (destroyPrice > length)
+    //        spriteRenderer.color = high;
+    //    else if (destroyPrice > length * 0.75)
+    //        spriteRenderer.color = upMedium;
+    //    else if (destroyPrice > length * 0.5)
+    //        spriteRenderer.color = medium;
+    //    else if(destroyPrice > length * 0.25)
+    //        spriteRenderer.color = downMedium;
+    //    else
+    //        spriteRenderer.color = low;
+    //}
 
     private void OnBecameInvisible()
     {

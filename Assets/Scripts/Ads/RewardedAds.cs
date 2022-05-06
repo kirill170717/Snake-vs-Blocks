@@ -42,6 +42,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     {
         Debug.Log("Showing Ad:" + adUnitId);
         getLife.interactable = false;
+        getCoin.interactable = false;
         Advertisement.Show(adUnitId, this);
     }
 
@@ -51,8 +52,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
         if (placementId.Equals(adUnitId))
         {
-            getLife.onClick.AddListener(ShowAd);
             getLife.interactable = true;
+            getCoin.interactable = true;
         }
     }
 
@@ -81,6 +82,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         if (adUnitId.Equals(placementId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Unity Ads rewarded ad completed!");
+
             if(UiManager.instance.gameOver.activeSelf)
             {
                 Score.instance.Life++;
@@ -91,6 +93,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
                 Score.instance.Coin++;
                 getCoin.gameObject.SetActive(false);
             }
+
             Advertisement.Load(adUnitId, this);
         }
     }
@@ -98,5 +101,6 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     private void OnDestroy()
     {
         getLife.onClick.RemoveAllListeners();
+        getCoin.onClick.RemoveAllListeners();
     }
 }
