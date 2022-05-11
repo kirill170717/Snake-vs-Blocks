@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
@@ -35,7 +34,11 @@ public class SnakeMovement : MonoBehaviour
     private SnakeTail componentSnakeTail;
     private Vector2 touchLastPos;
     private Vector2 delta;
+    private Vector3 min;
+    private Vector3 max;
     private float sidewaysSpeed;
+    public float leftBorder;
+    public float rightBorder;
 
     private void Awake()
     {
@@ -65,6 +68,14 @@ public class SnakeMovement : MonoBehaviour
 
     private void Update()
     {
+        min = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
+        max = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
+
+        if (componentRigidbody.position.x > max.x)
+            transform.position = new Vector2(max.x, transform.position.y);
+        else if (componentRigidbody.position.x < min.x)
+            transform.position = new Vector2(min.x, transform.position.y);
+
         if (Input.GetMouseButtonDown(0))
             touchLastPos = mainCamera.ScreenToViewportPoint(Input.mousePosition);
         else if (Input.GetMouseButtonUp(0))
