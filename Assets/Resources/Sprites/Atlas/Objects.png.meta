@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: objects_1024x1024_0
+      name: Candy 1
       rect:
         serializedVersion: 2
         x: 9
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_1
+      name: Tooth 2
       rect:
         serializedVersion: 2
         x: 244
@@ -170,7 +170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_2
+      name: Tooth 1
       rect:
         serializedVersion: 2
         x: 539
@@ -191,7 +191,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_3
+      name: Crack 1
       rect:
         serializedVersion: 2
         x: 871
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_4
+      name: Candy 2
       rect:
         serializedVersion: 2
         x: 17
@@ -233,7 +233,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_5
+      name: Tooth 3
       rect:
         serializedVersion: 2
         x: 252
@@ -254,7 +254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_6
+      name: Crack 3
       rect:
         serializedVersion: 2
         x: 793
@@ -275,7 +275,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_7
+      name: Candy 3
       rect:
         serializedVersion: 2
         x: 17
@@ -296,7 +296,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_9
+      name: Crack 2
       rect:
         serializedVersion: 2
         x: 591
@@ -317,7 +317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_10
+      name: Candy 4
       rect:
         serializedVersion: 2
         x: 13
@@ -338,10 +338,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_11
+      name: Bubble
       rect:
         serializedVersion: 2
-        x: 210
+        x: 211
         y: 23
         width: 256
         height: 255
@@ -359,7 +359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_12
+      name: Gums 1
       rect:
         serializedVersion: 2
         x: 537
@@ -380,7 +380,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_13
+      name: Shard 1
       rect:
         serializedVersion: 2
         x: 837
@@ -401,7 +401,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_14
+      name: Shard 2
       rect:
         serializedVersion: 2
         x: 933
@@ -422,7 +422,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_15
+      name: Shard 3
       rect:
         serializedVersion: 2
         x: 850
@@ -443,7 +443,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_1024x1024_16
+      name: Shard 4
       rect:
         serializedVersion: 2
         x: 946
@@ -474,23 +474,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      objects_1024x1024_9: 1644615638
-      objects_1024x1024_11: 781366958
-      objects_1024x1024_2: -431355201
-      objects_1024x1024_13: 2113861703
-      objects_1024x1024_12: 1432641461
-      objects_1024x1024_3: -1132206464
-      objects_1024x1024_14: 756231527
-      objects_1024x1024_1: 603436514
-      objects_1024x1024_10: 1562843075
-      objects_1024x1024_7: 1705567099
-      objects_1024x1024_4: -1700646976
-      objects_1024x1024_16: 984083702
+      Candy 2: -1700646976
+      Tooth 3: -801374878
+      Tooth 2: 603436514
+      Gums 1: 1432641461
+      Candy 3: 1705567099
+      Crack 2: 1644615638
+      Candy 1: -767875021
+      Candy 4: 1562843075
+      Crack 1: -1132206464
+      Crack 3: 86675299
+      Tooth 1: -431355201
+      Shard 1: 2113861703
       objects_1024x1024_8: -699372882
-      objects_1024x1024_5: -801374878
-      objects_1024x1024_6: 86675299
-      objects_1024x1024_0: -767875021
-      objects_1024x1024_15: -692675219
+      Bubble: 781366958
+      Shard 4: 984083702
+      Shard 3: -692675219
+      Shard 2: 756231527
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

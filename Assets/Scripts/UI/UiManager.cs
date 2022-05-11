@@ -128,11 +128,12 @@ public class UiManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+        Score.instance.Life--;
+        Score.instance.UnlockingPoints();
         SoundsManager.instance.Vibration();
         game.SetActive(false);
         gameOver.SetActive(true);
-        Score.instance.UnlockingPoints();
-        Score.instance.Life--;
+        
         adsPersent = Random.Range(0f, 1f);
 
         if (adsPersent < persentShowAds)

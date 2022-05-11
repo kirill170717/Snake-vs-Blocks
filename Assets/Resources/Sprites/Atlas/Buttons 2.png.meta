@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1_0
+      name: Button 4.1
       rect:
         serializedVersion: 2
         x: 10
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_1
+      name: Button 5.1
       rect:
         serializedVersion: 2
         x: 280
@@ -170,11 +170,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_2
+      name: Chekmark
       rect:
         serializedVersion: 2
         x: 836
-        y: 814
+        y: 815
         width: 158
         height: 118
       alignment: 0
@@ -191,7 +191,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_9
+      name: Button 4
       rect:
         serializedVersion: 2
         x: 9
@@ -212,10 +212,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_10
+      name: Button 5
       rect:
         serializedVersion: 2
-        x: 280
+        x: 281
         y: 428
         width: 257
         height: 285
@@ -233,7 +233,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_11
+      name: Profile
       rect:
         serializedVersion: 2
         x: 550
@@ -254,7 +254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_12
+      name: Coin
       rect:
         serializedVersion: 2
         x: 830
@@ -275,7 +275,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_17
+      name: Life
       rect:
         serializedVersion: 2
         x: 832
@@ -296,7 +296,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_18
+      name: Pause
       rect:
         serializedVersion: 2
         x: 9
@@ -317,7 +317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_19
+      name: Close
       rect:
         serializedVersion: 2
         x: 280
@@ -338,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_20
+      name: Skins
       rect:
         serializedVersion: 2
         x: 550
@@ -359,7 +359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_3
+      name: Toggle
       rect:
         serializedVersion: 2
         x: 550
@@ -391,26 +391,26 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       1_8: -1286875910
-      1_20: -1403475614
-      1_18: 27990119
-      1_19: -1997076719
       1_13: -726448277
+      Pause: 27990119
       1_6: -1097608378
-      1_1: 566594457
-      1_10: 1370960413
-      1_12: 405877827
-      1_0: -2099404729
-      1_2: 44533879
+      Life: 1106210981
+      Button 4.1: -2099404729
       1_14: -2122457512
+      Button 5.1: 566594457
+      Profile: -1355469153
+      Button 4: 1347140344
+      Button 5: 1370960413
+      Coin: 405877827
       1_5: 765114250
-      1_9: 1347140344
+      Skins: -1403475614
       1_7: 1129723825
       1_15: 1136413767
       1_4: 2006488425
       1_16: -362706352
-      1_17: 1106210981
-      1_11: -1355469153
-      1_3: -1883992688
+      Chekmark: 44533879
+      Toggle: -1883992688
+      Close: -1997076719
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

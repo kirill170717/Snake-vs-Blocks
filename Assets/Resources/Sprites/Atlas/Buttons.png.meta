@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2_1_1
+      name: Button 1
       rect:
         serializedVersion: 2
         x: 0
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_1_3
+      name: Button 1.1
       rect:
         serializedVersion: 2
         x: 0
@@ -170,7 +170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_1_4
+      name: Button 2
       rect:
         serializedVersion: 2
         x: 0
@@ -191,7 +191,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_1_6
+      name: Button 3
       rect:
         serializedVersion: 2
         x: 281
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_1_7
+      name: Button_Play
       rect:
         serializedVersion: 2
         x: 1121
@@ -233,7 +233,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_1_8
+      name: Infinite_Node
       rect:
         serializedVersion: 2
         x: 1392
@@ -254,7 +254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_1_9
+      name: Challenges
       rect:
         serializedVersion: 2
         x: 1662
@@ -285,20 +285,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      2_1_4: 283559946
       2_1_12: 922726637
-      2_1_8: 1420507556
-      2_1_7: -285110094
+      Button 2: 283559946
+      Button 3: 1579845812
       2_1_0: -1602347476
-      2_1_3: -597671422
-      2_1_6: 1579845812
-      2_1_9: -860928892
       2_1_13: 1798145773
-      2_1_1: 1493905236
+      Button 1: 1493905236
+      Challenges: -860928892
+      Button 1.1: -597671422
       2_1_11: 1942409412
       2_1_5: 324759970
       2_1_2: -705554662
+      Infinite_Node: 1420507556
       2_1_10: -639944255
+      Button_Play: -285110094
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

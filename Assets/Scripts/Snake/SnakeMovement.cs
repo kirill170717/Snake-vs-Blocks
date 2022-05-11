@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour
@@ -7,6 +8,8 @@ public class SnakeMovement : MonoBehaviour
 
     public float forwardSpeed = 4;
     public float sensitivity = 90;
+    public float impulse = 4;
+    [HideInInspector] public bool block = false;
 
     public int SnakeLength
     {
@@ -76,14 +79,22 @@ public class SnakeMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Mathf.Abs(sidewaysSpeed) > 4)
-            sidewaysSpeed = 4 * Mathf.Sign(sidewaysSpeed);
+        if (block)
+        {
+            block = false;
+            componentRigidbody.AddForce(new Vector2(0, -impulse), ForceMode2D.Impulse);
+        }
+        else
+        {
+            if (Mathf.Abs(sidewaysSpeed) > 4)
+                sidewaysSpeed = 4 * Mathf.Sign(sidewaysSpeed);
 
-        componentRigidbody.velocity = new Vector2(sidewaysSpeed * 5, forwardSpeed);
-        sidewaysSpeed = 0;
+            componentRigidbody.velocity = new Vector2(sidewaysSpeed * 5, forwardSpeed);
+            sidewaysSpeed = 0;
+        }
     }
 
-    private void OnBlockCollided()
+    public void OnBlockCollided()
     {
         if (SnakeLength > 0)
         {
