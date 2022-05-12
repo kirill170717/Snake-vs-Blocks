@@ -1,4 +1,4 @@
-using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,6 +6,9 @@ using UnityEngine.Events;
 public class Block : MonoBehaviour
 {
     public static Block instance;
+
+    public TMP_Text view;
+    public ParticleSystem particle;
 
     [Header("Cracks")]
     public GameObject crack1;
@@ -78,7 +81,22 @@ public class Block : MonoBehaviour
         fullPrice = destroyPrice;
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
+    {
+        FillingUpdated += OnFillingUpdated;
+    }
+
+    private void OnDisable()
+    {
+        FillingUpdated -= OnFillingUpdated;
+    }
+
+    private void OnFillingUpdated(int leftToFill)
+    {
+        view.text = leftToFill.ToString();
+    }
+
+    private void Update()
     {
         count = destroyPrice - filling;
         SetSprite();
@@ -87,6 +105,7 @@ public class Block : MonoBehaviour
 
     public void Fill()
     {
+        particle.Play();
         filling++;
         FillingUpdated?.Invoke(LeftToFill);
 
